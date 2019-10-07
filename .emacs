@@ -28,9 +28,16 @@
 ;; Disable auto indenting
 (electric-indent-mode 0)
 
+;; Show line numbers and column numbers
+(setq-default column-number-mode t)
+(global-display-line-numbers-mode)
+
 ;; Show trailing whitespace
 ;; https://www.emacswiki.org/emacs/WhiteSpace
 (require 'whitespace)
 (setq-default whitespace-style '(face trailing tabs))
 (custom-set-faces '(whitespace-tab ((t (:background "red")))))
 (global-whitespace-mode)
+
+;; Smooth scrolling rather than jumping by half a screenful
+(setq-default scroll-step 1)
