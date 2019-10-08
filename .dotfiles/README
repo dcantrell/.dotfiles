@@ -1,0 +1,31 @@
+Setup:
+======
+
+$ git clone git@github.com:dcantrell/.dotfiles.git
+$ alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
+$ dotfiles config --local status.showUntrackedFiles no
+
+# Add dotfiles from $HOME using 'dotfiles' in place of the git command,
+# commit and push as you do with git.  For example:
+#
+#    dotfiles add .emacs
+#    dotfiles commit -m "Add .emacs"
+#    dotfiles push
+
+Setting up a new system:
+========================
+
+# Install and create a local account for yourself.  On first login, do
+# this:
+
+$ mkdir $HOME/.dotfiles
+$ git clone --separate-git-dir=$HOME/.dotfiles/.git \
+            https://github.com/dcantrell/.dotfiles.git $HOME
+
+# If this fails, you may need to clone to a separate directory first,
+# then move things in place:
+
+$ git clone --separate-git-dir=$HOME/.dotfiles/.git \
+            https://github.com/dcantrell/.dotfiles.git tmpdotfiles
+$ rsync -rv --exclude '.git' tmpdotfiles/ $HOME/
+$ rm -rf tmpdotfiles
