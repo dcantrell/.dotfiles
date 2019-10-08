@@ -28,9 +28,10 @@
 ;; Disable auto indenting
 (electric-indent-mode 0)
 
-;; Show line numbers and column numbers
+;; Show line numbers and column numbers by default
+;; Bind M-# to toggle line number mode on/off
 (setq-default column-number-mode t)
-(global-display-line-numbers-mode)
+(global-set-key (kbd "M-#") 'display-line-numbers-mode)
 
 ;; Show trailing whitespace
 ;; https://www.emacswiki.org/emacs/WhiteSpace
@@ -41,3 +42,6 @@
 
 ;; Smooth scrolling rather than jumping by half a screenful
 (setq-default scroll-step 1)
+
+;; Show the clock
+(display-time-mode 1)
