@@ -45,3 +45,7 @@
 
 ;; Show the clock
 (display-time-mode 1)
+
+;; Set modes based on filename or file extension
+(add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
