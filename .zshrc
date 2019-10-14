@@ -42,6 +42,11 @@ fi
 # Make sure we have the right ssh config permissions
 [ -f "${HOME}/.ssh/config" ] && chmod 0644 "${HOME}/.ssh/config"
 
+# Make sure emacs has directories in place
+[ -d ${HOME}/.emacs.d ] || mkdir -p ${HOME}/.emacs.d
+[ -d ${HOME}/.emacs.d/autosaves ] || mkdir -p ${HOME}/.emacs.d/autosaves
+[ -d ${HOME}/.emacs.d/backups ] || mkdir -p ${HOME}/.emacs.d/backups
+
 # Command aliases
 alias less="less -F -R -X"
 alias ls="ls -FC --color=tty"
