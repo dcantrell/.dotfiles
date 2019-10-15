@@ -14,6 +14,11 @@ unsetopt NOMATCH
 autoload -U zcalc
 autoload -Uz vcs_info
 
+# Command history
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=${HOME}/.history
+
 # Make sure we have some basic PATH
 [ -z "${PATH}" ] && PATH=/usr/bin:/usr/local/bin
 
@@ -56,6 +61,7 @@ alias pwgen="pwgen -c -n -y 16 1"
 alias emacs="emacs -nw"
 alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
 alias vim='echo Use Emacs'
+alias agent='eval $(ssh-agent) ; ssh-add'
 
 # Other environment variables
 NAME="David Cantrell"
