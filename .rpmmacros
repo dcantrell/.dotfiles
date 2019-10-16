@@ -1,8 +1,5 @@
 %_topdir %(echo $HOME)/rpmbuild
-%_smp_mflags -j3
 
 %_signature gpg
 %_gpg_name david.l.cantrell@gmail.com
 %__arch_install_post /usr/lib/rpm/check-rpaths /usr/lib/rpm/check-buildroot
-
-%__id_u /usr/bin/id -u
