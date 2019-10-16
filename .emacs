@@ -1,51 +1,76 @@
+; Set up package repositories to use
 (package-initialize)
-
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
 
-;; Prevent tabs and use 4 space tab stop
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; Packages to use and make sure we have installed
+(setq package-list '(distinguished-theme))
+
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+; Load theme
+(load-theme 'distinguished t)
+
+; Prevent tabs and use 4 space tab stop
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default indent-line-function 'insert-tab)
 
-;; Put backup files in one place
+; Put backup files in one place
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
-;; Put auto-save files in one place
+; Put auto-save files in one place
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/" t)))
 
-;; Allow y/n answers instead of yes/no
+; Allow y/n answers instead of yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; Disable beeping
+; Disable beeping
 (setq-default visible-bell t)
 
-;; Enable syntax highlighting
+; Enable syntax highlighting
 (global-font-lock-mode t)
 (setq-default font-lock-maximum-decoration t)
 
-;; Disable auto indenting
+; Disable auto indenting
 (electric-indent-mode 0)
 
-;; Show line numbers and column numbers by default
-;; Bind M-# to toggle line number mode on/off
+; Show line numbers and column numbers by default
+; Bind M-# to toggle line number mode on/off
 (setq-default column-number-mode t)
 (global-set-key (kbd "M-#") 'display-line-numbers-mode)
 
-;; Show trailing whitespace
-;; https://www.emacswiki.org/emacs/WhiteSpace
+; Show trailing whitespace
+; https://www.emacswiki.org/emacs/WhiteSpace
 (require 'whitespace)
 (setq-default whitespace-style '(face trailing tabs))
-(custom-set-faces '(whitespace-tab ((t (:background "red")))))
+(custom-set-faces
+  ; custom-set-faces was added by Custom.
+  ; If you edit it by hand, you could mess it up, so be careful.
+  ; Your init file should contain only one such instance.
+  ; If there is more than one, they won't work right.
+  '(whitespace-tab ((t (:background "red")))))
 (global-whitespace-mode)
 
-;; Smooth scrolling rather than jumping by half a screenful
+; Smooth scrolling rather than jumping by half a screenful
 (setq-default scroll-step 1)
 
-;; Show the clock
+; Show the clock
 (display-time-mode 1)
 
-;; Set modes based on filename or file extension
+; Set modes based on filename or file extension
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+(custom-set-variables
+  ; custom-set-variables was added by Custom.
+  ; If you edit it by hand, you could mess it up, so be careful.
+  ; Your init file should contain only one such instance.
+  ; If there is more than one, they won't work right.
+  '(package-selected-packages (quote (distinguished-theme))))
