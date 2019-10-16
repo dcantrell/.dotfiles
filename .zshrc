@@ -52,6 +52,14 @@ fi
 [ -d ${HOME}/.emacs.d/autosaves ] || mkdir -p ${HOME}/.emacs.d/autosaves
 [ -d ${HOME}/.emacs.d/backups ] || mkdir -p ${HOME}/.emacs.d/backups
 
+# Make sure mbsync has directories
+if [ -f ${HOME}/.mbsyncrc ]; then
+    grep -v ^# ${HOME}/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
+    while read maildirname ; do
+        [ -d ${maildirname} ] || mkdir -p ${maildirname}
+    done
+fi
+
 # Command aliases
 alias less="less -F -R -X"
 alias ls="ls -FC --color=tty"
