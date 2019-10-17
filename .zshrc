@@ -68,8 +68,7 @@ alias ftp="tnftp"
 alias pwgen="pwgen -c -n -y 16 1"
 alias emacs="emacs -nw"
 alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
-alias vim='echo Use Emacs'
-alias agent='eval $(ssh-agent) ; ssh-add'
+alias vim='printf "Use Emacs.\n"'
 
 # Other environment variables
 NAME="David Cantrell"
