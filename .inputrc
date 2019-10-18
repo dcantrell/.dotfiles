@@ -1,0 +1,15 @@
+# GNU readline keybinding fix for certain stacked workflows
+# (e.g., rxvt-unicode running zsh that's ssh'ed to a host where tmux
+#  is running and inside tmux you have irssi and emacs)
+#
+# Information found here:
+# https://wiki.archlinux.org/index.php/Home_and_End_keys_not_working
+
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[H": beginning-of-line
+"\e[F": end-of-line
