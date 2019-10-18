@@ -55,6 +55,7 @@ fi
 # Make sure mbsync has directories
 if [ -f ${HOME}/.mbsyncrc ]; then
     grep -v ^# ${HOME}/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
+    sed -e 's|~|\${HOME}|g' |
     while read maildirname ; do
         [ -d ${maildirname} ] || mkdir -p ${maildirname}
     done
@@ -77,6 +78,7 @@ VISUAL="emacs -nw"
 PAGER="less -F -R -X"
 GPGKEY=8CB55649
 GPG_TTY="$(tty)"
+SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
 # As of GNU coreutils 8.25, the ls(1) command will wrap filenames
 # with spaces in single quotes if the output device is a tty.  This
@@ -101,19 +103,12 @@ vcs_info_wrapper() {
 PROMPT="[%n@%m %1~]%(!.#.$) "
 RPROMPT=$'$(vcs_info_wrapper)'
 
-# Favor the console version of pinentry
-if [ -x /usr/bin/pinentry-curses ]; then
-    PINENTRY_BINARY=/usr/bin/pinentry-curses
-    export PINENTRY_BINARY
-fi
-
 # Prevent GTK scrollbar autohide
 GTK_OVERLAY_SCROLLING=0
 
 export PROMPT RPROMPT
 export PATH NAME EDITOR VISUAL PAGER
-export GPGKEY GPG_TTY PAGER
-export SAL_USE_VCLPLUGIN
+export GPGKEY GPG_TTY SSH_AUTH_SOCK
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
 
