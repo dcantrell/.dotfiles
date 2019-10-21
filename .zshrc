@@ -57,7 +57,8 @@ if [ -f ${HOME}/.mbsyncrc ]; then
     grep -v ^# ${HOME}/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
     sed -e 's|~|\${HOME}|g' |
     while read maildirname ; do
-        [ -d ${maildirname} ] || mkdir -p ${maildirname}
+        mdn="$(eval echo "${maildirname}")"
+        [ -d "${mdn}" ] || mkdir -p "${mdn}"
     done
 fi
 
