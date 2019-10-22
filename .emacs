@@ -9,14 +9,24 @@
   (package-refresh-contents))
 
 ; Packages to use and make sure we have installed
-(setq package-list '(distinguished-theme))
+(setq package-list '(solarized-theme distinguished-theme))
 
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
 
 ; Load theme
-(load-theme 'distinguished t)
+(setq-default solarized-distinct-fringe-background t)
+(setq-default solarized-emphasize-indicators nil)
+(load-theme 'solarized-dark t)
+
+; Bind 'C-x t' to toggle between default and dark theme
+(defun toggle-theme ()
+  (interactive)
+  (if (eq (car custom-enabled-themes) 'solarized-dark)
+      (disable-theme 'solarized-dark)
+    (enable-theme 'solarized-dark)))
+(global-set-key (kbd "C-x t") 'toggle-theme)
 
 ; Prevent tabs and use 4 space tab stop
 (setq-default indent-tabs-mode nil)
