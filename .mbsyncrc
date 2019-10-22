@@ -66,6 +66,70 @@ Channel personal
     SyncState *
     Sync All
 
+##############################################
+# Red Hat gmail account - dcantrel@gmail.com #
+##############################################
+
+# This section defines the authentication and server information for the
+# account.  The 'PipelineDepth' setting throttles things so we don't get
+# gmail's OVERQUOTA error.  See:
+#     https://sourceforge.net/p/isync/mailman/message/35458365/
+# For an initial sync, I set pipeline depth to 1, otherwise gmaill will
+# complain at you a lot.  Once you have a local sync, 50 seems to work.
+IMAPAccount rht
+    Host imap.gmail.com
+    User dcantrel@redhat.com
+    # Temporarily use .netrc for password, replace with gpg later
+    PassCmd "awk '/dcantrel@redhat.com/{getline;print $2}' ${HOME}/.netrc"
+    SSLType IMAPS
+    CertificateFile /etc/ssl/certs/ca-bundle.crt
+    PipelineDepth 1
+
+# The local representation of an IMAPAccount.  The second parameter of
+# 'IMAPStore' names this store, which I make the same as the account
+# definition I will use plus "-remote" to indicate this is defining the
+# remote or server-side location of email.  The second parameter of
+# 'Account' maps to the second parameter of a corresponding 'IMAPAccount'.
+IMAPStore rht-remote
+    Account rht
+
+# The local MUA (e.g., mutt) will read and write mail from this store,
+# so it makes sense to use Maildir format.  The second parameter of
+# the 'MaildirStore' setting is the name of this store, which I make
+# the same as the other blocks that control it plus "-local" to indicate
+# this is defining the local location of email.  Path is self-explanatory
+# and SubFolders Verbatim means use the Unix directory layout for the
+# mailbox layout.
+#
+# NOTE: The trailing slash on the Path is critical if it's a directory.
+# And the Inbox setting means use that same directory specified as the
+# Path to hold the inbox, otherwise it uses ~/Maildir.
+MaildirStore rht-local
+    Path ~/Maildir/dcantrel@redhat.com/
+    Inbox ~/Maildir/dcantrel@redhat.com/INBOX
+    SubFolders Verbatim
+
+# Define the sync settings between the local email and server email.  This
+# is somewhat confusing.  The 'Channel' is just a name.  Master is where you
+# define the server-side block to use, in our case the IMAPAccount.  Slave
+# is the local side, so we use our MaildirStore.  Patterns controls what is
+# involved in the sync.  'Create Both' means automatically create missing
+# mailboxes on the server and local side.  'Remove Slave' means only propagate
+# mailbox deletions from the server side to the local side.  'Expunge Both'
+# means propagate mailbox deletions in both directions.  The SyncState and
+# Sync options control the sync state file and what to sync, which is
+# everything.
+Channel rht
+    Master :rht-remote:
+    Slave :rht-local:
+    # Exclude everything under the internal [Gmail] folder, except the interesting folders
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+    Create Both
+    Remove Slave
+    #Expunge Both
+    SyncState *
+    Sync All
+
 #################################################################
 # New II Tech corporate gmail account - newiitechcorp@gmail.com #
 #################################################################
@@ -122,6 +186,70 @@ MaildirStore ntcorp-local
 Channel ntcorp
     Master :ntcorp-remote:
     Slave :ntcorp-local:
+    # Exclude everything under the internal [Gmail] folder, except the interesting folders
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+    Create Both
+    Remove Slave
+    #Expunge Both
+    SyncState *
+    Sync All
+
+############################################################
+# New II Tech personal gmail account - david@newiitechcorp #
+############################################################
+
+# This section defines the authentication and server information for the
+# account.  The 'PipelineDepth' setting throttles things so we don't get
+# gmail's OVERQUOTA error.  See:
+#     https://sourceforge.net/p/isync/mailman/message/35458365/
+# For an initial sync, I set pipeline depth to 1, otherwise gmaill will
+# complain at you a lot.  Once you have a local sync, 50 seems to work.
+IMAPAccount nt
+    Host imap.gmail.com
+    User david@newiitech.com
+    # Temporarily use .netrc for password, replace with gpg later
+    PassCmd "awk '/david@newiitech.com/{getline;print $2}' ${HOME}/.netrc"
+    SSLType IMAPS
+    CertificateFile /etc/ssl/certs/ca-bundle.crt
+    PipelineDepth 1
+
+# The local representation of an IMAPAccount.  The second parameter of
+# 'IMAPStore' names this store, which I make the same as the account
+# definition I will use plus "-remote" to indicate this is defining the
+# remote or server-side location of email.  The second parameter of
+# 'Account' maps to the second parameter of a corresponding 'IMAPAccount'.
+IMAPStore nt-remote
+    Account nt
+
+# The local MUA (e.g., mutt) will read and write mail from this store,
+# so it makes sense to use Maildir format.  The second parameter of
+# the 'MaildirStore' setting is the name of this store, which I make
+# the same as the other blocks that control it plus "-local" to indicate
+# this is defining the local location of email.  Path is self-explanatory
+# and SubFolders Verbatim means use the Unix directory layout for the
+# mailbox layout.
+#
+# NOTE: The trailing slash on the Path is critical if it's a directory.
+# And the Inbox setting means use that same directory specified as the
+# Path to hold the inbox, otherwise it uses ~/Maildir.
+MaildirStore nt-local
+    Path ~/Maildir/david@newiitech.com/
+    Inbox ~/Maildir/david@newiitech.com/INBOX
+    SubFolders Verbatim
+
+# Define the sync settings between the local email and server email.  This
+# is somewhat confusing.  The 'Channel' is just a name.  Master is where you
+# define the server-side block to use, in our case the IMAPAccount.  Slave
+# is the local side, so we use our MaildirStore.  Patterns controls what is
+# involved in the sync.  'Create Both' means automatically create missing
+# mailboxes on the server and local side.  'Remove Slave' means only propagate
+# mailbox deletions from the server side to the local side.  'Expunge Both'
+# means propagate mailbox deletions in both directions.  The SyncState and
+# Sync options control the sync state file and what to sync, which is
+# everything.
+Channel nt
+    Master :nt-remote:
+    Slave :nt-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
