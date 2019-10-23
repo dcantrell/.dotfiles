@@ -1,6 +1,7 @@
 [user]
 	name = David Cantrell
 	email = david.l.cantrell@gmail.com
+	signingkey = 62977BB9C841B965
 [format]
 	subjectprefix = PATCH
 [color]
@@ -21,9 +22,12 @@
 	chainreplyto = no
 [push]
 	default = tracking
+	gpgsign = true
 [rebase]
 	stat = true
 [branch]
 	autosetuprebase = always
 [core]
 	editor = emacs -nw
+[commit]
+	gpgsign = true
