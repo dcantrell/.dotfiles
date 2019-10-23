@@ -1,0 +1,15 @@
+Email Configuration:
+--------------------
+
+Using mbsync, msmtp, and mutt for email.  The configuration files for those
+programs are stored in this repo.  All are configured to use passwords stored
+in pass(1), which needs to be set up separately.  pass(1) uses GnuPG so those
+are more or less paired.
+
+
+Crontabs:
+---------
+
+# Keep mail in sync
+*/15 * * * * /usr/bin/pkill -KILL mbsync && /usr/bin/mkdir -p $HOME/logs && /\
+usr/bin/mbsync -V -a >$HOME/logs/mbsync.log 2>&1
