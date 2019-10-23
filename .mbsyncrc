@@ -62,7 +62,7 @@ Channel personal
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Slave
-    #Expunge Both
+    Expunge Both
     SyncState *
     Sync All
 
@@ -126,7 +126,7 @@ Channel rht
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Slave
-    #Expunge Both
+    Expunge Both
     SyncState *
     Sync All
 
@@ -190,7 +190,7 @@ Channel ntcorp
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Slave
-    #Expunge Both
+    Expunge Both
     SyncState *
     Sync All
 
@@ -254,6 +254,6 @@ Channel nt
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Slave
-    #Expunge Both
+    Expunge Both
     SyncState *
     Sync All
