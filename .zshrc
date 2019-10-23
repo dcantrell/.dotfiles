@@ -76,7 +76,9 @@ NAME="David Cantrell"
 EDITOR="emacs -nw"
 VISUAL="emacs -nw"
 PAGER="less -F -R -X"
-GPGKEY=8CB55649
+
+# GnuPG and agent settings
+GPGKEY=62977BB9C841B965
 GPG_TTY="$(tty)"
 SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
 
