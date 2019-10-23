@@ -22,7 +22,6 @@
 	chainreplyto = no
 [push]
 	default = tracking
-	gpgsign = true
 [rebase]
 	stat = true
 [branch]
