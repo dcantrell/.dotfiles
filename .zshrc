@@ -78,9 +78,20 @@ VISUAL="emacs -nw"
 PAGER="less -F -R -X"
 
 # GnuPG and agent settings
+#
+# Go ahead and force start since we are likely to need ssh key support
+# before we need gpg key support.
+gpg-connect-agent /bye
+
+# Various settings for GnuPG
 GPGKEY=62977BB9C841B965
 GPG_TTY="$(tty)"
-SSH_AUTH_SOCK="/run/user/$(id -u)/gnupg/S.gpg-agent.ssh"
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export GPGKEY SSH_AUTH_SOCK GPG_TTY
+
+# This must be run so that 'ssh-add' works with gpg-agent
+# (The -q option to gpg-connect-agent lies, it's still noisy.)
+echo UPDATESTARTUPTTY | gpg-connect-agent >/dev/null 2>&1
 
 # As of GNU coreutils 8.25, the ls(1) command will wrap filenames
 # with spaces in single quotes if the output device is a tty.  This
@@ -110,7 +121,6 @@ GTK_OVERLAY_SCROLLING=0
 
 export PROMPT RPROMPT
 export PATH NAME EDITOR VISUAL PAGER
-export GPGKEY GPG_TTY SSH_AUTH_SOCK
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
 
