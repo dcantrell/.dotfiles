@@ -78,6 +78,9 @@
 ; Set modes based on filename or file extension
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+(add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
+
+
 (custom-set-variables
   ; custom-set-variables was added by Custom.
   ; If you edit it by hand, you could mess it up, so be careful.
