@@ -62,11 +62,11 @@
 (require 'whitespace)
 (setq-default whitespace-style '(face trailing tabs))
 (custom-set-faces
-  ; custom-set-faces was added by Custom.
-  ; If you edit it by hand, you could mess it up, so be careful.
-  ; Your init file should contain only one such instance.
-  ; If there is more than one, they won't work right.
-  '(whitespace-tab ((t (:background "red")))))
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(whitespace-tab ((t (:background "red")))))
 (global-whitespace-mode)
 
 ; Smooth scrolling rather than jumping by half a screenful
@@ -87,8 +87,8 @@
 ;(add-to-list 'auto-mode-alist '("\.git/COMMIT_MSG" . log-entry-mode))
 
 (custom-set-variables
-  ; custom-set-variables was added by Custom.
-  ; If you edit it by hand, you could mess it up, so be careful.
-  ; Your init file should contain only one such instance.
-  ; If there is more than one, they won't work right.
-  '(package-selected-packages (quote (distinguished-theme))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (distinguished-theme))))
