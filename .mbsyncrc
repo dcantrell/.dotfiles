@@ -49,8 +49,8 @@ MaildirStore personal-local
 # define the server-side block to use, in our case the IMAPAccount.  Slave
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
-# mailboxes on the server and local side.  'Remove Slave' means only propagate
-# mailbox deletions from the server side to the local side.  'Expunge Both'
+# mailboxes on the server and local side.  'Remove Both' means propagate
+# mailbox deletions between both the server and client sides.  'Expunge Both'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -60,7 +60,7 @@ Channel personal
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
-    Remove Slave
+    Remove Both
     Expunge Both
     SyncState *
     Sync All
@@ -112,8 +112,8 @@ MaildirStore rht-local
 # define the server-side block to use, in our case the IMAPAccount.  Slave
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
-# mailboxes on the server and local side.  'Remove Slave' means only propagate
-# mailbox deletions from the server side to the local side.  'Expunge Both'
+# mailboxes on the server and local side.  'Remove Both' means propagate
+# mailbox deletions between both the server and client sides.  'Expunge Both'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -123,7 +123,7 @@ Channel rht
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
-    Remove Slave
+    Remove Both
     Expunge Both
     SyncState *
     Sync All
@@ -175,8 +175,8 @@ MaildirStore ntcorp-local
 # define the server-side block to use, in our case the IMAPAccount.  Slave
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
-# mailboxes on the server and local side.  'Remove Slave' means only propagate
-# mailbox deletions from the server side to the local side.  'Expunge Both'
+# mailboxes on the server and local side.  'Remove Both' means propagate
+# mailbox deletions between both the server and client sides.  'Expunge Both'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -186,7 +186,7 @@ Channel ntcorp
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
-    Remove Slave
+    Remove Both
     Expunge Both
     SyncState *
     Sync All
@@ -238,8 +238,8 @@ MaildirStore nt-local
 # define the server-side block to use, in our case the IMAPAccount.  Slave
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
-# mailboxes on the server and local side.  'Remove Slave' means only propagate
-# mailbox deletions from the server side to the local side.  'Expunge Both'
+# mailboxes on the server and local side.  'Remove Both' means propagate
+# mailbox deletions between both the server and client sides.  'Expunge Both'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -249,7 +249,7 @@ Channel nt
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
-    Remove Slave
+    Remove Both
     Expunge Both
     SyncState *
     Sync All
