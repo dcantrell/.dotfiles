@@ -1,0 +1,85 @@
+# Common mutt settings for all accounts
+
+# Default list of header fields to weed when displaying.
+# Ignore all lines by default
+ignore *
+
+# ... then allow these through.
+unignore from: subject to cc date x-mailer x-url user-agent
+
+# Display the fields in this order
+hdr_order date from to cc subject
+
+# Solarized theme
+# https://github.com/altercation/solarized
+source ~/.mutt/solarized-light-theme
+
+# Editor (further functionality in editor config)
+set editor="emacs -nw"
+set visual="emacs -nw"
+
+# Additional configuration files and directories
+set alias_file="~/.mutt/aliases"
+set header_cache="~/.mutt/header.cache"
+set mailcap_path="~/.mutt/mailcap"
+set ssl_ca_certificates_file="/etc/ssl/certs/ca-bundle.crt"
+set tmpdir="/var/tmp"
+
+# What email looks like on this and from this computer
+set content_type="text/plain"
+set sig_dashes=yes
+set sig_on_top=no
+unset metoo
+
+# How email is browsed and viewed
+set sort=threads
+set sort_browser=reverse-date
+set sort_aux=last-date-received
+set strict_threads=yes
+set duplicate_threads=yes
+set flag_safe=yes
+
+# If one desires to spell check a message before sending
+set ispell="/usr/bin/hunspell"
+
+# How email is constructed
+set edit_headers=yes
+set fast_reply=yes
+set user_agent=yes
+set text_flowed=yes
+set envelope_from=yes
+
+# What happens to email
+set delete=no
+set copy=no
+set move=no
+
+# History buffer
+set history=50
+set history_file="~/.mutt/history"
+set history_remove_dups=yes
+
+# Me
+set realname="David Cantrell"
+
+# GPG signing and encryption
+set crypt_opportunistic_encrypt=yes
+set crypt_replysign=yes
+set crypt_replysignencrypted=yes
+set crypt_verify_sig=ask-yes
+set pgp_auto_decode=yes
+set pgp_default_key="62977BB9C841B965"
+set pgp_use_gpg_agent=yes
+
+
+
+
+
+# Personal account settings
+set sendmail="/usr/bin/msmtp -a personal"
+set folder="~/Maildir/david.l.cantrell@gmail.com"
+set from="david.l.cantrell@gmail.com"
+set signature="~/.mutt/signature/personal"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+unset record
