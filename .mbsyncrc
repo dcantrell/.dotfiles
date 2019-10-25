@@ -15,8 +15,7 @@
 IMAPAccount personal
     Host imap.gmail.com
     User david.l.cantrell@gmail.com
-    # Temporarily use .netrc for password, replace with gpg later
-    PassCmd "awk '/david.l.cantrell@gmail.com/{getline;print $2}' ${HOME}/.netrc"
+    PassCmd "pass app-passwords/david.l.cantrell@gmail.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
     PipelineDepth 1
@@ -79,8 +78,7 @@ Channel personal
 IMAPAccount rht
     Host imap.gmail.com
     User dcantrel@redhat.com
-    # Temporarily use .netrc for password, replace with gpg later
-    PassCmd "awk '/dcantrel@redhat.com/{getline;print $2}' ${HOME}/.netrc"
+    PassCmd "pass app-passwords/dcantrel@redhat.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
     PipelineDepth 1
@@ -143,8 +141,7 @@ Channel rht
 IMAPAccount ntcorp
     Host imap.gmail.com
     User newiitechcorp@gmail.com
-    # Temporarily use .netrc for password, replace with gpg later
-    PassCmd "awk '/newiitechcorp@gmail.com/{getline;print $2}' ${HOME}/.netrc"
+    PassCmd "pass app-passwords/newiitechcorp@gmail.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
     PipelineDepth 1
@@ -207,8 +204,7 @@ Channel ntcorp
 IMAPAccount nt
     Host imap.gmail.com
     User david@newiitech.com
-    # Temporarily use .netrc for password, replace with gpg later
-    PassCmd "awk '/david@newiitech.com/{getline;print $2}' ${HOME}/.netrc"
+    PassCmd "pass app-passwords/david@newiitech.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
     PipelineDepth 1
