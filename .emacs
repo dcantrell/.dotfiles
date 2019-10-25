@@ -80,6 +80,11 @@
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
 
+; Wrap email at 78 characters max per line
+(add-hook 'mail-mode-hook (lambda () (set-fill-column 78)))
+(add-hook 'mail-mode-hook 'turn-on-auto-fill)
+
+;(add-to-list 'auto-mode-alist '("\.git/COMMIT_MSG" . log-entry-mode))
 
 (custom-set-variables
   ; custom-set-variables was added by Custom.
