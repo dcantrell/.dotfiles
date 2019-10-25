@@ -1,0 +1,8 @@
+# Personal account settings
+set sendmail="/usr/bin/msmtp -a personal"
+set folder="~/Maildir/david.l.cantrell@gmail.com"
+set from="david.l.cantrell@gmail.com"
+set signature="~/.mutt/signature/personal"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+unset record

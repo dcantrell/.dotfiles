@@ -31,9 +31,12 @@ set sig_dashes=yes
 set sig_on_top=no
 unset metoo
 
+# Handle non-text content as much as possible (see ~/.mutt/mailcap)
+auto_view text/html
+alternative_order text/plain text/html
+
 # How email is browsed and viewed
 set sort=threads
-set sort_browser=reverse-date
 set sort_aux=last-date-received
 set strict_threads=yes
 set duplicate_threads=yes
@@ -71,15 +74,13 @@ set pgp_auto_decode=yes
 set pgp_default_key="62977BB9C841B965"
 set pgp_use_gpg_agent=yes
 
-
-
-
-
-# Personal account settings
-set sendmail="/usr/bin/msmtp -a personal"
-set folder="~/Maildir/david.l.cantrell@gmail.com"
-set from="david.l.cantrell@gmail.com"
-set signature="~/.mutt/signature/personal"
-set spoolfile="+INBOX"
-set postponed="+[Gmail]/Drafts"
-unset record
+# Accounts
+source ~/.mutt/accounts/personal
+folder-hook david.l.cantrell@gmail.com/* source ~/.mutt/accounts/personal
+folder-hook dcantrel@redhat.com/* source ~/.mutt/accounts/rht
+folder-hook newiitechcorp@gmail.com/* source ~/.mutt/accounts/ntcorp
+folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
+macro index <f2> '<enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
+macro index <f3> '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
+macro index <f4> '<enter-command>source ~/.mutt/accounts/ntcorp<enter><change-folder>!<enter>'
+macro index <f5> '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter>'

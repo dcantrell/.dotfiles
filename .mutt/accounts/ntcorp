@@ -1,0 +1,8 @@
+# New II Tech Corporate account settings
+set sendmail="/usr/bin/msmtp -a ntcorp"
+set folder="~/Maildir/newiitechcorp@gmail.com"
+set from="newiitechcorp@gmail.com"
+set signature="~/.mutt/signature/ntcorp"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+unset record

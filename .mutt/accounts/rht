@@ -1,0 +1,8 @@
+# Work account settings
+set sendmail="/usr/bin/msmtp -a rht"
+set folder="~/Maildir/dcantrel@redhat.com"
+set from="dcantrell@redhat.com"
+set signature="~/.mutt/signature/rht"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+unset record

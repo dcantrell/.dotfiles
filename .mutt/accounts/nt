@@ -1,0 +1,8 @@
+# New II Tech personal account settings
+set sendmail="/usr/bin/msmtp -a nt"
+set folder="~/Maildir/david@newiitech.com"
+set from="david@newiitech.com"
+set signature="~/.mutt/signature/nt"
+set spoolfile="+INBOX"
+set postponed="+[Gmail]/Drafts"
+unset record
