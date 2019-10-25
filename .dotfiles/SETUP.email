@@ -11,5 +11,7 @@ Crontabs:
 ---------
 
 # Keep mail in sync
-*/15 * * * * /usr/bin/pkill -KILL mbsync && /usr/bin/mkdir -p $HOME/logs && /\
-usr/bin/mbsync -V -a >$HOME/logs/mbsync.log 2>&1
+# This runs mbsync every 15 minutes on all configured accounts and
+# channels, but if you ran it manually then this job won't interrupt
+# the running one.
+*/15 * * * * /usr/bin/pgrep mbsync >/dev/null || ( /usr/bin/pkill -KILL mbsync && /usr/bin/mkdir -p $HOME/logs && /usr/bin/mbsync -V -a >$HOME/logs/mbsync.log 2>&1 )
