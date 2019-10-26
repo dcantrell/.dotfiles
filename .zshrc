@@ -81,7 +81,7 @@ PAGER="less -F -R -X"
 #
 # Go ahead and force start since we are likely to need ssh key support
 # before we need gpg key support.
-gpg-connect-agent /bye
+gpg-connect-agent /bye >/dev/null 2>&1
 
 # Various settings for GnuPG
 GPGKEY=62977BB9C841B965
