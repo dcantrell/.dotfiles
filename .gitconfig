@@ -28,5 +28,3 @@
 	autosetuprebase = always
 [core]
 	editor = emacs -nw
-[commit]
-	gpgsign = true
