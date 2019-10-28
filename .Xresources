@@ -1,0 +1,22 @@
+! rxvt-unicode customizations
+URxvt*title:             urxvt
+URxvt*background:        black
+URxvt*foreground:        white
+URxvt*font:              xft:Inconsolata:style=Bold:size=16
+URxvt*scrollStyle:       next
+URxvt*scrollBar_right:   true
+URxvt*scrollTtyKeypress: true
+URxvt*scrollTtyOutput:   true
+URxvt*perl-ext-common:   default,matcher
+URxvt*url-launcher:      firefox
+URxvt*matcher.button:    1
+URxvt*urgentOnBell:      true
+URxvt*cursorBlink:       true
+URxvt*cursorUnderline:   true
+URxvt*skipBuiltinGlyphs: true
+URxvt*loginShell:        true
+URxvt*termName:          rxvt-unicode-256color
+URxvt*secondaryScreen:   true
+URxvt*colorUL:           yellow
+URxvt*underlineColor:    yellow
+URxvt*buffered:          true
