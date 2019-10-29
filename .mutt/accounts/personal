@@ -1,4 +1,5 @@
 # Personal account settings
+set status_format="---[ Folder: %f ]---[ %r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)?%?p? ( %p postponed )? ]---%>-[ david.l.cantrell@gmail.com ]---"
 set sendmail="/usr/bin/msmtp -a personal"
 set folder="~/Maildir/david.l.cantrell@gmail.com"
 set from="david.l.cantrell@gmail.com"

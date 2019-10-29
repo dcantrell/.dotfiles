@@ -1,4 +1,5 @@
 # Work account settings
+set status_format="---[ Folder: %f ]---[ %r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)?%?p? ( %p postponed )? ]---%>-[ dcantrell@redhat.com ]---"
 set sendmail="/usr/bin/msmtp -a rht"
 set folder="~/Maildir/dcantrel@redhat.com"
 set from="dcantrell@redhat.com"

@@ -33,7 +33,7 @@ unset metoo
 
 # Handle non-text content as much as possible (see ~/.mutt/mailcap)
 auto_view text/html
-alternative_order text/plain text/html
+alternative_order text/plain text/enriched text/html
 
 # How email is browsed and viewed
 set sort=threads
@@ -66,21 +66,44 @@ set history_remove_dups=yes
 set realname="David Cantrell"
 
 # GPG signing and encryption
-set crypt_opportunistic_encrypt=yes
+set pgp_sign_as="62977BB9C841B965"
+set crypt_use_gpgme=no
+set crypt_autosign=no
+set crypt_verify_sig=yes
 set crypt_replysign=yes
+set crypt_replyencrypt=yes
 set crypt_replysignencrypted=yes
-set crypt_verify_sig=ask-yes
-set pgp_auto_decode=yes
-set pgp_default_key="62977BB9C841B965"
-set pgp_use_gpg_agent=yes
 
-# Accounts
+# Default account is 'personal'
 source ~/.mutt/accounts/personal
+
+# Folder hooks, source in account configuration each time the mailbox
+# subdirectory changes.
 folder-hook david.l.cantrell@gmail.com/* source ~/.mutt/accounts/personal
 folder-hook dcantrel@redhat.com/* source ~/.mutt/accounts/rht
 folder-hook newiitechcorp@gmail.com/* source ~/.mutt/accounts/ntcorp
 folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
+
+# Use F-keys to change between accounts:
+#
+#   F2   personal
+#   F3   rht
+#   F4   ntcorp
+#   F5   nt
+#
+# Also include octal macros to handle the Fn+Fkey codes on my Dell XPS 13.  Use ":exec what-key"
+# to get odd keycodes that mutt can't figure out directly.  Invoke that function in mutt by
+# just typing ':' and going from there.  To exit the key code reporter, press Ctrl+G
+#
+# NOTE: These macro keys do not work inside a tmux session.  Still looking for a fix for that.
 macro index <f2> '<enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
+macro index \121 '<enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
+
 macro index <f3> '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
+macro index \122 '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
+
 macro index <f4> '<enter-command>source ~/.mutt/accounts/ntcorp<enter><change-folder>!<enter>'
-macro index <f5> '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter>'
+macro index \123 '<enter-command>source ~/.mutt/accounts/ntcorp<enter><change-folder>!<enter>'
+
+macro index <f5> '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter'>
+macro index \415 '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter'>
