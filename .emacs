@@ -1,3 +1,8 @@
+; Send automatic custom additions to a different file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
 ; Set up package repositories to use
 (package-initialize)
 (require 'package)
@@ -11,9 +16,7 @@
 ; Packages to use and make sure we have installed
 (setq package-list '(dracula-theme))
 
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+(package-install-selected-packages)
 
 ; Load theme
 ; https://draculatheme.com/emacs/
