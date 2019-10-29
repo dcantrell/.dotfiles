@@ -16,6 +16,7 @@
     (package-install package)))
 
 ; Load theme
+; https://draculatheme.com/emacs/
 (load-theme 'dracula t)
 
 ; Prevent tabs and use 4 space tab stop
