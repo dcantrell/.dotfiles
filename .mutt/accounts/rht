@@ -7,3 +7,4 @@ set signature="~/.mutt/signature/rht"
 set spoolfile="+INBOX"
 set postponed="+[Gmail]/Drafts"
 unset record
+folder-hook dcantrel@redhat.com/* source ~/.mutt/accounts/rht

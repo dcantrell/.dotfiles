@@ -7,3 +7,4 @@ set signature="~/.mutt/signature/ntcorp"
 set spoolfile="+INBOX"
 set postponed="+[Gmail]/Drafts"
 unset record
+folder-hook newiitechcorp@gmail.com/* source ~/.mutt/accounts/ntcorp
