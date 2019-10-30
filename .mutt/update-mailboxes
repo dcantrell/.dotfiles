@@ -31,7 +31,8 @@ for account in * ; do
     IFS=
 
     # every account should have an INBOX
-    echo "mailboxes \"=INBOX\"" > ${MAILBOXES}/${account}
+    echo "unmailboxes *" > ${MAILBOXES}/${account}
+    echo "mailboxes \"=INBOX\"" >> ${MAILBOXES}/${account}
 
     # change over to this account's IMAP store and look for mailboxes
     cd ${HOME}/Maildir/${folder}
