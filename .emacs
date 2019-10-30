@@ -1,5 +1,5 @@
 ; Send automatic custom additions to a different file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
   (load custom-file))
 
@@ -55,12 +55,7 @@
 ; https://www.emacswiki.org/emacs/WhiteSpace
 (require 'whitespace)
 (setq whitespace-style '(face trailing tabs))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(whitespace-tab ((t (:background "red")))))
+(custom-set-faces '(whitespace-tab ((t (:background "red")))))
 (global-whitespace-mode)
 
 ; Smooth scrolling rather than jumping by half a screenful
@@ -69,11 +64,11 @@
 ; Show the clock
 (display-time-mode 1)
 
+; Wrap email at 78 characters max per line
+(add-hook 'mail-mode-hook (lambda () (set-fill-column 78)))
+(add-hook 'mail-mode-hook 'turn-on-auto-fill)
+
 ; Set modes based on filename or file extension
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
-
-; Wrap email at 78 characters max per line
-(add-hook 'mail-mode-hook (lambda () (set-fill-column 78)))
-(add-hook 'mail-mode-hook 'turn-on-auto-fill)
