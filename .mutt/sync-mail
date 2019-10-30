@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Run mbsync if it isn't already running followed by the
+# update-mailboxes script to pick up any new or deleted
+# IMAP folders.
+#
+# David Cantrell <david.l.cantrell@gmail.com>
+#
+
+PATH=/usr/bin
+
+# Exit if mbsync is already running (won't pick up mailbox changes)
+pgrep mbsync >/dev/null 2>&1
+[ $? -eq 0 ] && exit 0
+
+# Run mbsync
+pkill -KILL mbsync
+[ -d ${HOME}/logs ] || mkdir -p ${HOME}/logs
+mbsync -a -V >${HOME}/logs/mbsync.log 2>&1
+
+# Update mailboxes
+[ -x ${HOME}/.mutt/update-mailboxes ] && ${HOME}/.mutt/update-mailboxes

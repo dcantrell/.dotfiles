@@ -41,6 +41,32 @@ set sort_aux=last-date-received
 set strict_threads=yes
 set duplicate_threads=yes
 set flag_safe=yes
+set imap_check_subscribed=yes
+set mail_check_stats=yes
+
+# Sidebar configuration (shows folders)
+set sidebar_visible=yes
+set sidebar_sort_method=new
+set sidebar_short_path=yes
+set sidebar_folder_indent=yes
+set sidebar_indent_string="  "
+
+# Sidebar keybindings.  This keeps the arrow keys and PgUp/PgDn usable
+# for the regular message index.  Sidebar bindings:
+#
+#     b       Toggle sidebar on/off
+#     Ctrl+p  Previous mailbox
+#     Ctrl+n  Next mailbox
+#     Ctrl+d  PgDn mailbox list
+#     Ctrl+u  PgUp mailbox list
+#     Ctrl+o  Open selected mailbox
+#
+bind index,pager b sidebar-toggle-visible
+bind index,pager \CN sidebar-next
+bind index,pager \CP sidebar-prev
+bind index,pager \CD sidebar-page-down
+bind index,pager \CU sidebar-page-up
+bind index,pager \CO sidebar-open
 
 # If one desires to spell check a message before sending
 set ispell="/usr/bin/hunspell"
@@ -53,7 +79,11 @@ set text_flowed=yes
 set envelope_from=yes
 
 # What happens to email
-set delete=no
+# NOTE: Setting delete to yes when using gmail does not actually delete the
+# the message but just archives it.  If this is not the behavior you want,
+# then you need to configure mutt to move deleted messages to the trash
+# folder in gmail.
+set delete=yes
 set copy=no
 set move=no
 

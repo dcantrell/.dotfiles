@@ -8,3 +8,4 @@ set spoolfile="+INBOX"
 set postponed="+[Gmail]/Drafts"
 unset record
 folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
+source ~/.mutt/mailboxes/nt

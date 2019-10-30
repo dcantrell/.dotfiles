@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# Generate mailboxes include files for each account in mutt
+# This can run manually, but it's meant to be invoked by the
+# script that fires by cron to run mbsync.  The idea being
+# if new server-side folders have been created, this will
+# pick them up.  Also folder deletions.
+#
+# David Cantrell <david.l.cantrell@gmail.com>
+#
+
+PATH=/usr/bin
+MAILBOXES=${HOME}/.mutt/mailboxes
+ACCOUNTS=${HOME}/.mutt/accounts
+
+[ -d ${HOME}/Maildir ] || exit 0
+[ -d ${ACCOUNTS} ] || exit 0
+[ -d ${MAILBOXES} ] || mkdir -p ${MAILBOXES}
+
+# Iterate over each account definition and look for IMAP folders locally
+cd ${ACCOUNTS}
+for account in * ; do
+    # this is where the local IMAP copy is stored
+    folder="$(grep 'set folder' ${ACCOUNTS}/${account} | cut -d '"' -f 2 | cut -d '/' -f 3)"
+
+    # if it isn't there, just go to the next account
+    [ -d ${HOME}/Maildir/${folder} ] || continue
+
+    # disable IFS for the next loop
+    OLDIFS=${IFS}
+    IFS=
+
+    # every account should have an INBOX
+    echo "mailboxes \"=INBOX\"" > ${MAILBOXES}/${account}
+
+    # change over to this account's IMAP store and look for mailboxes
+    cd ${HOME}/Maildir/${folder}
+    find . -type d -name cur | cut -c2- | while read line ; do
+        # remove the 'cur' from this name and the leading slash
+        mailbox="$(dirname ${line} | cut -c2-)"
+
+        # these are handled outside the loop
+        [ "${mailbox}" = "INBOX" ] && continue
+        [ "${mailbox}" = "[Gmail]/All Mail" ] && continue
+        [ "${mailbox}" = "[Gmail]/Drafts" ] && continue
+        [ "${mailbox}" = "[Gmail]/Sent Mail" ] && continue
+        [ "${mailbox}" = "[Gmail]/Starred" ] && continue
+
+        echo "mailboxes \"=${mailbox}\"" >> ${MAILBOXES}/${account}
+    done
+
+    # restore IFS
+    IFS=${OLDIFS}
+
+    # special gmail mailboxes
+    echo "mailboxes \"=[Gmail]/All Mail\" \"=[Gmail]/Drafts\" \"=[Gmail]/Sent Mail\" \"=[Gmail]/Starred\"" >> ${MAILBOXES}/${account}
+done
