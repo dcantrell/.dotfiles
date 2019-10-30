@@ -12,7 +12,7 @@ hdr_order date from to cc subject
 
 # Solarized theme
 # https://github.com/altercation/solarized
-source ~/.mutt/solarized-light-theme
+source ~/.mutt/themes/solarized-light
 
 # Editor (further functionality in editor config)
 set editor="emacs -nw"
