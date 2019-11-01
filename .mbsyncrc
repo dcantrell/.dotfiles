@@ -50,7 +50,7 @@ MaildirStore personal-local
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
-# mailbox deletions between both the server and client sides.  'Expunge Both'
+# mailbox deletions between both the server and client sides.  'Expunge None'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -61,7 +61,7 @@ Channel personal
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Both
-    Expunge Both
+    Expunge None
     SyncState *
     Sync All
 
@@ -113,7 +113,7 @@ MaildirStore rht-local
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
-# mailbox deletions between both the server and client sides.  'Expunge Both'
+# mailbox deletions between both the server and client sides.  'Expunge None'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -124,7 +124,7 @@ Channel rht
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Both
-    Expunge Both
+    Expunge None
     SyncState *
     Sync All
 
@@ -176,7 +176,7 @@ MaildirStore ntcorp-local
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
-# mailbox deletions between both the server and client sides.  'Expunge Both'
+# mailbox deletions between both the server and client sides.  'Expunge None'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -187,7 +187,7 @@ Channel ntcorp
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Both
-    Expunge Both
+    Expunge None
     SyncState *
     Sync All
 
@@ -239,7 +239,7 @@ MaildirStore nt-local
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
-# mailbox deletions between both the server and client sides.  'Expunge Both'
+# mailbox deletions between both the server and client sides.  'Expunge None'
 # means propagate mailbox deletions in both directions.  The SyncState and
 # Sync options control the sync state file and what to sync, which is
 # everything.
@@ -250,6 +250,6 @@ Channel nt
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
     Create Both
     Remove Both
-    Expunge Both
+    Expunge None
     SyncState *
     Sync All
