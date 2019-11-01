@@ -46,11 +46,12 @@ set mail_check_stats=yes
 
 # Sidebar configuration (shows folders)
 set sidebar_visible=yes
-set sidebar_sort_method=unsorted
+set sidebar_sort_method=alpha
 set sidebar_short_path=yes
 set sidebar_folder_indent=yes
 set sidebar_indent_string="  "
-set sidebar_format="%B%*  %N/%S"
+set sidebar_format="%B%*  %n (%S)"
+set sidebar_divider_char=" | "
 
 # Sidebar keybindings.  This keeps the arrow keys and PgUp/PgDn usable
 # for the regular message index.  Sidebar bindings:
