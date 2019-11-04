@@ -1,4 +1,6 @@
-# Common mutt settings for all accounts
+#########################################
+# Common mutt settings for all accounts #
+#########################################
 
 # Default list of header fields to weed when displaying.
 # Ignore all lines by default
@@ -31,11 +33,18 @@ set sig_dashes=yes
 set sig_on_top=no
 unset metoo
 
-# Handle non-text content as much as possible (see ~/.mutt/mailcap)
+# Me
+set realname="David Cantrell"
+
+#####################################################################
+# Handle non-text content as much as possible (see ~/.mutt/mailcap) #
+#####################################################################
 auto_view text/html
 alternative_order text/plain text/enriched text/html
 
-# How email is browsed and viewed
+###################################
+# How email is browsed and viewed #
+###################################
 set sort=threads
 set sort_aux=last-date-received
 set strict_threads=yes
@@ -44,7 +53,9 @@ set flag_safe=yes
 set imap_check_subscribed=yes
 set mail_check_stats=yes
 
-# Sidebar configuration (shows folders)
+#########################################
+# Sidebar configuration (shows folders) #
+#########################################
 set sidebar_visible=yes
 set sidebar_sort_method=alpha
 set sidebar_short_path=yes
@@ -53,8 +64,11 @@ set sidebar_indent_string="  "
 set sidebar_format="%B%*  %n (%S)"
 set sidebar_divider_char=" | "
 
-# Sidebar keybindings.  This keeps the arrow keys and PgUp/PgDn usable
-# for the regular message index.  Sidebar bindings:
+#######################
+# Sidebar keybindings #
+#######################
+# This keeps the arrow keys and PgUp/PgDn usable for the regular
+# message index.  Sidebar bindings:
 #
 #     b       Toggle sidebar on/off
 #     Ctrl+p  Previous mailbox
@@ -70,17 +84,24 @@ bind index,pager \CD sidebar-page-down
 bind index,pager \CU sidebar-page-up
 bind index,pager \CO sidebar-open
 
+###############
+# Spell check #
+###############
 # If one desires to spell check a message before sending
 set ispell="/usr/bin/hunspell"
 
-# How email is constructed
+############################
+# How email is constructed #
+############################
 set edit_headers=yes
 set fast_reply=yes
 set user_agent=yes
 set text_flowed=yes
 set envelope_from=yes
 
-# What happens to email
+#########################
+# What happens to email #
+#########################
 # NOTE: Setting delete to yes when using gmail does not actually delete the
 # the message but just archives it.  If this is not the behavior you want,
 # then you need to configure mutt to move deleted messages to the trash
@@ -89,15 +110,16 @@ set delete=yes
 set copy=no
 set move=no
 
-# History buffer
+##################
+# History buffer #
+##################
 set history=50
 set history_file="~/.mutt/history"
 set history_remove_dups=yes
 
-# Me
-set realname="David Cantrell"
-
-# GPG signing and encryption
+##############################
+# GPG signing and encryption #
+##############################
 set pgp_sign_as="62977BB9C841B965"
 set crypt_use_gpgme=no
 set crypt_autosign=no
@@ -106,17 +128,24 @@ set crypt_replysign=yes
 set crypt_replyencrypt=yes
 set crypt_replysignencrypted=yes
 
-# Default account is 'personal'
+#################################
+# Default account is 'personal' #
+#################################
 source ~/.mutt/accounts/personal
 
-# Folder hooks, source in account configuration each time the mailbox
-# subdirectory changes.
+################
+# Folder hooks #
+################
+
+# Source in account configuration each time the mailbox subdirectory changes.
 folder-hook david.l.cantrell@gmail.com/* source ~/.mutt/accounts/personal
 folder-hook dcantrel@redhat.com/* source ~/.mutt/accounts/rht
 folder-hook newiitechcorp@gmail.com/* source ~/.mutt/accounts/ntcorp
 folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
 
-# Use F-keys to change between accounts:
+#########################################
+# Use F-keys to change between accounts #
+#########################################
 #
 #   F2   personal
 #   F3   rht
@@ -139,3 +168,12 @@ macro index \123 '<enter-command>source ~/.mutt/accounts/ntcorp<enter><change-fo
 
 macro index <f5> '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter'>
 macro index \415 '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter'>
+
+#####################################
+# Common macros across all accounts #
+#####################################
+
+# Report message as spam.  This saves it to the Spam folder for the
+# currently active account.  The hot key is "!" which is in the icon
+# that Gmail uses to mark the Spam folder.
+macro index,pager ! "<save-message>=[Gmail]/Spam<enter><enter>" "Report spam"
