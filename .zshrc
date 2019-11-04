@@ -19,6 +19,13 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=${HOME}/.history
 
+# Function to name terminal windows with an arbitrary string
+# Usage:  wname "STRING"
+# e.g., wname mutt
+wname() {
+    echo -en "\033]0;$@\007";
+}
+
 # Make sure we have some basic PATH
 [ -z "${PATH}" ] && PATH=/usr/bin:/usr/local/bin
 
