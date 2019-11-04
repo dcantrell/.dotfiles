@@ -79,17 +79,15 @@ PAGER="less -F -R -X"
 
 # GnuPG and agent settings
 #
-# Go ahead and force start since we are likely to need ssh key support
-# before we need gpg key support.
+# Go ahead and force start the agent
 gpg-connect-agent /bye >/dev/null 2>&1
 
 # Various settings for GnuPG
 GPGKEY=62977BB9C841B965
 GPG_TTY="$(tty)"
-SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-export GPGKEY SSH_AUTH_SOCK GPG_TTY
+export GPGKEY GPG_TTY
 
-# This must be run so that 'ssh-add' works with gpg-agent
+# Ensure we are connected to the agent
 # (The -q option to gpg-connect-agent lies, it's still noisy.)
 echo UPDATESTARTUPTTY | gpg-connect-agent >/dev/null 2>&1
 
