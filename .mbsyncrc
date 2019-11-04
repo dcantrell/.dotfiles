@@ -58,7 +58,7 @@ Channel personal
     Master :personal-remote:
     Slave :personal-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
     Remove Both
     Expunge None
@@ -121,7 +121,7 @@ Channel rht
     Master :rht-remote:
     Slave :rht-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
     Remove Both
     Expunge None
@@ -184,7 +184,7 @@ Channel ntcorp
     Master :ntcorp-remote:
     Slave :ntcorp-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
     Remove Both
     Expunge None
@@ -247,7 +247,7 @@ Channel nt
     Master :nt-remote:
     Slave :nt-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/All Mail"
+    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
     Remove Both
     Expunge None
