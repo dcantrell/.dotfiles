@@ -98,6 +98,30 @@ export GPGKEY GPG_TTY
 # (The -q option to gpg-connect-agent lies, it's still noisy.)
 echo UPDATESTARTUPTTY | gpg-connect-agent >/dev/null 2>&1
 
+# Run the ssh-agent or connect to an already running one
+# NOTE:  To get this block working, make sure you start with no .ssh/agent.env
+# file and no running ssh-agent.
+AGENT_ENV=${HOME}/.ssh/agent.env
+
+if [ -f ${AGENT_ENV} ]; then
+    eval $(cat ${AGENT_ENV})
+
+    if [ ! "$(ps -q $SSH_AGENT_PID -o comm=)" = "ssh-agent" ]; then
+        unset SSH_AGENT_PID
+        unset SSH_AUTH_SOCK
+        rm -f ${AGENT_ENV}
+        ssh-agent | grep -v ^echo > ${AGENT_ENV}
+        eval $(cat ${AGENT_ENV})
+    fi
+else
+    pid="$(pgrep ssh-agent)"
+
+    if [ -z "${pid}" ]; then
+        ssh-agent | grep -v ^echo > ${AGENT_ENV}
+        eval $(cat ${AGENT_ENV})
+    fi
+fi
+
 # As of GNU coreutils 8.25, the ls(1) command will wrap filenames
 # with spaces in single quotes if the output device is a tty.  This
 # is strange and unusual and unwelcome.  This variable will restore
