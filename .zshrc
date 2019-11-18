@@ -153,6 +153,10 @@ export PATH NAME EDITOR VISUAL PAGER
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
 
+# Home and End keys (especially inside tmux)
+bindkey "\E[1~" beginning-of-line
+bindkey "\E[4~" end-of-line
+
 # Make sure latest irssi scripts are in use
 if [ -d /usr/share/irssi/scripts ]; then
     IRSSI_SCRIPTS_DIR=/usr/share/irssi/scripts
