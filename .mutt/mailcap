@@ -1,1 +1,2 @@
-text/html; links -dump %s; copiousoutput;
+text/html; w3m -o auto_image=TRUE -I %{charset} -T text/html -F; copiousoutput;
+application/pdf; mupdf %s; copiousoutput

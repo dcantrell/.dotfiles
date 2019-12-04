@@ -46,6 +46,7 @@ for account in * ; do
         [ "${mailbox}" = "[Gmail]/Drafts" ] && continue
         [ "${mailbox}" = "[Gmail]/Sent Mail" ] && continue
         [ "${mailbox}" = "[Gmail]/Starred" ] && continue
+        [ "${mailbox}" = "[Gmail]/Spam" ] && continue
 
         echo "mailboxes \"=${mailbox}\"" >> ${MAILBOXES}/${account}
     done
@@ -54,5 +55,5 @@ for account in * ; do
     IFS=${OLDIFS}
 
     # special gmail mailboxes
-    echo "mailboxes \"=[Gmail]/All Mail\" \"=[Gmail]/Drafts\" \"=[Gmail]/Sent Mail\" \"=[Gmail]/Starred\"" >> ${MAILBOXES}/${account}
+    echo "mailboxes \"=[Gmail]/All Mail\" \"=[Gmail]/Drafts\" \"=[Gmail]/Sent Mail\" \"=[Gmail]/Starred\" \"=[Gmail]/Spam\"" >> ${MAILBOXES}/${account}
 done
