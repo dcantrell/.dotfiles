@@ -1,5 +1,4 @@
 ! rxvt-unicode customizations
-URxvt*title:             urxvt
 URxvt*background:        black
 URxvt*foreground:        white
 URxvt*font:              xft:Inconsolata:style=Bold:size=16
