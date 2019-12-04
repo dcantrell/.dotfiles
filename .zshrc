@@ -51,6 +51,10 @@ fi
 # Pull in photo tools
 [ -d "${HOME}/photos/bin" ] && PATH=${PATH}:${HOME}/photos/bin
 
+# Things installed by pip and maybe other package managers
+[ -d "${HOME}/.local/bin" ] && PATH=${PATH}:${HOME}/.local/bin
+[ -d "${HOME}/.cabal/bin" ] && PATH=${PATH}:${HOME}/.cabal/bin
+
 # Make sure we have the right ssh config permissions
 [ -f "${HOME}/.ssh/config" ] && chmod 0644 "${HOME}/.ssh/config"
 
