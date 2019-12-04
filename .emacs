@@ -72,3 +72,8 @@
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
+
+; Prevent lots of trailing whitespace on mouse copy/paste
+(unless window-system
+  (custom-set-faces
+   '(default ((t (:background "unspecified-bg"))))))
