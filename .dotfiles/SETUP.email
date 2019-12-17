@@ -6,6 +6,13 @@ programs are stored in this repo.  All are configured to use passwords stored
 in pass(1), which needs to be set up separately.  pass(1) uses GnuPG so those
 are more or less paired.
 
+The mailcap file requires w3m, mupdf, and mutt-ics.  mutt-ics is
+installable with pip:
+
+    pip install --user mutt-ics
+
+w3m and mupdf likely come with your distribution.
+
 
 Crontabs:
 ---------
