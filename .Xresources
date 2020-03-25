@@ -20,12 +20,16 @@ URxvt*colorUL:           yellow
 URxvt*underlineColor:    yellow
 URxvt*buffered:          true
 
+! xlockmore
+XLock*mode: qix
+
 !!!!!!!!!!!!!!!!!!!!
 ! 4K monitor stuff !
 !!!!!!!!!!!!!!!!!!!!
 
-! Increase the mouse cursor size
-Xcursor.size: 16
+! Set a scalable cursor theme and increase the size
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size: 48
 
 ! Need bigger fonts
 
