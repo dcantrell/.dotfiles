@@ -70,9 +70,9 @@ Channel personal
     SyncState *
     Sync All
 
-##############################################
-# Red Hat gmail account - dcantrel@gmail.com #
-##############################################
+################################################
+# Red Hat gmail account - dcantrell@redhat.com #
+################################################
 
 # This section defines the authentication and server information for the
 # account.  The 'PipelineDepth' setting throttles things so we don't get
@@ -82,8 +82,8 @@ Channel personal
 # complain at you a lot.  Once you have a local sync, 50 seems to work.
 IMAPAccount rht
     Host imap.gmail.com
-    User dcantrel@redhat.com
-    PassCmd "pass app-passwords/dcantrel@redhat.com"
+    User dcantrell@redhat.com
+    PassCmd "pass app-passwords/dcantrell@redhat.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
     PipelineDepth 1
@@ -108,8 +108,8 @@ IMAPStore rht-remote
 # And the Inbox setting means use that same directory specified as the
 # Path to hold the inbox, otherwise it uses ~/Maildir.
 MaildirStore rht-local
-    Path ~/Maildir/dcantrel@redhat.com/
-    Inbox ~/Maildir/dcantrel@redhat.com/INBOX
+    Path ~/Maildir/dcantrell@redhat.com/
+    Inbox ~/Maildir/dcantrell@redhat.com/INBOX
     SubFolders Verbatim
 
 # Define the sync settings between the local email and server email.  This

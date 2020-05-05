@@ -1,11 +1,11 @@
 # Work account settings
 set status_format="---[ Folder: %f ]---[ %r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)?%?p? ( %p postponed )? ]---%>-[ dcantrell@redhat.com ]---"
 set sendmail="/usr/bin/msmtp -a rht"
-set folder="~/Maildir/dcantrel@redhat.com"
+set folder="~/Maildir/dcantrell@redhat.com"
 set from="dcantrell@redhat.com"
 set signature="~/.mutt/signature/rht"
 set spoolfile="+INBOX"
 set postponed="+[Gmail]/Drafts"
 unset record
-folder-hook dcantrel@redhat.com/* source ~/.mutt/accounts/rht
+folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 source ~/.mutt/mailboxes/rht

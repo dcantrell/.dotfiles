@@ -142,7 +142,7 @@ source ~/.mutt/accounts/personal
 
 # Source in account configuration each time the mailbox subdirectory changes.
 folder-hook david.l.cantrell@gmail.com/* source ~/.mutt/accounts/personal
-folder-hook dcantrel@redhat.com/* source ~/.mutt/accounts/rht
+folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 folder-hook newiitechcorp@gmail.com/* source ~/.mutt/accounts/ntcorp
 folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
 
