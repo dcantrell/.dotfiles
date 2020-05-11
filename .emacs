@@ -77,3 +77,18 @@
 (unless window-system
   (custom-set-faces
    '(default ((t (:background "unspecified-bg"))))))
+
+; Work around problem with the X selection and getting extra spaces
+; only on commented lines
+(defun yank-to-x-clipboard () (interactive)
+  (if (region-active-p)
+      (progn (shell-command-on-region (region-beginning)
+                                      (region-end)
+                                      "xsel -i -p")
+             (shell-command-on-region (region-beginning)
+                                      (region-end)
+                                      "xsel -i -b")
+             (message "Yanked region to clipboard!")
+             (deactivate-mark))
+    (message "No region active; can't yank to clipboard!")))
+(global-set-key "\M-W" 'yank-to-x-clipboard)
