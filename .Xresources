@@ -20,51 +20,48 @@ URxvt*colorUL:           yellow
 URxvt*underlineColor:    yellow
 URxvt*buffered:          true
 
-! xlockmore
-XLock*mode: qix
-
 #ifdef SRVR_bnsf
-    !!!!!!!!!!!!!!!!!!!!
-    ! 4K monitor stuff !
-    !!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!
+! 4K monitor stuff !
+!!!!!!!!!!!!!!!!!!!!
 
-    ! Set a scalable cursor theme and increase the size
-    Xcursor.theme: Vanilla-DMZ-AA
-    Xcursor.size: 48
+! Set a scalable cursor theme and increase the size
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size: 48
 
-    ! Need bigger fonts
+! Need bigger fonts
 
-    ! Use multiples of 96 where 96 is generally the default dpi
-    Xft.dpi: 192
+! Use multiples of 96 where 96 is generally the default dpi
+Xft.dpi: 192
 
-    ! These settings and values come from fontconfig
+! These settings and values come from fontconfig
 
-    ! Do autohinting and disregard any existing hinting info (0=off, 1=on)
-    Xft.autohint: 0
+! Do autohinting and disregard any existing hinting info (0=off, 1=on)
+Xft.autohint: 0
 
-    ! Enable hinting (0=off, 1=on)
-    Xft.hinting: 1
+! Enable hinting (0=off, 1=on)
+Xft.hinting: 1
 
-    ! Hint style.  Possible values:
-    !     hintnone      No hinting (not sure why this is a value)
-    !     hintslight    Make font fuzzy to line up to the grid while
-    !                   favoring the font shape.
-    !     hintmedium    Probably between hintslight and hintfull.
-    !     hintfull      Favor crisp font aligned to grid at the expense
-    !                   of font shape.
-    Xft.hintstyle:  hintfull
+! Hint style.  Possible values:
+!     hintnone      No hinting (not sure why this is a value)
+!     hintslight    Make font fuzzy to line up to the grid while
+!                   favoring the font shape.
+!     hintmedium    Probably between hintslight and hintfull.
+!     hintfull      Favor crisp font aligned to grid at the expense
+!                   of font shape.
+Xft.hintstyle:  hintfull
 
-    ! The Cleartype subpixel rendering on LCD monitors.  Possible values:
-    !     lcddefault    Reduce color fringing on LCD monitors
-    !     lcdlight      Alternate for fonts that look too bold or fuzzy
-    !     lcdlegacy     Original Cairo filter
-    !     lcdnone       Disable
-    Xft.lcdfilter: lcddefault
+! The Cleartype subpixel rendering on LCD monitors.  Possible values:
+!     lcddefault    Reduce color fringing on LCD monitors
+!     lcdlight      Alternate for fonts that look too bold or fuzzy
+!     lcdlegacy     Original Cairo filter
+!     lcdnone       Disable
+Xft.lcdfilter: lcddefault
 
-    ! Pixel alignment.  Either rgb, bgr, v-rgb, or v-bgr
-    ! Monitor test:  http://www.lagom.nl/lcd-test/subpixel.php
-    Xft.rgba: rgb
+! Pixel alignment.  Either rgb, bgr, v-rgb, or v-bgr
+! Monitor test:  http://www.lagom.nl/lcd-test/subpixel.php
+Xft.rgba: rgb
 
-    ! Anti-aliasing (0=off, 1=on)
-    Xft.antialias: 1
+! Anti-aliasing (0=off, 1=on)
+Xft.antialias: 1
 #endif
