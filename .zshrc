@@ -81,6 +81,11 @@ alias emacs="emacs -nw"
 alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
 alias vim='printf "Use Emacs.\n"'
 
+# Aliases specific to Fedora/RHEL/CentOS and derivatives
+if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
+    alias rmdebugrpms='sudo yum remove $(rpm -qa | grep -E "debug(info|source)")'
+fi
+
 # Other environment variables
 NAME="David Cantrell"
 EDITOR="emacs -nw"

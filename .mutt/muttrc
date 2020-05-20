@@ -16,8 +16,8 @@ unignore x-ms-exchange-calendar-series-instance-id
 hdr_order date from to cc subject
 
 # Solarized theme
-# https://github.com/altercation/solarized
-source ~/.mutt/themes/solarized-light
+# https://github.com/altercation/mutt-colors-solarized
+source ~/.mutt/themes/davep.org
 
 # Editor (further functionality in editor config)
 set editor="emacs -nw"
