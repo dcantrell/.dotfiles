@@ -14,7 +14,7 @@
   (package-refresh-contents))
 
 ; Packages to use and make sure we have installed
-(setq package-list '(dracula-theme))
+(setq package-list '(dracula-theme org))
 
 (package-install-selected-packages)
 
@@ -92,3 +92,9 @@
              (deactivate-mark))
     (message "No region active; can't yank to clipboard!")))
 (global-set-key "\M-W" 'yank-to-x-clipboard)
+
+; Org-mode
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-font-lock-mode 1)
