@@ -140,7 +140,7 @@ QUOTING_STYLE=literal
 [ -f ~/bin/zsh-git-prompt.sh ] && . ~/bin/zsh-git-prompt.sh
 
 # Command prompt settings
-PROMPT="[%n@%m %1~]%(!.#.$) "
+PROMPT="[%n@%m %1~]%# "
 RPROMPT=$'$(git_super_status)'
 
 # Prevent GTK scrollbar autohide
