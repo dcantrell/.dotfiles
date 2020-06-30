@@ -13,10 +13,6 @@ unsetopt NOMATCH
 # zsh modules
 autoload -U zcalc
 
-# Make sure Home and End work inside tmux
-bindkey "\E[1~" beginning-of-line
-bindkey "\E[4~" end-of-line
-
 # Command history
 HISTSIZE=1000
 SAVEHIST=1000
