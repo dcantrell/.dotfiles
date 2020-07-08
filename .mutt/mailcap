@@ -1,4 +1,4 @@
-text/html; w3m -o auto_image=TRUE -I %{charset} -T text/html -F; copiousoutput;
+text/html; links -dump %s; nametemplate=%s.html; copiousoutput;
 application/pdf; mupdf %s; copiousoutput
 text/calendar; mutt-ics; copiousoutput;
 application/ics; mutt-ics; copiousoutput;

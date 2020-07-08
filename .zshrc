@@ -146,10 +146,14 @@ RPROMPT=$'$(git_super_status)'
 # Prevent GTK scrollbar autohide
 GTK_OVERLAY_SCROLLING=0
 
+# Set browser command for urlscan
+BROWSER="firefox --new-tab"
+
 export PROMPT RPROMPT
 export PATH NAME EDITOR VISUAL PAGER
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
+export BROWSER
 
 # Home and End keys (especially inside tmux)
 bindkey "\E[1~" beginning-of-line
