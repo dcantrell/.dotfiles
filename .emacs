@@ -14,6 +14,10 @@
   (package-refresh-contents))
 
 ; Packages to use and make sure we have installed
+; NOTE: This claims to be automatically installable via melpa, but that
+; does not always work for me.  https://draculatheme.com/emacs/
+; Adding here manually so my dotfiles collection always works.
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (setq package-list '(dracula-theme org))
 
 (package-install-selected-packages)
