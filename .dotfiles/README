@@ -4,7 +4,7 @@ Setup:
 $ git clone git@github.com:dcantrell/.dotfiles.git di
 $ mv di/.dotfiles $HOME
 $ mv di/.git $HOME/.dotfiles
-$ mv di/.* $HOME
+$ mv di/.* di/bin $HOME
 $ rmdir di
 $ alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
 $ dotfiles config --local status.showUntrackedFiles no
