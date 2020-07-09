@@ -64,7 +64,7 @@ fi
 
 # Make sure mbsync has directories
 if [ -f ${HOME}/.mbsyncrc ]; then
-    grep -v ^# ${HOME}/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
+    grep -v "^#" ${HOME}/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
     while read maildirname ; do
         mdn="$(eval echo "${maildirname}")"
         [ -d "${mdn}" ] || mkdir -p "${mdn}"
