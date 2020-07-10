@@ -72,8 +72,15 @@ if [ -f ${HOME}/.mbsyncrc ]; then
 fi
 
 # Command aliases
+OS="$(uname 2>/dev/null)"
+
+if [ "${OS}" = "Darwin" ]; then
+    alias ls="ls -FG"
+else
+    alias ls="ls -FC --color=tty"
+fi
+
 alias less="less -F -R -X"
-alias ls="ls -FC --color=tty"
 alias bc="bc -q -l"
 alias ftp="tnftp"
 alias pwgen="pwgen -c -n -y 16 1"
@@ -114,7 +121,7 @@ AGENT_ENV=${HOME}/.ssh/agent.env
 if [ -f ${AGENT_ENV} ]; then
     eval $(cat ${AGENT_ENV})
 
-    if [ ! "$(ps -q $SSH_AGENT_PID -o comm=)" = "ssh-agent" ]; then
+    if [ ! "$(ps -p $SSH_AGENT_PID -o comm=)" = "ssh-agent" ]; then
         unset SSH_AGENT_PID
         unset SSH_AUTH_SOCK
         rm -f ${AGENT_ENV}
