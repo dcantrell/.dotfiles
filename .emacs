@@ -9,7 +9,7 @@
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
-(package-initialize)
+(unless package--initialized (package-initialize t))
 (unless package-archive-contents
   (package-refresh-contents))
 
