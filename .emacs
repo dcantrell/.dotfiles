@@ -68,9 +68,11 @@
 ; Show the clock
 (display-time-mode 1)
 
-; Wrap email at 78 characters max per line
-(add-hook 'mail-mode-hook (lambda () (set-fill-column 78)))
+; Wrap email at 74 characters max per line
+(add-hook 'mail-mode-hook (lambda () (set-fill-column 74)))
 (add-hook 'mail-mode-hook 'turn-on-auto-fill)
+(add-hook 'mail-mode-hook 'mail-abbrevs-setup)
+(add-hook 'mail-mode-hook (lambda () (setq 'indent-line-function 'nil)))
 
 ; Set modes based on filename or file extension
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
