@@ -76,6 +76,8 @@ OS="$(uname 2>/dev/null)"
 
 if [ "${OS}" = "Darwin" ]; then
     alias ls="ls -FG"
+elif [ "${OS}" = "FreeBSD" ]; then
+    alias ls="ls -FCG"
 else
     alias ls="ls -FC --color=tty"
 fi
