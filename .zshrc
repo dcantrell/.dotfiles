@@ -42,6 +42,7 @@ if [ ! -z "${PATH}" ]; then
     tPATH=" $(echo ${PATH} | sed -e 's/:/\ /g')"
 
     echo "${tPATH}" | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
+    echo "${tPATH}" | grep -q "${HOME}/.local/bin" || PATH="${HOME}/.local/bin:${PATH}"
     echo "${tPATH}" | grep -q "/usr/local/sbin" || PATH="${PATH}:/usr/local/sbin"
     echo "${tPATH}" | grep -q "/usr/sbin" || PATH="${PATH}:/usr/sbin"
     echo "${tPATH}" | grep -q "/sbin" || PATH="${PATH}:/sbin"
@@ -56,11 +57,6 @@ fi
 
 # Make sure we have the right ssh config permissions
 [ -f "${HOME}/.ssh/config" ] && chmod 0644 "${HOME}/.ssh/config"
-
-# Make sure emacs has directories in place
-[ -d ${HOME}/.emacs.d ] || mkdir -p ${HOME}/.emacs.d
-[ -d ${HOME}/.emacs.d/autosaves ] || mkdir -p ${HOME}/.emacs.d/autosaves
-[ -d ${HOME}/.emacs.d/backups ] || mkdir -p ${HOME}/.emacs.d/backups
 
 # Make sure mbsync has directories
 if [ -f ${HOME}/.mbsyncrc ]; then
@@ -86,9 +82,7 @@ alias less="less -F -R -X"
 alias bc="bc -q -l"
 alias ftp="tnftp"
 alias pwgen="pwgen -c -n -y 16 1"
-alias emacs="emacs -nw"
 alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
-alias vim='printf "Use Emacs.\n"'
 
 # Aliases specific to Fedora/RHEL/CentOS and derivatives
 if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
@@ -97,9 +91,26 @@ fi
 
 # Other environment variables
 NAME="David Cantrell"
-EDITOR="emacs -nw"
-VISUAL="emacs -nw"
 PAGER="less -F -R -X"
+
+# Emacs setup
+ALTERNATE_EDITOR=""
+
+if [ -z "${SSH_CONNECTION}" ]; then
+    alias emacs="emacsclient -c"
+    EDITOR="emacsclient -c"
+else
+    alias emacs="emacs -nw"
+    EDITOR="emacs -nw"
+fi
+
+alias vim='printf "Use Emacs.\n"'
+VISUAL="${EDITOR}"
+
+# Make sure emacs has directories in place
+[ -d ${HOME}/.emacs.d ] || mkdir -p ${HOME}/.emacs.d
+[ -d ${HOME}/.emacs.d/autosaves ] || mkdir -p ${HOME}/.emacs.d/autosaves
+[ -d ${HOME}/.emacs.d/backups ] || mkdir -p ${HOME}/.emacs.d/backups
 
 # GnuPG and agent settings
 #
@@ -159,7 +170,7 @@ GTK_OVERLAY_SCROLLING=0
 BROWSER="firefox --new-tab"
 
 export PROMPT RPROMPT
-export PATH NAME EDITOR VISUAL PAGER
+export PATH NAME EDITOR VISUAL ALTERNATE_EDITOR PAGER
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
 export BROWSER
