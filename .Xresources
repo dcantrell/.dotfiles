@@ -1,7 +1,7 @@
 ! rxvt-unicode customizations
 URxvt*background:        black
 URxvt*foreground:        white
-URxvt*font:              xft:Inconsolata:style=Bold:size=16
+URxvt*font:              xft:Hack:style=Regular:size=14
 URxvt*scrollStyle:       next
 URxvt*scrollBar_right:   true
 URxvt*scrollTtyKeypress: true
