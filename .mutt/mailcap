@@ -1,4 +1,4 @@
-text/html; links -dump %s; nametemplate=%s.html; copiousoutput;
+text/html; html2text -d -e --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
 application/pdf; mupdf %s; copiousoutput
 text/calendar; mutt-ics; copiousoutput;
 application/ics; mutt-ics; copiousoutput;
