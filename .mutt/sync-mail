@@ -9,9 +9,8 @@
 
 PATH=/usr/bin
 
-# Exit if mbsync is already running (won't pick up mailbox changes)
-pgrep mbsync >/dev/null 2>&1
-[ $? -eq 0 ] && exit 0
+# Lock things so only one script runs at a time
+[ ! "${FLOCKER}" = "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 
 # Run mbsync
 pkill -KILL mbsync

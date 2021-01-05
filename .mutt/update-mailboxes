@@ -13,6 +13,9 @@ PATH=/usr/bin
 MAILBOXES=${HOME}/.mutt/mailboxes
 ACCOUNTS=${HOME}/.mutt/accounts
 
+# Lock things so only one script runs at a time
+[ ! "${FLOCKER}" = "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+
 [ -d ${HOME}/Maildir ] || exit 0
 [ -d ${ACCOUNTS} ] || exit 0
 [ -d ${MAILBOXES} ] || mkdir -p ${MAILBOXES}
