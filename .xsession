@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 PATH=/usr/X11/bin:/usr/bin
 HOST="$(hostname | cut -d '.' -f 1)"
