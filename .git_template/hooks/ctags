@@ -1,0 +1,17 @@
+#!/bin/sh
+# Originating from:
+#     https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+# Modified to generate emacs ctags files and use a slightly more
+# insane temporary file.
+#
+# by: David Cantrell <david.l.cantrell@gmail.com>
+
+set -e
+
+PATH=/usr/bin:/usr/local/bin
+TMPTAGS="$(mktemp -t git-hook-XXXXXXXXXX.TAGS)"
+
+trap 'rm -f "${TMPTAGS}"' EXIT
+
+git ls-files | ctags -e --tag-relative=yes -f "${TMPTAGS}" -L -
+mv "${TMPTAGS}" "TAGS"

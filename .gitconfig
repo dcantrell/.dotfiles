@@ -30,3 +30,5 @@
 	editor = emacs -nw
 [pull]
 	rebase = true
+[init]
+	templateDir = ~/.git_template
