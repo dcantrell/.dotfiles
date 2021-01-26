@@ -15,9 +15,8 @@ unignore x-ms-exchange-calendar-series-instance-id
 # Display the fields in this order
 hdr_order date from to cc subject
 
-# Solarized theme
-# https://github.com/altercation/mutt-colors-solarized
-source ~/.mutt/themes/davep.org
+# Theme
+source ~/.mutt/themes/dracula
 
 # Editor (further functionality in editor config)
 set editor="emacs -nw"
