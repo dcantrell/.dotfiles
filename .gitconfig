@@ -28,6 +28,7 @@
 	autosetuprebase = always
 [core]
 	editor = emacs -nw
+	excludesfile = /home/dcantrell/.gitignore_global
 [pull]
 	rebase = true
 [init]
