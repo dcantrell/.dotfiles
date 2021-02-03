@@ -176,8 +176,8 @@ export GTK_OVERLAY_SCROLLING
 export BROWSER
 
 # Home and End keys (especially inside tmux)
-bindkey "\E$(tput khome | cat -v | cut -c3-)" beginning-of-line
-bindkey "\E$(tput kend | cat -v | cut -c3-)" end-of-line
+bindkey "$(tput khome | cat -v)" beginning-of-line
+bindkey "$(tput kend | cat -v)" end-of-line
 
 # Make sure latest irssi scripts are in use
 if [ -d /usr/share/irssi/scripts ]; then
