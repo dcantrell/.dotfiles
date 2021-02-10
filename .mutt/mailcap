@@ -1,4 +1,13 @@
-text/html; html2text -d -e --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
-application/pdf; mupdf %s; copiousoutput
+# HTML-formatted email
+text/html; html2text -d -e --no-wrap-links --protect-links --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
+
+# Images
+image/*; geeqie %s;
+
+# Adobe Portable Document Format
+application/pdf; mupdf %s; copiousoutput;
+application/PDF; mupdf %s; copiousoutput;
+
+# Handle vcalendar files
 text/calendar; mutt-ics; copiousoutput;
 application/ics; mutt-ics; copiousoutput;
