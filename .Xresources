@@ -19,6 +19,7 @@ URxvt*secondaryScreen:   true
 URxvt*colorUL:           yellow
 URxvt*underlineColor:    yellow
 URxvt*buffered:          true
+URxvt*depth:             24
 
 #ifdef SRVR_bnsf
 !!!!!!!!!!!!!!!!!!!!
