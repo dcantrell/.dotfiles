@@ -76,6 +76,10 @@ elif [ "${OS}" = "FreeBSD" ]; then
     alias ls="ls -FCG"
 else
     alias ls="ls -FC --color=tty"
+    alias cp="cp -iv"
+    alias rm="rm -iv"
+    alias mv="mv -iv"
+    alias ln="ln -iv"
 fi
 
 alias less="less -F -R -X"
@@ -137,7 +141,7 @@ if [ -f ${AGENT_ENV} ]; then
     if [ ! "$(ps -p $SSH_AGENT_PID -o comm=)" = "ssh-agent" ]; then
         unset SSH_AGENT_PID
         unset SSH_AUTH_SOCK
-        rm -f ${AGENT_ENV}
+        /bin/rm -f ${AGENT_ENV}
         ssh-agent | grep -v ^echo > ${AGENT_ENV}
         eval $(cat ${AGENT_ENV})
     fi
@@ -193,8 +197,8 @@ if [ -d "${IRSSI_SCRIPTS_DIR}" -a -d "${HOME}/.irssi/scripts" ]; then
     for s in ${IRSSI_SCRIPTS} ; do
         [ "${s}" = "autorun" ] && continue
         if [ -r "${IRSSI_SCRIPTS_DIR}/${s}" ]; then
-            rm -f "${s}"
-            ln -sf ${IRSSI_SCRIPTS_DIR}/${s} .
+            /bin/rm -f "${s}"
+            /bin/ln -sf ${IRSSI_SCRIPTS_DIR}/${s} .
         fi
     done
     cd ${HOME}
@@ -206,8 +210,8 @@ if [ -d "${HOME}/.irssi/scripts" ]; then
     [ ! -d autorun ] && mkdir autorun
     for s in * ; do
         ( cd autorun
-          [ -r "${s}" ] && rm -f ${s}
-          ln -sf ../${s} .
+          [ -r "${s}" ] && /bin/rm -f ${s}
+          /bin/ln -sf ../${s} .
         )
     done
     cd ${HOME}
