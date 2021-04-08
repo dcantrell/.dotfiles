@@ -50,8 +50,8 @@ MaildirStore personal-local
     SubFolders Verbatim
 
 # Define the sync settings between the local email and server email.  This
-# is somewhat confusing.  The 'Channel' is just a name.  Master is where you
-# define the server-side block to use, in our case the IMAPAccount.  Slave
+# is somewhat confusing.  The 'Channel' is just a name.  Far is where you
+# define the server-side block to use, in our case the IMAPAccount.  Near
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
@@ -60,8 +60,8 @@ MaildirStore personal-local
 # Sync options control the sync state file and what to sync, which is
 # everything.
 Channel personal
-    Master :personal-remote:
-    Slave :personal-local:
+    Far :personal-remote:
+    Near :personal-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
@@ -113,8 +113,8 @@ MaildirStore rht-local
     SubFolders Verbatim
 
 # Define the sync settings between the local email and server email.  This
-# is somewhat confusing.  The 'Channel' is just a name.  Master is where you
-# define the server-side block to use, in our case the IMAPAccount.  Slave
+# is somewhat confusing.  The 'Channel' is just a name.  Far is where you
+# define the server-side block to use, in our case the IMAPAccount.  Near
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
@@ -123,8 +123,8 @@ MaildirStore rht-local
 # Sync options control the sync state file and what to sync, which is
 # everything.
 Channel rht
-    Master :rht-remote:
-    Slave :rht-local:
+    Far :rht-remote:
+    Near :rht-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
@@ -176,8 +176,8 @@ MaildirStore ntcorp-local
     SubFolders Verbatim
 
 # Define the sync settings between the local email and server email.  This
-# is somewhat confusing.  The 'Channel' is just a name.  Master is where you
-# define the server-side block to use, in our case the IMAPAccount.  Slave
+# is somewhat confusing.  The 'Channel' is just a name.  Far is where you
+# define the server-side block to use, in our case the IMAPAccount.  Near
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
@@ -186,8 +186,8 @@ MaildirStore ntcorp-local
 # Sync options control the sync state file and what to sync, which is
 # everything.
 Channel ntcorp
-    Master :ntcorp-remote:
-    Slave :ntcorp-local:
+    Far :ntcorp-remote:
+    Near :ntcorp-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
@@ -239,8 +239,8 @@ MaildirStore nt-local
     SubFolders Verbatim
 
 # Define the sync settings between the local email and server email.  This
-# is somewhat confusing.  The 'Channel' is just a name.  Master is where you
-# define the server-side block to use, in our case the IMAPAccount.  Slave
+# is somewhat confusing.  The 'Channel' is just a name.  Far is where you
+# define the server-side block to use, in our case the IMAPAccount.  Near
 # is the local side, so we use our MaildirStore.  Patterns controls what is
 # involved in the sync.  'Create Both' means automatically create missing
 # mailboxes on the server and local side.  'Remove Both' means propagate
@@ -249,8 +249,8 @@ MaildirStore nt-local
 # Sync options control the sync state file and what to sync, which is
 # everything.
 Channel nt
-    Master :nt-remote:
-    Slave :nt-local:
+    Far :nt-remote:
+    Near :nt-local:
     # Exclude everything under the internal [Gmail] folder, except the interesting folders
     Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
     Create Both
