@@ -183,3 +183,6 @@ macro index,pager ! "<save-message>=[Gmail]/Spam<enter><enter>" "Report spam"
 # Handle URLs in messages
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# Select all new messages in the current folder and mark as read
+macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "Mark all new messages as read"
