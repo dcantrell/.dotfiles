@@ -7,7 +7,7 @@
 (package-initialize)
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 (unless package--initialized (package-initialize t))
 (unless package-archive-contents
@@ -18,7 +18,7 @@
 ; does not always work for me.  https://draculatheme.com/emacs/
 ; Adding here manually so my dotfiles collection always works.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(setq package-list '(dracula-theme org))
+(setq package-list '(dracula-theme org magit))
 
 (package-install-selected-packages)
 
@@ -104,3 +104,9 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-font-lock-mode 1)
+
+; Set the terminal window title
+;(defun xterm-title-update ()
+;    (interactive)
+;    (send-string-to-terminal (concat "\033]2;emacs: " (buffer-name) "\007")))
+;(add-hook 'post-command-hook 'xterm-title-update)
