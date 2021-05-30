@@ -19,8 +19,8 @@ hdr_order date from to cc subject
 source ~/.mutt/themes/dracula
 
 # Editor (further functionality in editor config)
-set editor="emacs -nw"
-set visual="emacs -nw"
+set editor="emacsclient -c -nw"
+set visual="emacsclient -c -nw"
 
 # Additional configuration files and directories
 set alias_file="~/.mutt/aliases"
