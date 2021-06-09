@@ -91,6 +91,7 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
 # Aliases specific to Fedora/RHEL/CentOS and derivatives
 if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
     alias rmdebugrpms='sudo yum remove $(rpm -qa | grep -E "debug(info|source)")'
+    alias scuttle="sudo systemctl"
 fi
 
 # Other environment variables
