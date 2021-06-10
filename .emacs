@@ -106,7 +106,29 @@
 (global-font-lock-mode 1)
 
 ; Set the terminal window title
+; [I don't like the output of the terminal window name, but that's
+; because I abuse mkstemp in mutt and other programs., but I'm leaving
+; the code here in case I want it in the future.]
 ;(defun xterm-title-update ()
 ;    (interactive)
 ;    (send-string-to-terminal (concat "\033]2;emacs: " (buffer-name) "\007")))
 ;(add-hook 'post-command-hook 'xterm-title-update)
+
+; When in org-mode, enable auto-fill-mode
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
+
+; Function to insert my daily status report file in to the current
+; buffer.  I use this from mutt when composing a status report email.
+; At some point in the future I will extend this to compose the
+; message for me and then eventually send it.  For now I am just
+; inserting the file contents.  Bind it to M-S.
+;
+; TODO:
+; * Insert two lines below the last mail header
+; * Make sure there's only a single blank line before the sig
+; * Work without positioning the point
+; * Construct outgoing email and send it
+(defun insert-dailystatus ()
+    (interactive)
+    (insert-file-contents "~/dailystatus.org"))
+(global-set-key (kbd "M-S") 'insert-dailystatus)
