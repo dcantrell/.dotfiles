@@ -1,22 +1,21 @@
 # .zshrc
 # Settings used by all zsh invocations
 
-setopt PROMPT_SUBST
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_SAVE_NO_DUPS
+setopt prompt_subst
 
 # this is so things like "scp host:path/* ." work
-unsetopt NOMATCH
+unsetopt nomatch
 
 # zsh modules
 autoload -U zcalc
 
 # Command history
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=2000
+SAVEHIST=${HISTSIZE}
 HISTFILE=${HOME}/.history
+export HISTSIZE SAVEHIST HISTFILE
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
 
 # Function to name terminal windows with an arbitrary string
 # Usage:  wname "STRING"
