@@ -89,7 +89,7 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
 
 # Aliases specific to Fedora/RHEL/CentOS and derivatives
 if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
-    alias rmdebugrpms='sudo yum remove $(rpm -qa | grep -E "debug(info|source)")'
+    alias rmdebugrpms='sudo yum remove $(rpm -qa | grep -E "\-debug(info|source)" | grep -v debuginfod) --noautoremove'
     alias scuttle="sudo systemctl"
 fi
 
@@ -207,9 +207,10 @@ fi
 # Load all irssi scripts at startup
 if [ -d "${HOME}/.irssi/scripts" ]; then
     cd "${HOME}/.irssi/scripts"
-    [ ! -d autorun ] && mkdir autorun
+    [ -d autorun ] || mkdir autorun
     for s in * ; do
         ( cd autorun
+          [ "${s}" = "autorun" ] && continue
           [ -r "${s}" ] && /bin/rm -f ${s}
           /bin/ln -sf ../${s} .
         )
