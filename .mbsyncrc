@@ -15,7 +15,7 @@
 # account.  The 'PipelineDepth' setting throttles things so we don't get
 # gmail's OVERQUOTA error.  See:
 #     https://sourceforge.net/p/isync/mailman/message/35458365/
-# For an initial sync, I set pipeline depth to 1, otherwise gmaill will
+# For an initial sync, I set pipeline depth to 1, otherwise gmail will
 # complain at you a lot.  Once you have a local sync, 50 seems to work.
 IMAPAccount personal
     Host imap.gmail.com
@@ -23,7 +23,7 @@ IMAPAccount personal
     PassCmd "pass app-passwords/david.l.cantrell@gmail.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 1
+    PipelineDepth 50
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
@@ -78,7 +78,7 @@ Channel personal
 # account.  The 'PipelineDepth' setting throttles things so we don't get
 # gmail's OVERQUOTA error.  See:
 #     https://sourceforge.net/p/isync/mailman/message/35458365/
-# For an initial sync, I set pipeline depth to 1, otherwise gmaill will
+# For an initial sync, I set pipeline depth to 1, otherwise gmail will
 # complain at you a lot.  Once you have a local sync, 50 seems to work.
 IMAPAccount rht
     Host imap.gmail.com
@@ -86,7 +86,7 @@ IMAPAccount rht
     PassCmd "pass app-passwords/dcantrell@redhat.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 1
+    PipelineDepth 50
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
@@ -141,7 +141,7 @@ Channel rht
 # account.  The 'PipelineDepth' setting throttles things so we don't get
 # gmail's OVERQUOTA error.  See:
 #     https://sourceforge.net/p/isync/mailman/message/35458365/
-# For an initial sync, I set pipeline depth to 1, otherwise gmaill will
+# For an initial sync, I set pipeline depth to 1, otherwise gmail will
 # complain at you a lot.  Once you have a local sync, 50 seems to work.
 IMAPAccount ntcorp
     Host imap.gmail.com
@@ -149,7 +149,7 @@ IMAPAccount ntcorp
     PassCmd "pass app-passwords/newiitechcorp@gmail.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 1
+    PipelineDepth 50
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
@@ -204,7 +204,7 @@ Channel ntcorp
 # account.  The 'PipelineDepth' setting throttles things so we don't get
 # gmail's OVERQUOTA error.  See:
 #     https://sourceforge.net/p/isync/mailman/message/35458365/
-# For an initial sync, I set pipeline depth to 1, otherwise gmaill will
+# For an initial sync, I set pipeline depth to 1, otherwise gmail will
 # complain at you a lot.  Once you have a local sync, 50 seems to work.
 IMAPAccount nt
     Host imap.gmail.com
@@ -212,7 +212,7 @@ IMAPAccount nt
     PassCmd "pass app-passwords/david@newiitech.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 1
+    PipelineDepth 50
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
