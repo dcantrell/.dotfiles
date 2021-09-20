@@ -13,5 +13,12 @@ TMPTAGS="$(mktemp -t git-hook-XXXXXXXXXX.TAGS)"
 
 trap 'rm -f "${TMPTAGS}"' EXIT
 
-git ls-files | ctags -e --tag-relative=yes -f "${TMPTAGS}" -L -
+CTAGSBIN=
+if [ "${CTAGS}" ] && [ -x "${CTAGS}" ]; then
+    CTAGSBIN="${CTAGS}"
+else
+    CTAGSBIN=ctags
+fi
+
+git ls-files | ${CTAGSBIN} -e --tag-relative=yes -f "${TMPTAGS}" -L -
 mv "${TMPTAGS}" "TAGS"
