@@ -39,7 +39,7 @@ for account in * ; do
 
     # change over to this account's IMAP store and look for mailboxes
     cd ${HOME}/Maildir/${folder}
-    find . -type d -name cur | cut -c2- | while read line ; do
+    find . -type d -name cur | sort | cut -c2- | while read line ; do
         # remove the 'cur' from this name and the leading slash
         mailbox="$(dirname ${line} | cut -c2-)"
 
