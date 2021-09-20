@@ -1,3 +1,11 @@
+; NOTE: You must manually install 'use-package' then exit and restart emacs.
+; M-x package-refresh-contents <RET>
+; M-x package-install <RET>
+; use-package <RET>
+
+; Pick up local packages (*.el files)
+(add-to-list 'load-path "~/.emacs.d/local/")
+
 ; Send automatic custom additions to a different file
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
@@ -6,21 +14,28 @@
 ; Set up package repositories to use
 (package-initialize)
 (require 'package)
+(setq use-package-always-ensure t)
 
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-
-(unless package--initialized (package-initialize t))
-(unless package-archive-contents
-  (package-refresh-contents))
 
 ; Packages to use and make sure we have installed
 ; NOTE: This claims to be automatically installable via melpa, but that
 ; does not always work for me.  https://draculatheme.com/emacs/
 ; Adding here manually so my dotfiles collection always works.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(setq package-list '(dracula-theme org magit))
 
-(package-install-selected-packages)
+(use-package dracula-theme)
+(use-package org)
+(use-package magit)
+(use-package ggtags)
+(use-package cc-mode)
+(use-package semantic)
+
+; This is not in MELPA but is from here:
+; https://www.emacswiki.org/emacs/download/sr-speedbar.el
+; I just save it to ~/.emacs.d
+(require 'sr-speedbar)
 
 ; Load theme
 ; https://draculatheme.com/emacs/
@@ -132,3 +147,42 @@
     (interactive)
     (insert-file-contents "~/dailystatus.org"))
 (global-set-key (kbd "M-S") 'insert-dailystatus)
+
+;;;;;;;;;;;;;;;;;;;
+;; C Development ;;
+;;;;;;;;;;;;;;;;;;;
+
+; GNU global and universal ctags and pygments for C development
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+    (lambda ()
+        (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+            (ggtags-mode 1))))
+
+; ggtags keybindings for common operations
+(define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+(define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+(define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+(define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+(define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+(define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+(define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
+; Find definitions in the current buffer
+(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
+
+; Semantic setup
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+(semantic-mode 1)
+(global-semantic-idle-summary-mode 1)
+
+; GDB
+(setq
+ ;; use gdb-many-windows by default
+ gdb-many-windows t
+
+ ;; Non-nil means display source file containing the main routine at startup
+ gdb-show-main t
+ )
