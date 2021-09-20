@@ -19,3 +19,6 @@ mbsync -a -V >${HOME}/logs/mbsync.log 2>&1
 
 # Update mailboxes
 [ -x ${HOME}/.mutt/update-mailboxes ] && ${HOME}/.mutt/update-mailboxes
+
+# Update notmuch cache
+[ -x /usr/bin/notmuch ] && /usr/bin/notmuch new >${HOME}/logs/notmuch.log 2>&1

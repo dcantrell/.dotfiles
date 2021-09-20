@@ -1,10 +1,10 @@
 Email Configuration:
 --------------------
 
-Using mbsync, msmtp, and mutt for email.  The configuration files for those
-programs are stored in this repo.  All are configured to use passwords stored
-in pass(1), which needs to be set up separately.  pass(1) uses GnuPG so those
-are more or less paired.
+Using mbsync, msmtp, notmuch, and mutt for email.  The configuration
+files for those programs are stored in this repo.  All are configured
+to use passwords stored in pass(1), which needs to be set up
+separately.  pass(1) uses GnuPG so those are more or less paired.
 
 The mailcap file requires html2text, mupdf, and mutt-ics.  mutt-ics is
 installable with pip:
@@ -14,6 +14,10 @@ installable with pip:
 html2text and mupdf likely come with your distribution.  Feel free to
 install these dependencies in whatever manner works for you.  As long
 as they are in the PATH, things should work.
+
+For notmuch, you can use "notmuch setup" to do the initial
+configuration and "notmuch new" to do the initial indexing.  The
+sync-mail script will reindex notmuch after each mbsync run.
 
 
 Crontabs:
