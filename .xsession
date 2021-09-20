@@ -2,6 +2,7 @@
 
 PATH=/usr/X11/bin:/usr/bin
 HOST="$(hostname | cut -d '.' -f 1)"
+DEVNODE=
 
 if [ "${HOST}" = "bnsf" ]; then
     # GTK 3.x scaling
@@ -11,19 +12,23 @@ if [ "${HOST}" = "bnsf" ]; then
 
     # Griffin PowerMate knob for volume control
     DEVNODE=/dev/powermate
+elif [ "${HOST}" = "awvr" ]; then
+    # Griffin PowerMate knob for volume control
+    DEVNODE=/dev/input/powermate
+fi
 
-    if [ -r "${DEVNODE}" ]; then
-        EVROUTER_PID=$(pgrep evrouter)
-        XBINDKEYS_PID=$(pgrep xbindkeys)
+# Run input event handler if devnode defined
+if [ -r "${DEVNODE}" ]; then
+    EVROUTER_PID=$(pgrep evrouter)
+    XBINDKEYS_PID=$(pgrep xbindkeys)
 
-        if [ -z "${EVROUTER_PID}" ]; then
-            rm -f /tmp/.evrouter*
-            evrouter ${DEVNODE}
-        fi
+    if [ -z "${EVROUTER_PID}" ]; then
+        rm -f /tmp/.evrouter*
+        evrouter ${DEVNODE}
+    fi
 
-        if [ -z "${XBINDKEYS_PID}" ]; then
-            xbindkeys
-        fi
+    if [ -z "${XBINDKEYS_PID}" ]; then
+        xbindkeys
     fi
 fi
 
