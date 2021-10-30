@@ -148,6 +148,11 @@
     (insert-file-contents "~/dailystatus.org"))
 (global-set-key (kbd "M-S") 'insert-dailystatus)
 
+;;;;;;;;;
+;; git ;;
+;;;;;;;;;
+(add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
+
 ;;;;;;;;;;;;;;;;;;;
 ;; C Development ;;
 ;;;;;;;;;;;;;;;;;;;
@@ -186,3 +191,6 @@
  ;; Non-nil means display source file containing the main routine at startup
  gdb-show-main t
  )
+
+; Try to help when things go wrong
+(setq debug-on-error t)
