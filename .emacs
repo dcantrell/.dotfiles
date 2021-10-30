@@ -151,7 +151,7 @@
 ;;;;;;;;;
 ;; git ;;
 ;;;;;;;;;
-(add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
+(add-hook 'git-commit-mode-hook (lambda () (set-fill-column 74)))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; C Development ;;
