@@ -27,7 +27,7 @@
 
 (use-package dracula-theme)
 (use-package org)
-(use-package magit)
+;(use-package magit)
 (use-package ggtags)
 (use-package cc-mode)
 (use-package semantic)
@@ -64,6 +64,7 @@
 
 ; Disable auto indenting
 (electric-indent-mode 0)
+(add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode 0)))
 
 ; Show line numbers and column numbers by default
 ; Bind M-# to toggle line number mode on/off
