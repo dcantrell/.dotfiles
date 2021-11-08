@@ -122,8 +122,8 @@ set history_remove_dups=yes
 ##############################
 # GPG signing and encryption #
 ##############################
-set pgp_sign_as="62977BB9C841B965"
-set crypt_use_gpgme=no
+set pgp_sign_as=0x62977BB9C841B965
+set crypt_use_gpgme=yes
 set crypt_autosign=no
 set crypt_verify_sig=yes
 set crypt_replysign=yes
