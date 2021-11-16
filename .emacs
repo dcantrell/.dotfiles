@@ -25,7 +25,7 @@
 ; Adding here manually so my dotfiles collection always works.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-(use-package dracula-theme)
+(use-package darcula-theme)
 (use-package org)
 ;(use-package magit)
 (use-package ggtags)
@@ -39,7 +39,7 @@
 
 ; Load theme
 ; https://draculatheme.com/emacs/
-(load-theme 'dracula t)
+;(load-theme 'dracula t)
 
 ; Prevent tabs and use 4 space tab stop
 (setq indent-tabs-mode nil)
@@ -148,6 +148,14 @@
     (interactive)
     (insert-file-contents "~/dailystatus.org"))
 (global-set-key (kbd "M-S") 'insert-dailystatus)
+
+; Kill all sessions and the daemon if I feel so inclined
+(defun server-shutdown ()
+    "Save buffers, Quit, and Shutdown (kill) server"
+    (interactive)
+    (save-some-buffers)
+    (kill-emacs))
+(global-set-key (kbd "C-c x") 'server-shutdown)
 
 ;;;;;;;;;
 ;; git ;;
