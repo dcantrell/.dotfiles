@@ -20,12 +20,9 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
 ; Packages to use and make sure we have installed
-; NOTE: This claims to be automatically installable via melpa, but that
-; does not always work for me.  https://draculatheme.com/emacs/
-; Adding here manually so my dotfiles collection always works.
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-(use-package darcula-theme)
+; Packages to use from MELPA
 (use-package org)
 ;(use-package magit)
 (use-package ggtags)
@@ -37,9 +34,10 @@
 ; I just save it to ~/.emacs.d
 (require 'sr-speedbar)
 
-; Load theme
-; https://draculatheme.com/emacs/
-;(load-theme 'dracula t)
+; Theme it up
+; https://emacsthemes.com/themes/tomorrow-night-paradise-theme.html
+; https://github.com/jimeh/tomorrow-night-paradise-theme.el
+(load-theme 'tomorrow-night-paradise t)
 
 ; Prevent tabs and use 4 space tab stop
 (setq indent-tabs-mode nil)
