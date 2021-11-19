@@ -12,32 +12,27 @@
   (load custom-file))
 
 ; Set up package repositories to use
-(package-initialize)
 (require 'package)
 (setq use-package-always-ensure t)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
+; Packages to use from MELPA
+(use-package color-theme-modern)
+(use-package org)
+(use-package ggtags)
+
+(package-initialize)
+
 ; Packages to use and make sure we have installed
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-; Packages to use from MELPA
-(use-package org)
-;(use-package magit)
-(use-package ggtags)
-(use-package cc-mode)
-(use-package semantic)
-
-; This is not in MELPA but is from here:
-; https://www.emacswiki.org/emacs/download/sr-speedbar.el
-; I just save it to ~/.emacs.d
-(require 'sr-speedbar)
-
 ; Theme it up
-; https://emacsthemes.com/themes/tomorrow-night-paradise-theme.html
-; https://github.com/jimeh/tomorrow-night-paradise-theme.el
-(load-theme 'tomorrow-night-paradise t)
+; https://github.com/emacs-jp/replace-colorthemes
+; Not working?
+(load-theme 'blue-mood t)
+(enable-theme 'blue-mood)
 
 ; Prevent tabs and use 4 space tab stop
 (setq indent-tabs-mode nil)
@@ -63,6 +58,9 @@
 ; Disable auto indenting
 (electric-indent-mode 0)
 (add-hook 'after-change-major-mode-hook (lambda() (electric-indent-mode 0)))
+
+; Disable automatic formatting
+(setq lsp-enable-on-type-formatting nil)
 
 ; Show line numbers and column numbers by default
 ; Bind M-# to toggle line number mode on/off
@@ -155,11 +153,6 @@
     (kill-emacs))
 (global-set-key (kbd "C-c x") 'server-shutdown)
 
-;;;;;;;;;
-;; git ;;
-;;;;;;;;;
-(add-hook 'git-commit-mode-hook (lambda () (set-fill-column 74)))
-
 ;;;;;;;;;;;;;;;;;;;
 ;; C Development ;;
 ;;;;;;;;;;;;;;;;;;;
@@ -183,12 +176,6 @@
 
 ; Find definitions in the current buffer
 (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
-
-; Semantic setup
-(global-semanticdb-minor-mode 1)
-(global-semantic-idle-scheduler-mode 1)
-(semantic-mode 1)
-(global-semantic-idle-summary-mode 1)
 
 ; GDB
 (setq
