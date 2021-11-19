@@ -1,38 +1,40 @@
-; NOTE: You must manually install 'use-package' then exit and restart emacs.
-; M-x package-refresh-contents <RET>
-; M-x package-install <RET>
-; use-package <RET>
+; Install things from MELPA
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-; Pick up local packages (*.el files)
-(add-to-list 'load-path "~/.emacs.d/local/")
+; Install 'use-package' if we don't have it
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+; Install 'color-theme-modern' if we don't have it
+; (NOTE: I don't currently use these themes, but I'll let them install
+; anyway on the off chance I find myself in some weird terminal and
+; need to change from my preferred theme.)
+(unless (package-installed-p 'color-theme-modern)
+    (package-refresh-contents)
+    (package-install 'color-theme-modern))
+(use-package color-theme-modern)
+
+; Orgmode
+; https://orgmode.org
+(unless (package-installed-p 'org)
+    (package-refresh-contents)
+    (package-install 'org))
+(use-package org)
+
+; ggtags - GNU Global frontend
+; https://github.com/leoliu/ggtags
+(unless (package-installed-p 'ggtags)
+    (package-refresh-contents)
+    (package-install 'ggtags))
+(use-package ggtags)
 
 ; Send automatic custom additions to a different file
 (setq custom-file "~/.emacs.d/custom.el")
 (when (file-exists-p custom-file)
-  (load custom-file))
-
-; Set up package repositories to use
-(require 'package)
-(setq use-package-always-ensure t)
-
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-
-; Packages to use from MELPA
-(use-package color-theme-modern)
-(use-package org)
-(use-package ggtags)
-
-(package-initialize)
-
-; Packages to use and make sure we have installed
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
-; Theme it up
-; https://github.com/emacs-jp/replace-colorthemes
-; Not working?
-(load-theme 'blue-mood t)
-(enable-theme 'blue-mood)
+    (load custom-file))
 
 ; Prevent tabs and use 4 space tab stop
 (setq indent-tabs-mode nil)
@@ -67,18 +69,25 @@
 (setq column-number-mode t)
 (global-set-key (kbd "M-#") 'display-line-numbers-mode)
 
-; Show trailing whitespace
-; https://www.emacswiki.org/emacs/WhiteSpace
-(require 'whitespace)
-(setq whitespace-style '(face trailing tabs))
-(custom-set-faces '(whitespace-tab ((t (:background "red")))))
-(global-whitespace-mode)
-
 ; Smooth scrolling rather than jumping by half a screenful
 (setq scroll-step 1)
 
 ; Show the clock
 (display-time-mode 1)
+
+; Show trailing whitespace
+; https://www.emacswiki.org/emacs/WhiteSpace
+; (Does not appear to work for comment lines, but maybe I can fix that
+; one day.)
+(require 'whitespace)
+(setq whitespace-style '(face trailing tabs))
+(custom-set-faces '(whitespace-tab ((t (:background "red")))))
+(global-whitespace-mode)
+
+; Prevent lots of trailing whitespace on mouse copy/paste
+(unless window-system
+    (custom-set-faces
+        '(default ((t (:background "unspecified-bg"))))))
 
 ; Wrap email at 74 characters max per line
 (add-hook 'mail-mode-hook (lambda () (set-fill-column 74)))
@@ -90,11 +99,6 @@
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
-
-; Prevent lots of trailing whitespace on mouse copy/paste
-(unless window-system
-  (custom-set-faces
-   '(default ((t (:background "unspecified-bg"))))))
 
 ; Work around problem with the X selection and getting extra spaces
 ; only on commented lines
@@ -116,6 +120,7 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-font-lock-mode 1)
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Set the terminal window title
 ; [I don't like the output of the terminal window name, but that's
@@ -125,9 +130,6 @@
 ;    (interactive)
 ;    (send-string-to-terminal (concat "\033]2;emacs: " (buffer-name) "\007")))
 ;(add-hook 'post-command-hook 'xterm-title-update)
-
-; When in org-mode, enable auto-fill-mode
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ; Function to insert my daily status report file in to the current
 ; buffer.  I use this from mutt when composing a status report email.
@@ -152,10 +154,6 @@
     (save-some-buffers)
     (kill-emacs))
 (global-set-key (kbd "C-c x") 'server-shutdown)
-
-;;;;;;;;;;;;;;;;;;;
-;; C Development ;;
-;;;;;;;;;;;;;;;;;;;
 
 ; GNU global and universal ctags and pygments for C development
 (require 'ggtags)
@@ -188,3 +186,6 @@
 
 ; Try to help when things go wrong
 (setq debug-on-error t)
+
+; Theme it up
+(load-theme 'misterioso t)
