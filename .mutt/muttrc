@@ -16,7 +16,7 @@ unignore x-ms-exchange-calendar-series-instance-id
 hdr_order date from to cc subject
 
 # Theme
-source ~/.mutt/themes/dracula
+source ~/.mutt/themes/davep.org
 
 # Editor (further functionality in editor config)
 set editor="emacsclient -c -nw"
