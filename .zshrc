@@ -99,17 +99,10 @@ PAGER="less -F -R -X"
 
 # Emacs setup
 ALTERNATE_EDITOR=""
-
-if [ -z "${SSH_CONNECTION}" ]; then
-    alias emacs="emacsclient -c"
-    EDITOR="emacsclient -c"
-else
-    alias emacs="emacs -nw"
-    EDITOR="emacs -nw"
-fi
-
-alias vim='printf "Use Emacs.\n"'
+EDITOR="emacs -nw"
 VISUAL="${EDITOR}"
+alias emacs="emacs -nw"
+alias vim='printf "Use Emacs.\n"'
 
 # Make sure emacs has directories in place
 [ -d ${HOME}/.emacs.d ] || mkdir -p ${HOME}/.emacs.d
