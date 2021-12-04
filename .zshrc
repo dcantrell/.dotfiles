@@ -9,6 +9,10 @@ unsetopt nomatch
 # zsh modules
 autoload -U zcalc
 
+# Completions
+fpath=(~/shell/functions $fpath)
+rm ~/.zcompdump ; compinit
+
 # Command history
 HISTSIZE=2000
 SAVEHIST=${HISTSIZE}
