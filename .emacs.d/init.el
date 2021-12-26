@@ -89,11 +89,55 @@
     (custom-set-faces
         '(default ((t (:background "unspecified-bg"))))))
 
-; Wrap email at 74 characters max per line
-(add-hook 'mail-mode-hook (lambda () (set-fill-column 74)))
-(add-hook 'mail-mode-hook 'turn-on-auto-fill)
-(add-hook 'mail-mode-hook 'mail-abbrevs-setup)
-(add-hook 'mail-mode-hook (lambda () (setq 'indent-line-function 'nil)))
+; How to compose email
+(defun mutt-mail-mode-hook ()
+    (flush-lines "^\\(>\n\\)*>-- \n\\(\n?>.*\\)*") ; kill quoted sigs
+    (setq fill-column 78)
+    ;(setq auto-fill-function 'do-auto-fill)
+    (setq indent-line-function 'nil)
+    (not-modified)
+    (mail-text)
+    (setq make-backup-files nil))
+(or (assoc "mutt-" auto-mode-alist)
+    (setq auto-mode-alist (cons '(".*tmp\/mutt-.*[0-9]+$" . mail-mode) auto-mode-alist)))
+
+; Helper function to select the message body
+(defun mutt-select-body ()
+    (interactive)
+    (save-excursion
+        (goto-line 0)
+        (move-beginning-of-line nil)
+        (while (looking-at-p "^.+:.*$")            ; advance past header
+            (forward-line 1))
+        (while (looking-at-p "^$")                 ; advance past blank lines
+            (forward-line 1))
+        (let ((pos (line-beginning-position)))     ; save current position
+            (while (not (looking-at-p "^--\\s+$")) ; advance to signature
+                (forward-line 1))
+            (set-mark pos))))
+
+;        (set-mark-command nil)                     ; begin marking body
+;        (while (not (looking-at-p "^--\\s+$"))     ; mark to signature
+;            (forward-line 1))
+;        (setq deactivate-mark nil)))
+
+
+; Helper function to produce RFC2646 format=flowed email
+; https://lists.gnu.org/archive/html/help-gnu-emacs/2005-05/msg00821.html
+(defun mutt-reflow-body ()
+    (interactive)
+    (save-excursion
+        (goto-char (point-min))
+        (while (< (point) (point-max))
+            (end-of-line)
+            (if (or (= 0 (current-column))  ; empty line
+                    (looking-at "\n\\s-"))  ; bo(next)l whitespace
+                (delete-horizontal-space)
+                (just-one-space))
+            (forward-line 1))))
+
+; When launched from mutt, put us in email composing mode
+(add-hook 'mail-mode-hook 'mutt-mail-mode-hook)
 
 ; Set modes based on filename or file extension
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
