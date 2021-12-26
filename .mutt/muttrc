@@ -19,8 +19,8 @@ hdr_order date from to cc subject
 source ~/.mutt/themes/davep.org
 
 # Editor (further functionality in editor config)
-set editor="emacsclient -c -nw"
-set visual="emacsclient -c -nw"
+set editor="emacs -nw"
+set visual="emacs -nw"
 
 # Additional configuration files and directories
 set alias_file="~/.mutt/aliases"
@@ -100,6 +100,7 @@ set fast_reply=yes
 set user_agent=yes
 set text_flowed=yes
 set envelope_from=yes
+set send_charset="utf-8"
 
 #########################
 # What happens to email #
