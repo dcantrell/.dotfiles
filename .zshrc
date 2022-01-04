@@ -90,7 +90,7 @@ alias less="less -F -R -X"
 alias bc="bc -q -l"
 alias ftp="tnftp"
 alias pwgen="pwgen -c -n -y 16 1"
-alias dotf='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
+alias dotf='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME -c user.name="David Cantrell" -c user.email="david.l.cantrell@gmail.com"'
 
 # Aliases specific to Fedora/RHEL/CentOS and derivatives
 if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
