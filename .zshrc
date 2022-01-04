@@ -29,6 +29,13 @@ wname() {
     echo -en "\033]0;$@\007";
 }
 
+# dotfiles git command wrapper
+dotf() {
+    env GIT_AUTHOR_EMAIL=david.l.cantrell@gmail.com \
+        GIT_COMMITTER_EMAIL=david.l.cantrell@gmail.com \
+    git --git-dir=${HOME}/.dotfiles/.git --work-tree=${HOME} $*
+}
+
 # Make sure we have some basic PATH
 [ -z "${PATH}" ] && PATH=/usr/bin:/usr/local/bin
 
@@ -90,7 +97,6 @@ alias less="less -F -R -X"
 alias bc="bc -q -l"
 alias ftp="tnftp"
 alias pwgen="pwgen -c -n -y 16 1"
-alias dotf='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME -c user.name="David Cantrell" -c user.email="david.l.cantrell@gmail.com"'
 
 # Aliases specific to Fedora/RHEL/CentOS and derivatives
 if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
