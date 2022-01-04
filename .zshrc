@@ -8,10 +8,11 @@ unsetopt nomatch
 
 # zsh modules
 autoload -U zcalc
+autoload -U compinit
 
 # Completions
 fpath=(~/shell/functions $fpath)
-rm ~/.zcompdump ; compinit
+rm -rf ~/.zcompdump ; compinit
 
 # Command history
 HISTSIZE=2000

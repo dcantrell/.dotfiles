@@ -1,0 +1,209 @@
+#compdef distadd distchk distinfo distmk distplist distrm etcmerge etcorphan makerepo upgrayedd
+
+_dist_list_packages() {
+    # We could do caching here, but meh.
+    _dist_packages=( $(distinfo | awk -e '{print $2}') )
+    compadd "$@" -a -- _dist_packages
+}
+
+_dist_list_packages_no_debug() {
+    _dist_packages_no_debug=( $(distinfo | awk -e '{print $2}' | grep -v \.debug\.) )
+    compadd "$@" -a -- _dist_packages_no_debug
+}
+
+_distadd() {
+    _arguments -s -w \
+        '(-a --noarch)'{-a,--noarch}'[Skip architecture check]' \
+        '(-d --nodeps)'{-d,--nodeps}'[Skip library dependency check]' \
+        '(-e --etcmerge)'{-e,--etcmerge}'[Run etcmerge -i after install]' \
+        '(-f --force)'{-f,--force}'[Force replacement of all files]' \
+        '(-F --force-script)'{-F,--force-script}'[Continue install if any package script fails]' \
+        '(-g --genattrs)'{-g,--genattrs}'[Regenerate metadata after package is installed]' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(-m --multi)'{-m,--multi}'[Install additional version of a package]' \
+        '(- *)'{-P,--pkgspec=}'[Specify exact installed package to upgrade]:pkgspec:_dist_list_packages' \
+        '(-q --quick)'{-q,--quick}'[Skip all file checks]' \
+        '(- *)'{-r,--root=}'[Install package to directory PATH]:path:_directories' \
+        '(-s --strict)'{-s,--strict}'[Perform attribute checks]' \
+        '(-S --noscripts)'{-S,--noscripts}'[Do not run pre/post-install scripts]' \
+        '(-u --upgrade)'{-u,--upgrade}'[Upgrade a package]' \
+        '(- *)'{-v,--upgrade-version=}'[Choose VER for upgrading if multiple versions of a package are installed]:ver' \
+        '(- *)'{-V,--version}'[Show distadd version]' \
+        '-no-doc[Do not install anything to /usr/share/doc]' \
+        '-no-info[Do not install any info pages]' \
+        '-no-licenses[Do not install anything to /usr/share/licenses]' \
+        '-no-man[Do not install any man pages]' \
+        '-no-wayland[Do not install anything to /usr/wayland]' \
+        '-no-x11[Do not install anything to /usr/X11]' \
+        '--tmpdir=[Use PATH for temporary files]:path:_directories' \
+        '--verbose[Display more output]' \
+        '*:pkgs:_files -g \*.dist'
+}
+
+_distchk() {
+    _arguments -s -w \
+        '(-d --dry-run)'{-d,--dry-run}'[Only show what database repairs would be made]' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(- *)'{-r,--root=}'[Install package to directory PATH]:path:_directories' \
+        '(-R --repair)'{-R,--repair}'[Repair database entries to match filesystem]' \
+        '(- *)'{-V,--version}'[Show distchk version]' \
+        '*:pkgs:_dist_list_packages'
+}
+
+_distinfo() {
+    _arguments -s -w \
+        '(-a --arch)'{-a,--arch}'[Display package architecture]' \
+        '(-A --all)'{-A,--all}'[Display all package information]' \
+        '(-d --description)'{-d,--description}'[Display package description]' \
+        '(-D --nodebug)'{-D,--nodebug}'[Skip debug packages]' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(-f --files)'{-f,--files}'[Display package file listing]' \
+        '(-g --isdebug)'{-g,--isdebug}'[Indicate if debug package or not'] \
+        '(-l --license)'{-l,--license}'[Display license name (e.g., GPLv3+)]' \
+        '(-m --maintainer)'{-m,--maintainer}'[Display package maintainer]' \
+        '(-p --pkgsize)'{-p,--pkgsize}'[Display size of package file]' \
+        '(- *)'{-q,--query=}'[Display package containing file]:file:_files' \
+        '(- *)'{-r,--root=}'[Use PATH for the root (/) directory]:path:_directories' \
+        '(-R --repo)'{-R,--repo}'[Display package repository name]' \
+        '(-s --size)'{-s,--size}'[Display installed package size]' \
+        '(-S --shell)'{-S,--shell}'[Output shell variable syntax]' \
+        '(-v --ver)'{-v,--ver}'[Display package version]' \
+        '(- *)'{-V,--version}'[Show distinfo version]' \
+        '(- *)'--deps='[Display dependencies this package requires]:pkg:_files -g "*.dist"' \
+        '(- *)'--provs='[Display dependencies this package provides]:pkg:_files -g "*.dist"' \
+        '--tmpdir=[Use PATH for temporary files]:path:_directories' \
+        '*:pkgs:_dist_list_packages'
+}
+
+_distmk() {
+    _arguments -s -w \
+        '(- *)'{-a,--arch=}'[Target architecture]:arch:(x86_64 noarch)' \
+        '(-c --clean)'{-c,--clean}'[Clean up temporary packaging files]' \
+        '(-d --debug)'{-d,--debug}'[Create a debug package]' \
+        '(- *)'{-D,--description=}'[Short package description string]' \
+        '(- *)'{-E,--depspath=}'[Additional shared library directories]:depspath:_directories' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(- *)'{-l,--plist=}'[Path to the packing list file]:plist file:_files' \
+        '(- *)'{-L,--license=}'[Short license tag (e.g., GPL-2.0-or-later)]' \
+        '(- *)'{-m,--meta=}'[Source path to package meta data)]' \
+        '(- *)'{-M,--maintainer=}'[Name and email of maintainer]' \
+        '(- *)'{-o,--outdir=}'[Output directory for final package]' \
+        '(- *)'{-p,--pkg=}'[Package name (e.g., dist-tools]' \
+        '(- *)'{-r,--rel=}'[Package release (e.g., 1)]' \
+        '(- *)'{-R,--repo=}'[Package repository name]' \
+        '(- *)'{-s,--checksum=}'[Set the checksum type]:checksum:(md5 sha1 sha256)' \
+        '(- *)'{-t,--tree=}'[Source path to package root tree]:directory:_directories' \
+        '(- *)'{-v,--ver=}'[Package version (e.g., 2.0)]' \
+        '(- *)'{-V,--version}'[Show distmk version]' \
+        '(- *)'{-z,--compression=}'[Set compression type]:compression:(bzip2 bz2 gzip gz compress Z xz lzma zstd none)' \
+        '--verbose[Show more detailed status messages]' \
+        '--tmpdir=[Use PATH for temporary files]:path:_directories'
+}
+
+_distplist() {
+    _arguments -s -w \
+        '(- *)'{-g,--group=}'[Group name for the default owner of the files]' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(- *)'{-t,--tree=}'[Source path to package root tree]:path:_directories' \
+        '(- *)'{-u,--user=}'[Username for the default owner of the files]' \
+        '(- *)'{-V,--version}'[Show distrm version]'
+}
+
+_distrm() {
+    _arguments -s -w \
+        '(-f --force)'{-f,--force}'[Force removal of all files]' \
+        '(-F --force-script)'{-F,--force-script}'[Continue removal if scripts fail]' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(-q --quick)'{-q,--quick}'[Skip all file checks]' \
+        '(- *)'{-r,--root=}'[Use PATH for the root (/) directory]:path:_directories' \
+        '(-s --strict)'{-s,--strict}'[Perform attribute checks]' \
+        '(-S --noscripts)'{-S,--noscripts}'[Do not run pre/post-install scripts]' \
+        '(-v --verbose)'{-v,--verbose}'[Show more detailed status messages]' \
+        '(- *)'{-V,--version}'[Show distrm version]' \
+        '*:pkgs:_dist_list_packages'
+}
+
+_etcmerge() {
+    _arguments -s -w \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(-i --install)'{-i,--install}'[Install new configuration files]' \
+        '(-I --ignore-install)'{-I,--ignore-install}'[Ignore the /etc/dist/install.list file]' \
+        '(-m --merge)'{-m,--merge}'[Merge package configuration files with the configuration files on the main system]' \
+        '(-q --query)'{-q,--query}'[Exit indicating if a merge would occur]' \
+        '(-S --ignore-skip)'{-S,--ignore-skip}'[Ignore the /etc/dist/skip.list file]' \
+        '(- *)'{-r,--root=}'[Use PATH for the root (/) directory]:path:_directories' \
+        '--tmpdir=[Use PATH for temporary files]:path:_directories' \
+        '(- *)'{-V,--version}'[Show etcmerge version]' \
+        '*:pkgs:_dist_list_packages_no_debug'
+}
+
+_etcorphan() {
+    _arguments -s -w \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(- *)'{-r,--root=}'[Use PATH for the root (/) directory]:path:_directories' \
+        '(- *)'{-V,--version}'[Show etcorphan version]'
+}
+
+_makerepo() {
+    _arguments -s -w \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(- *)'{-V,--version}'[Show makerepo version]'
+}
+
+_upgrayedd() {
+    _arguments -s -w \
+        '(-c --clean)'{-c,--clean}'[Remove cached files and packages on exit]' \
+        '(-d --download-only)'{-d,--download-only}'[Only download and cache packages that are new or upgrade an existing package]' \
+        '(- *)'{-D,--download-dir=}'[Use DIR to store downloaded packages]' \
+        '(-f --force)'{-f,--force}'[Pass the -f option to distadd]' \
+        '(- *)'{-h,--help}'[This help message]' \
+        '(-i --install)'{-i,--install}'[Install new packages from installed collections]' \
+        '(- *)'{-R,--release=}'[Specify distribution version number]' \
+        '(-S --skip-repodata)'{-S,--skip-repodata}'[Skip updating the locally cached repodata]' \
+        '(-u --upgrade)'{-u,--upgrade}'[Upgrade existing packages from installed collections]' \
+        '(- *)'{-V,--version}'[Show makerepo version]' \
+        '(-y --yes)'{-y,--yes}'[Do not prompt to confirm the distadd run after downloading packages]' \
+        '*:pkgs:_dist_list_packages'
+}
+
+case $service in
+    distadd)
+        _distadd
+        ;;
+
+    distchk)
+        _distchk
+        ;;
+
+    distinfo)
+        _distinfo
+        ;;
+
+    distmk)
+        _distmk
+        ;;
+
+    distplist)
+        _distplist
+        ;;
+
+    distrm)
+        _distrm
+        ;;
+
+    etcmerge)
+        _etcmerge
+        ;;
+
+    etcorphan)
+        _etcorphan
+        ;;
+
+    makerepo)
+        _makerepo
+        ;;
+
+    upgrayedd)
+        _upgrayedd
+        ;;
+esac
