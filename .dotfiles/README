@@ -6,23 +6,19 @@ Setup:
 # this manually to get everything in place, but once you do the shell
 # init file in dotfiles will provide the alias and such.
 
+$ cd ${HOME}
 $ git clone git@github.com:dcantrell/.dotfiles.git di
-$ mv di/.dotfiles $HOME
-$ mv di/.git $HOME/.dotfiles
-$ mv di/.* di/bin $HOME
-$ rmdir di
-$ alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
-$ dotfiles config --local status.showUntrackedFiles no
+$ ${HOME}/di/install-dotfiles
 
-# Add dotfiles from $HOME using 'dotfiles' in place of the git command,
+# Add dotfiles from $HOME using 'dotf' in place of the git command,
 # commit and push as you do with git.  For example:
 #
-#    dotfiles add .emacs
-#    dotfiles commit -m "Add .emacs"
-#    dotfiles push
+#    dotf add .emacs
+#    dotf commit -m "Add .emacs"
+#    dotf push
 #
-# You can call this alias whatever you want.  'dotfiles' may seem
-# long, but I used that to avoid aliasing 'df' to this git command.
+# You can call this alias whatever you want.  'dotf' may seem long,
+# but I used that to avoid aliasing 'df' to this git command.
 
 
 Setting up a new system:

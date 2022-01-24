@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# Once dotfiles have been cloned to a working directory, this script
+# merges them in to the current home directory and gets things ready
+# for usage.
+#
+
+PATH=/usr/bin
+WORKING_DOTFILES_DIR=
+
+if [ -z "$1" ]; then
+    WORKING_DOTFILES_DIR="${HOME}/di"
+else
+    WORKING_DOTFILES_DIR="$1"
+fi
+
+if [ ! -d "${WORKING_DOTFILES_DIR}" ]; then
+    echo "*** ${WORKING_DOTFILES_DIR} does not exist" >&2
+    exit 1
+fi
+
+if [ -d "${HOME}"/.dotfiles ]; then
+    echo "*** Removing existing ${HOME}/.dotfiles directory..."
+    rm -rf "${HOME}"/.dotfiles
+fi
+
+mv "${WORKING_DOTFILES_DIR}"/.dotfiles "${HOME}"
+mv "${WORKING_DOTFILES_DIR}"/.git "${HOME}"/.dotfiles
+
+cd "${WORKING_DOTFILES_DIR}"
+for f in * .* ; do
+    [ "${f}" = "TAGS" ] && continue
+
+    if [ -r "${HOME}"/"${f}" ]; then
+        echo "*** Removing existing ${HOME}/${f}..."
+        rm -rf "${HOME}"/"${f}"
+    fi
+
+    mv "${HOME}"/"${f}" "${HOME}"
+done
+
+cd "${HOME}"
+rm -rf "${WORKING_DOTFILES_DIR}"
+
+git \
+    --git-dir=${HOME}/.dotfiles/.git --work-tree=${HOME} \
+    config --local status.showUntrackedFiles no
+
+echo "Now log out and log back in for a working dotfiles setup."
