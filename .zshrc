@@ -196,37 +196,15 @@ export BROWSER
 bindkey "$(tput khome | cat -v)" beginning-of-line
 bindkey "$(tput kend | cat -v)" end-of-line
 
-# Make sure latest irssi scripts are in use
-if [ -d /usr/share/irssi/scripts ]; then
-    IRSSI_SCRIPTS_DIR=/usr/share/irssi/scripts
-elif [ -d /usr/local/share/irssi/scripts ]; then
-    IRSSI_SCRIPTS_DIR=/usr/local/share/irssi/scripts
-fi
+# IRC (and other systems) client
+WEECHAT_HOME=${HOME}/.weechat
+export WEECHAT_HOME
 
-IRSSI_SCRIPTS="splitlong usercount"
-
-if [ -d "${IRSSI_SCRIPTS_DIR}" -a -d "${HOME}/.irssi/scripts" ]; then
-    cd "${HOME}/.irssi/scripts"
-    for s in ${IRSSI_SCRIPTS} ; do
-        [ "${s}" = "autorun" ] && continue
-        if [ -r "${IRSSI_SCRIPTS_DIR}/${s}" ]; then
-            /bin/rm -f "${s}"
-            /bin/ln -sf ${IRSSI_SCRIPTS_DIR}/${s} .
-        fi
+if [ -d ${HOME}/.weechat/python ]; then
+    # autoload all Python plugins
+    cd ${HOME}/.weechat/python
+    [ -d autoload ] || mkdir autoload
+    for plugin in $(ls -1 *.py 2>/dev/null) ; do
+        ( cd autoload ; ln -sf ../${plugin} . >/dev/null 2>&1 )
     done
-    cd ${HOME}
-fi
-
-# Load all irssi scripts at startup
-if [ -d "${HOME}/.irssi/scripts" ]; then
-    cd "${HOME}/.irssi/scripts"
-    [ -d autorun ] || mkdir autorun
-    for s in * ; do
-        ( cd autorun
-          [ "${s}" = "autorun" ] && continue
-          [ -r "${s}" ] && /bin/rm -f ${s}
-          /bin/ln -sf ../${s} .
-        )
-    done
-    cd ${HOME}
 fi
