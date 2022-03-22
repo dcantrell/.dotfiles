@@ -98,7 +98,13 @@ set ispell="/usr/bin/hunspell"
 set edit_headers=yes
 set fast_reply=yes
 set user_agent=yes
-set text_flowed=yes
+
+# Do not set this until emacs can be modified with a minor mode or
+# something to compose format=flowed messages.  Right now that's not
+# working so if this is set, mutt will send a non-compliant f=f
+# message but say it is in the header.
+#set text_flowed=yes
+
 set envelope_from=yes
 set send_charset="utf-8"
 
