@@ -202,9 +202,11 @@ export WEECHAT_HOME
 
 if [ -d ${HOME}/.weechat/python ]; then
     # autoload all Python plugins
+    CWD="$(pwd)"
     cd ${HOME}/.weechat/python
     [ -d autoload ] || mkdir autoload
     for plugin in $(ls -1 *.py 2>/dev/null) ; do
         ( cd autoload ; ln -sf ../${plugin} . >/dev/null 2>&1 )
     done
+    cd "${CWD}"
 fi
