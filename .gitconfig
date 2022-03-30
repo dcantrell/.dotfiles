@@ -13,14 +13,10 @@
 [merge]
 	summary = 1
 	tool = meld
-[sendemail]
-	confirm = never
 [alias]
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 	change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
 	addw = !sh -c 'git diff -U0 --ignore-space-change --no-color "$@" | git apply --cached --ignore-space-change --unidiff-zero' -
-[sendmail]
-	chainreplyto = no
 [push]
 	default = tracking
 [rebase]
