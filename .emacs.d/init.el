@@ -1,35 +1,32 @@
-; Install things from MELPA
+; Install things from MELPA if we don't have tham
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-; Install 'use-package' if we don't have it
-(unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
+; Packages to install
+;     'use-package'          Emacs install may not have it
+;     'color-theme-modern'   (NOTE: I don't currently use these themes,
+;                            but I'll let them install anyway on the off
+;                            chance I find myself in some weird terminal
+;                            and need to change from my preferred theme.
+;     'org'                  Orgmode - https://orgmode.org/
+;     'ggtags'               GNU Global frontend
+;                            https://github.com/leoliu/ggtags
+(setq package-list '(use-package color-theme-modern org ggtags))
 
-; Install 'color-theme-modern' if we don't have it
-; (NOTE: I don't currently use these themes, but I'll let them install
-; anyway on the off chance I find myself in some weird terminal and
-; need to change from my preferred theme.)
-(unless (package-installed-p 'color-theme-modern)
-    (package-refresh-contents)
-    (package-install 'color-theme-modern))
-(use-package color-theme-modern)
+; Package repositories
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
 
-; Orgmode
-; https://orgmode.org
-(unless (package-installed-p 'org)
-    (package-refresh-contents)
-    (package-install 'org))
-(use-package org)
+; Activate all the packages (in particular autoloads)
+(package-initialize)
 
-; ggtags - GNU Global frontend
-; https://github.com/leoliu/ggtags
-(unless (package-installed-p 'ggtags)
-    (package-refresh-contents)
-    (package-install 'ggtags))
-(use-package ggtags)
+; Fetch the list of packages available
+(or (file-exists-p package-user-dir) (package-refresh-contents))
+
+; Install the missing packages
+(dolist (package package-list)
+    (unless (package-installed-p package)
+        (package-install package)))
 
 ; Send automatic custom additions to a different file
 (setq custom-file "~/.emacs.d/custom.el")
