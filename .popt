@@ -1,0 +1,1 @@
+rpm* alias --here -D "_topdir %(echo $PWD)" -D '_builddir %{_topdir}' -D '_rpmdir %{_topdir}' -D '_sourcedir %{_topdir}' -D '_specdir %{_topdir}' -D '_srcrpmdir %{_topdir}'
