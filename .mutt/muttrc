@@ -151,8 +151,6 @@ source ~/.mutt/accounts/personal
 folder-hook david.l.cantrell@gmail.com/* source ~/.mutt/accounts/personal
 folder-hook dcantrell@burdell.org/* source ~/.mutt/accounts/burdell
 folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
-folder-hook newiitechcorp@gmail.com/* source ~/.mutt/accounts/ntcorp
-folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
 
 #########################################
 # Use F-keys to change between accounts #
@@ -160,8 +158,6 @@ folder-hook david@newiitech.com/* source ~/.mutt/accounts/nt
 #
 #   F2   personal
 #   F3   rht
-#   F4   ntcorp
-#   F5   nt
 #   F6   burdell
 #
 # Also include octal macros to handle the Fn+Fkey codes on my Dell XPS 13.  Use ":exec what-key"
@@ -175,14 +171,8 @@ macro index \121 '<enter-command>source ~/.mutt/accounts/personal<enter><change-
 macro index <f3> '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
 macro index \122 '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
 
-macro index <f4> '<enter-command>source ~/.mutt/accounts/ntcorp<enter><change-folder>!<enter>'
-macro index \123 '<enter-command>source ~/.mutt/accounts/ntcorp<enter><change-folder>!<enter>'
-
-macro index <f5> '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter'>
-macro index \415 '<enter-command>source ~/.mutt/accounts/nt<enter><change-folder>!<enter'>
-
-macro index <f6> '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
-macro index \416 '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
+macro index <f4> '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
+macro index \123 '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
 
 #####################################
 # Common macros across all accounts #
