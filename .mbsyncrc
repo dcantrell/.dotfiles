@@ -118,6 +118,7 @@ MaildirStore burdell-local
 Channel burdell
     Far :burdell-remote:
     Near :burdell-local:
+    Patterns *
     Create Both
     Remove Both
     Expunge Both
