@@ -90,8 +90,8 @@ bind index,pager \CO sidebar-open
 ###############
 # Spell check #
 ###############
-# If one desires to spell check a message before sending
-set ispell="/usr/bin/hunspell"
+set my_aspell_en="/usr/bin/aspell -c --mode=email --lang=en_US"
+set ispell="$my_aspell_en"
 
 ############################
 # How email is constructed #

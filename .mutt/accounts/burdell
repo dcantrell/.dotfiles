@@ -6,6 +6,15 @@ set from="dcantrell@burdell.org"
 set signature="~/.mutt/signature/burdell"
 set spoolfile="+INBOX"
 set postponed="+Drafts"
-unset record
+set record="+Sent"
+
+# always save read messages to 'archive' in IMAP
+set confirmappend=no
+set confirmcreate=no
+save-hook . +archive
+
 folder-hook dcantrell@burdell.org/* source ~/.mutt/accounts/burdell
 source ~/.mutt/mailboxes/burdell
+
+# Save read messages
+macro index \' "<save-message>+archive<enter>" "archive"

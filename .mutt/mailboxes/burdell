@@ -2,6 +2,7 @@ unmailboxes *
 mailboxes "=INBOX"
 mailboxes "=amazon"
 mailboxes "=arca-noae"
+mailboxes "=archive"
 mailboxes "=Calendar"
 mailboxes "=Configuration"
 mailboxes "=Contacts"
