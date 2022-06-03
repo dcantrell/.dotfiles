@@ -15,7 +15,7 @@ PATH=/usr/bin
 # Run mbsync
 pkill -KILL mbsync
 [ -d ${HOME}/logs ] || mkdir -p ${HOME}/logs
-mbsync -a -V >${HOME}/logs/mbsync.log 2>&1
+mbsync -a -V >${HOME}/logs/mbsync.log 2>&1 || :
 
 # Update mailboxes
 [ -x ${HOME}/.mutt/update-mailboxes ] && ${HOME}/.mutt/update-mailboxes

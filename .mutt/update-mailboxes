@@ -58,5 +58,7 @@ for account in * ; do
     IFS=${OLDIFS}
 
     # special gmail mailboxes
-    echo "mailboxes \"=[Gmail]/All Mail\" \"=[Gmail]/Drafts\" \"=[Gmail]/Sent Mail\" \"=[Gmail]/Starred\" \"=[Gmail]/Spam\"" >> ${MAILBOXES}/${account}
+    if [ "${account}" = "rht" ]; then
+        echo "mailboxes \"=[Gmail]/All Mail\" \"=[Gmail]/Drafts\" \"=[Gmail]/Sent Mail\" \"=[Gmail]/Starred\" \"=[Gmail]/Spam\"" >> ${MAILBOXES}/${account}
+    fi
 done

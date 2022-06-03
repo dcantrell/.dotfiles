@@ -7,69 +7,6 @@
 #     Auto-Expunge OFF
 #
 
-#######################################################
-# Personal gmail account - david.l.cantrell@gmail.com #
-#######################################################
-
-# This section defines the authentication and server information for the
-# account.  The 'PipelineDepth' setting throttles things so we don't get
-# gmail's OVERQUOTA error.  See:
-#     https://sourceforge.net/p/isync/mailman/message/35458365/
-# For an initial sync, I set pipeline depth to 1, otherwise gmail will
-# complain at you a lot.  Once you have a local sync, 50 seems to work.
-IMAPAccount personal
-    Host imap.gmail.com
-    User david.l.cantrell@gmail.com
-    PassCmd "pass app-passwords/david.l.cantrell@gmail.com"
-    SSLType IMAPS
-    CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 50
-
-# The local representation of an IMAPAccount.  The second parameter of
-# 'IMAPStore' names this store, which I make the same as the account
-# definition I will use plus "-remote" to indicate this is defining the
-# remote or server-side location of email.  The second parameter of
-# 'Account' maps to the second parameter of a corresponding 'IMAPAccount'.
-IMAPStore personal-remote
-    Account personal
-
-# The local MUA (e.g., mutt) will read and write mail from this store,
-# so it makes sense to use Maildir format.  The second parameter of
-# the 'MaildirStore' setting is the name of this store, which I make
-# the same as the other blocks that control it plus "-local" to indicate
-# this is defining the local location of email.  Path is self-explanatory
-# and SubFolders Verbatim means use the Unix directory layout for the
-# mailbox layout.
-#
-# NOTE: The trailing slash on the Path is critical if it's a directory.
-# And the Inbox setting means use that same directory specified as the
-# Path to hold the inbox, otherwise it uses ~/Maildir.
-MaildirStore personal-local
-    Path ~/Maildir/david.l.cantrell@gmail.com/
-    Inbox ~/Maildir/david.l.cantrell@gmail.com/INBOX
-    SubFolders Verbatim
-
-# Define the sync settings between the local email and server email.  This
-# is somewhat confusing.  The 'Channel' is just a name.  Far is where you
-# define the server-side block to use, in our case the IMAPAccount.  Near
-# is the local side, so we use our MaildirStore.  Patterns controls what is
-# involved in the sync.  'Create Both' means automatically create missing
-# mailboxes on the server and local side.  'Remove Both' means propagate
-# mailbox deletions between both the server and client sides.  'Expunge Both'
-# means propagate mailbox deletions in both directions.  The SyncState and
-# Sync options control the sync state file and what to sync, which is
-# everything.
-Channel personal
-    Far :personal-remote:
-    Near :personal-local:
-    # Exclude everything under the internal [Gmail] folder, except the interesting folders
-    Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Drafts" "[Gmail]/Starred" "[Gmail]/Spam" "[Gmail]/All Mail"
-    Create Both
-    Remove Both
-    Expunge Both
-    SyncState *
-    Sync All
-
 ########################################################
 # Personal burdell.org account - dcantrell@burdell.org #
 ########################################################

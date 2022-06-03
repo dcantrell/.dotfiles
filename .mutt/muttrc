@@ -138,17 +138,16 @@ set crypt_replysign=yes
 set crypt_replyencrypt=yes
 set crypt_replysignencrypted=yes
 
-#################################
-# Default account is 'personal' #
-#################################
-source ~/.mutt/accounts/personal
+################################
+# Default account is 'burdell' #
+################################
+source ~/.mutt/accounts/burdell
 
 ################
 # Folder hooks #
 ################
 
 # Source in account configuration each time the mailbox subdirectory changes.
-folder-hook david.l.cantrell@gmail.com/* source ~/.mutt/accounts/personal
 folder-hook dcantrell@burdell.org/* source ~/.mutt/accounts/burdell
 folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 
@@ -156,23 +155,20 @@ folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 # Use F-keys to change between accounts #
 #########################################
 #
-#   F2   personal
+#   F2   burdell
 #   F3   rht
-#   F6   burdell
 #
 # Also include octal macros to handle the Fn+Fkey codes on my Dell XPS 13.  Use ":exec what-key"
 # to get odd keycodes that mutt can't figure out directly.  Invoke that function in mutt by
 # just typing ':' and going from there.  To exit the key code reporter, press Ctrl+G
 #
 # NOTE: These macro keys do not work inside a tmux session.  Still looking for a fix for that.
-macro index <f2> '<enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
-macro index \121 '<enter-command>source ~/.mutt/accounts/personal<enter><change-folder>!<enter>'
+macro index <f2> '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
+macro index \121 '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
 
 macro index <f3> '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
 macro index \122 '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
 
-macro index <f4> '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
-macro index \123 '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
 
 #####################################
 # Common macros across all accounts #

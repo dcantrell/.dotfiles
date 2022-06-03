@@ -1,3 +1,0 @@
-unmailboxes *
-mailboxes "=INBOX"
-mailboxes "=[Gmail]/All Mail" "=[Gmail]/Drafts" "=[Gmail]/Sent Mail" "=[Gmail]/Starred" "=[Gmail]/Spam"

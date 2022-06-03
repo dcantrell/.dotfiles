@@ -9,3 +9,8 @@ set postponed="+[Gmail]/Drafts"
 unset record
 folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 source ~/.mutt/mailboxes/rht
+
+# Report message as spam.  This saves it to the Spam folder for the
+# currently active account.  The hot key is "!" which is in the icon
+# that Gmail uses to mark the Spam folder.
+macro index,pager ! "<save-message>=[Gmail]/Spam<enter><enter>" "Report spam"

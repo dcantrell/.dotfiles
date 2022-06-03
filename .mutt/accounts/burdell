@@ -18,3 +18,6 @@ source ~/.mutt/mailboxes/burdell
 
 # Save read messages
 macro index \' "<save-message>+archive<enter>" "archive"
+
+# Move message to Junk folder
+macro index,pager ! "<save-message>+Junk<enter><enter>" "Report spam"
