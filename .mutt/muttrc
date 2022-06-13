@@ -174,11 +174,6 @@ macro index \122 '<enter-command>source ~/.mutt/accounts/rht<enter><change-folde
 # Common macros across all accounts #
 #####################################
 
-# Report message as spam.  This saves it to the Spam folder for the
-# currently active account.  The hot key is "!" which is in the icon
-# that Gmail uses to mark the Spam folder.
-macro index,pager ! "<save-message>=[Gmail]/Spam<enter><enter>" "Report spam"
-
 # Handle URLs in messages
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
