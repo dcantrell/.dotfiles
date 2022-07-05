@@ -6,6 +6,7 @@ set from="dcantrell@redhat.com"
 set signature="~/.mutt/signature/rht"
 set spoolfile="+INBOX"
 set postponed="+[Gmail]/Drafts"
+unset copy
 unset record
 folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 source ~/.mutt/mailboxes/rht

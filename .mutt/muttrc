@@ -117,7 +117,7 @@ set send_charset="utf-8"
 # then you need to configure mutt to move deleted messages to the trash
 # folder in gmail.
 set delete=yes
-set copy=no
+#set copy=no             # different by account (gmail vs. kolab now)
 set move=no
 
 ##################

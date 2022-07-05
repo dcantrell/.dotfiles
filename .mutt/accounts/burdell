@@ -6,6 +6,7 @@ set from="dcantrell@burdell.org"
 set signature="~/.mutt/signature/burdell"
 set spoolfile="+INBOX"
 set postponed="+Drafts"
+set copy=yes
 set record="+Sent"
 
 # always save read messages to 'archive' in IMAP
@@ -20,4 +21,4 @@ source ~/.mutt/mailboxes/burdell
 macro index \' "<save-message>+archive<enter>" "archive"
 
 # Move message to Junk folder
-macro index,pager ! "<save-message>+Junk<enter><enter>" "Report spam"
+macro index,pager ! "<save-message>+Junk<enter>" "Report spam"
