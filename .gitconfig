@@ -31,3 +31,6 @@
 [init]
 	templateDir = ~/.git_template
 	defaultBranch = main
+[safe]
+	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect
+	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect
