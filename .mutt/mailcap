@@ -1,5 +1,5 @@
 # HTML-formatted email
-text/html; html2text -d -e --no-wrap-links --protect-links --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
+text/html; html2text -d -e --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
 
 # Images
 image/*; geeqie %s;
