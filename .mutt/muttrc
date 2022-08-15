@@ -43,7 +43,7 @@ set realname="David Cantrell"
 # Handle non-text content as much as possible (see ~/.mutt/mailcap) #
 #####################################################################
 auto_view text/html text/calendar application/ics
-alternative_order text/plain text/enriched text/html
+alternative_order text/html text/plain text/enriched
 
 ###################################
 # How email is browsed and viewed #
