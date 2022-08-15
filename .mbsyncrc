@@ -17,6 +17,7 @@ IMAPAccount burdell
     PassCmd "pass app-passwords/dcantrell@burdell.org"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
+    PipelineDepth 1
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
@@ -78,7 +79,7 @@ IMAPAccount rht
     PassCmd "pass app-passwords/dcantrell@redhat.com"
     SSLType IMAPS
     CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 50
+    PipelineDepth 1
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
