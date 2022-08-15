@@ -12,6 +12,11 @@ PATH=/usr/bin
 # Lock things so only one script runs at a time
 [ ! "${FLOCKER}" = "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
 
+# See if we can reach network hosts first
+grep "Host " ~/.mbsyncrc | awk '{ print $2; }' | while read mailserver ; do
+    ping -q -c 1 -w 5 ${mailserver} >/dev/null 2>&1 || exit 0
+done
+
 # Run mbsync
 pkill -KILL mbsync
 [ -d "${HOME}"/logs ] || mkdir -p "${HOME}"/logs
