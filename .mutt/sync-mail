@@ -10,15 +10,21 @@
 PATH=/usr/bin
 
 # Lock things so only one script runs at a time
-[ ! "${FLOCKER}" = "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+if [ ! "${FLOCKER}" = "$0" ]; then
+    exec env FLOCKER="$0" flock -en "$0" "$0" "$@"
+else
+    exit 0
+fi
 
 # Run mbsync
 pkill -KILL mbsync
-[ -d ${HOME}/logs ] || mkdir -p ${HOME}/logs
-mbsync -a -V >${HOME}/logs/mbsync.log 2>&1 || :
+[ -d "${HOME}"/logs ] || mkdir -p "${HOME}"/logs
+mbsync -a -V > "${HOME}"/logs/mbsync.log 2>&1 || :
 
 # Update mailboxes
-[ -x ${HOME}/.mutt/update-mailboxes ] && ${HOME}/.mutt/update-mailboxes
+[ -x "${HOME}"/.mutt/update-mailboxes ] && "${HOME}"/.mutt/update-mailboxes
 
 # Update notmuch cache
-[ -x /usr/bin/notmuch ] && /usr/bin/notmuch new >${HOME}/logs/notmuch.log 2>&1
+if notmuch --help >/dev/null 2>&1 ; then
+    notmuch new > "${HOME}"/logs/notmuch.log 2>&1
+fi
