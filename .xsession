@@ -47,13 +47,13 @@ fi
 if pactl --help >/dev/null 2>&1 ; then
     pactl list short sinks | grep alsa | while read -r num shortname stuff ; do
         echo "${shortname}" | grep -q -i headset >/dev/null 2>&1
-	if [ $? -eq 0 ]; then
-	    # input from the USB headset
-	    pactl set-default-source "${shortname}"
-	else
-	    # output to regular headphones
-	    pactl set-default-sink "${shortname}"
-	fi
+        if [ $? -eq 0 ]; then
+            # input from the USB headset
+            pactl set-default-source "${shortname}"
+        else
+            # output to regular headphones
+            pactl set-default-sink "${shortname}"
+        fi
     done
 fi
 
