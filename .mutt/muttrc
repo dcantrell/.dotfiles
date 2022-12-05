@@ -39,6 +39,12 @@ unset metoo
 # Me
 set realname="David Cantrell"
 
+# Markers are visual things that help you determine what mutt has done
+# to render the email on your display.  This is most frustrating when
+# trying to click embedded links in HTML formatted email.  It's where
+# you get all those '+' signs.
+unset markers
+
 #####################################################################
 # Handle non-text content as much as possible (see ~/.mutt/mailcap) #
 #####################################################################

@@ -1,6 +1,7 @@
 # HTML-formatted email
-text/html; html2text -d -e --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
-#text/html; w3m -dump -v -F -T text/html %s; nametemplate=%s.html; needsterminal;
+text/html; html2text -d -e --reference-links --images-to-alt --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
+#text/html; elinks -dump %s; nametemplate=%s.html; copiousoutput
+#text/html; w3m -I %{charset} -T text/html; copiusoutput;
 
 # Images
 image/*; geeqie %s;
