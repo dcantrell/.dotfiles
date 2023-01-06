@@ -10,6 +10,9 @@ unsetopt nomatch
 autoload -U zcalc
 autoload -U compinit
 
+# only show RPROMPT on active prompt
+setopt transient_rprompt
+
 # Completions
 fpath=(~/shell/functions $fpath)
 rm -rf ~/.zcompdump ; compinit
@@ -31,8 +34,8 @@ wname() {
 
 # dotfiles git command wrapper
 dotf() {
-    env GIT_AUTHOR_EMAIL=david.l.cantrell@gmail.com \
-        GIT_COMMITTER_EMAIL=david.l.cantrell@gmail.com \
+    env GIT_AUTHOR_EMAIL=dcantrell@burdell.org \
+        GIT_COMMITTER_EMAIL=dcantrell@burdell.org \
     git --git-dir=${HOME}/.dotfiles/.git --work-tree=${HOME} $*
 }
 
@@ -113,6 +116,7 @@ ALTERNATE_EDITOR=""
 EDITOR="emacs -nw"
 VISUAL="${EDITOR}"
 alias emacs="emacs -nw"
+alias vi='printf "Use Emacs.\n"'
 alias vim='printf "Use Emacs.\n"'
 
 # Make sure emacs has directories in place
