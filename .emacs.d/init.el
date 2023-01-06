@@ -225,6 +225,18 @@
  gdb-show-main t
  )
 
+; Diff mode highlighting adjustments (my pupils!)
+(defun update-diff-colors ()
+  "update the colors for diff faces"
+  (set-face-attribute 'diff-added nil
+                      :foreground "white" :background "blue")
+  (set-face-attribute 'diff-removed nil
+                      :foreground "white" :background "red3")
+  (set-face-attribute 'diff-changed nil
+                      :foreground "white" :background "purple"))
+(eval-after-load "diff-mode"
+  '(update-diff-colors))
+
 ; Try to help when things go wrong
 (setq debug-on-error t)
 
