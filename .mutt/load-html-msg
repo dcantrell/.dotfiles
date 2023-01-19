@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Receive a message on standard input, place in a temporary file, load
+# in a Firefox tab.
+#
+
+PATH=/usr/bin:/usr/X11/bin
+TMPFILE="$(mktemp -t mutt.XXXXXXXXXX -p /var/tmp)"
+
+sed -n "w ${TMPFILE}"
+firefox --new-tab "file:///${TMPFILE}"

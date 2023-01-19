@@ -1,7 +1,5 @@
 # HTML-formatted email
-text/html; html2text -d -e --reference-links --images-to-alt --wrap-list-items %s; nametemplate=%s.html; copiousoutput;
-#text/html; elinks -dump %s; nametemplate=%s.html; copiousoutput
-#text/html; w3m -I %{charset} -T text/html; copiusoutput;
+text/html; w3m -o display_link_number=TRUE -o ignore_null_img_alt=TRUE -I %{charset} -T text/html %s; nametemplate=%s.html; copiousoutput;
 
 # Images
 image/*; geeqie %s;

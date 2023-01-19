@@ -51,6 +51,12 @@ unset markers
 auto_view text/html text/calendar application/ics
 alternative_order text/html text/plain text/enriched
 
+# run viewer defined in mailcap by <return> in attach view
+bind attach <return> view-mailcap
+
+# load message in firefox tab
+#macro index,pager H "<pipe-message>~/.mutt/load-html-msg<return>" "render html mail using firefox"
+
 ###################################
 # How email is browsed and viewed #
 ###################################
