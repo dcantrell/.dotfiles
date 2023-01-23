@@ -15,9 +15,11 @@ IMAPAccount burdell
     Host imap.kolabnow.com
     User dcantrell@burdell.org
     PassCmd "pass app-passwords/dcantrell@burdell.org"
+    Port 993
     SSLType IMAPS
+    SSLVersions TLSv1.2
     CertificateFile /etc/ssl/certs/ca-bundle.crt
-    PipelineDepth 1
+    PipelineDepth   1
 
 # The local representation of an IMAPAccount.  The second parameter of
 # 'IMAPStore' names this store, which I make the same as the account
@@ -56,7 +58,8 @@ MaildirStore burdell-local
 Channel burdell
     Far :burdell-remote:
     Near :burdell-local:
-    Patterns *
+    # Exclude KolabNow suite folders that are not interesting in mutt
+    Patterns * !Calendar !Configuration !Contacts !Files !Freebusy !Journal !Notes !Tasks
     Create Both
     Remove Both
     Expunge Both
@@ -77,7 +80,9 @@ IMAPAccount rht
     Host imap.gmail.com
     User dcantrell@redhat.com
     PassCmd "pass app-passwords/dcantrell@redhat.com"
+    Port 993
     SSLType IMAPS
+    SSLVersions TLSv1.2
     CertificateFile /etc/ssl/certs/ca-bundle.crt
     PipelineDepth 1
 
