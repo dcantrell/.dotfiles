@@ -90,7 +90,7 @@ elif [ "${OS}" = "FreeBSD" ]; then
     alias ls="ls -FCG"
 else
     alias ls="ls -FC --color=tty"
-    alias cp="cp -iv"
+    alias cp="cp -ivp"
     alias rm="rm -iv"
     alias mv="mv -iv"
     alias ln="ln -iv"
