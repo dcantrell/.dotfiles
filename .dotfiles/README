@@ -29,12 +29,18 @@ Setting up a new system:
 
 $ mkdir $HOME/.dotfiles
 $ git clone --separate-git-dir=$HOME/.dotfiles/.git \
-            https://github.com/dcantrell/.dotfiles.git $HOME
+            git@github.com:dcantrell/.dotfiles.git $HOME
 
 # If this fails, you may need to clone to a separate directory first,
 # then move things in place:
 
 $ git clone --separate-git-dir=$HOME/.dotfiles/.git \
-            https://github.com/dcantrell/.dotfiles.git tmpdotfiles
+            git@github.com:dcantrell/.dotfiles.git tmpdotfiles
 $ rsync -rv --exclude '.git' tmpdotfiles/ $HOME/
 $ rm -rf tmpdotfiles
+
+# After getting the repo cloned, you need to make sure this exists in
+  ~/.dotfiles/.git/config:
+
+    [status]
+            showUntrackedFiles = no
