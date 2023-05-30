@@ -121,6 +121,9 @@ set user_agent=yes
 set envelope_from=yes
 set send_charset="utf-8"
 
+# Per https://people.kernel.org/monsieuricon/fix-your-mutt
+set message_id_format = "<%Y%02m%02d%02H%02M%02S.G%c%p@%f>"
+
 #########################
 # What happens to email #
 #########################
