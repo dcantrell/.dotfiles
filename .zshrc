@@ -200,6 +200,9 @@ export BROWSER
 bindkey "$(tput khome | cat -v)" beginning-of-line
 bindkey "$(tput kend | cat -v)" end-of-line
 
+# Make delete work
+bindkey "^[[3~" delete-char
+
 # IRC (and other systems) client
 WEECHAT_HOME=${HOME}/.weechat
 export WEECHAT_HOME
