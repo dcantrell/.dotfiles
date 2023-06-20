@@ -124,15 +124,6 @@ alias vim='printf "Use Emacs.\n"'
 [ -d ${HOME}/.emacs.d/autosaves ] || mkdir -p ${HOME}/.emacs.d/autosaves
 [ -d ${HOME}/.emacs.d/backups ] || mkdir -p ${HOME}/.emacs.d/backups
 
-# If on a work system, change the git author & committer email
-case $(hostname -d 2>/dev/null) in
-    *.redhat.com)
-        GIT_AUTHOR_EMAIL="dcantrell@redhat.com"
-        GIT_COMMITTER_EMAIL="dcantrell@redhat.com"
-        export GIT_AUTHOR_EMAIL GIT_COMMITTER_EMAIL
-        ;;
-esac
-
 # GnuPG and agent settings
 #
 # Go ahead and force start the agent
