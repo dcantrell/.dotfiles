@@ -96,6 +96,7 @@ else
     alias ln="ln -iv"
 fi
 
+alias grep="grep -I -n"
 alias less="less -F -R -X"
 alias bc="bc -q -l"
 alias ftp="tnftp"
@@ -103,7 +104,7 @@ alias pwgen="pwgen -c -n -y 16 1"
 
 # Aliases specific to Fedora/RHEL/CentOS and derivatives
 if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-release ]; then
-    alias rmdebugrpms='sudo yum remove $(rpm -qa | grep -E "\-debug(info|source)" | grep -v debuginfod) --noautoremove'
+    alias rmdebugrpms='sudo yum remove $(rpm -qa | /bin/grep -E "\-debug(info|source)" | /bin/grep -v debuginfod) --noautoremove'
     alias scuttle="sudo systemctl"
 fi
 
