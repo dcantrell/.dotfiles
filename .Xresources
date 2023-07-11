@@ -25,6 +25,9 @@ URxvt*buffered:           true
 URxvt*depth:              24
 URxvt*print-pipe:         "cat > /dev/null"
 
+! Add colon to the list of characters used as delimiters when you double click.
+URxvt.cutchars:  "\\`\"'&()*,;<=>?@[]^{|}:"
+
 #ifdef SRVR_bnsf
 !!!!!!!!!!!!!!!!!!!!
 ! 4K monitor stuff !
