@@ -6,7 +6,7 @@
 # if new server-side folders have been created, this will
 # pick them up.  Also folder deletions.
 #
-# David Cantrell <david.l.cantrell@gmail.com>
+# David Cantrell <dcantrell@burdell.org>
 #
 
 PATH=/usr/bin
@@ -56,9 +56,4 @@ for account in * ; do
 
     # restore IFS
     IFS=${OLDIFS}
-
-    # special gmail mailboxes
-    if [ "${account}" = "rht" ]; then
-        echo "mailboxes \"=[Gmail]/All Mail\" \"=[Gmail]/Drafts\" \"=[Gmail]/Sent Mail\" \"=[Gmail]/Starred\" \"=[Gmail]/Spam\"" >> "${MAILBOXES}"/"${account}"
-    fi
 done

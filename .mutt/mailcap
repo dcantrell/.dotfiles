@@ -1,5 +1,6 @@
 # HTML-formatted email
-text/html; w3m -o display_link_number=TRUE -o ignore_null_img_alt=TRUE -I %{charset} -T text/html %s; nametemplate=%s.html; copiousoutput;
+#text/html; w3m -o display_link_number=TRUE -o ignore_null_img_alt=TRUE -I %{charset} -T text/html %s; nametemplate=%s.html; copiousoutput;
+text/html; links -html-numbered-links 1 -html-break-long-lines 1 -html-images 0 -html-image-names 1 -dump %s; copiousoutput;
 
 # Images
 image/*; geeqie %s;

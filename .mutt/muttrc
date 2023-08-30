@@ -49,7 +49,7 @@ unset markers
 # Handle non-text content as much as possible (see ~/.mutt/mailcap) #
 #####################################################################
 auto_view text/html text/calendar application/ics
-alternative_order text/html text/plain text/enriched
+alternative_order text/enriched text/plain text/html
 
 # run viewer defined in mailcap by <return> in attach view
 bind attach <return> view-mailcap
@@ -164,14 +164,12 @@ source ~/.mutt/accounts/burdell
 
 # Source in account configuration each time the mailbox subdirectory changes.
 folder-hook dcantrell@burdell.org/* source ~/.mutt/accounts/burdell
-folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 
 #########################################
 # Use F-keys to change between accounts #
 #########################################
 #
 #   F2   burdell
-#   F3   rht
 #
 # Also include octal macros to handle the Fn+Fkey codes on my Dell XPS 13.  Use ":exec what-key"
 # to get odd keycodes that mutt can't figure out directly.  Invoke that function in mutt by
@@ -180,10 +178,6 @@ folder-hook dcantrell@redhat.com/* source ~/.mutt/accounts/rht
 # NOTE: These macro keys do not work inside a tmux session.  Still looking for a fix for that.
 macro index <f2> '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
 macro index \121 '<enter-command>source ~/.mutt/accounts/burdell<enter><change-folder>!<enter>'
-
-macro index <f3> '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
-macro index \122 '<enter-command>source ~/.mutt/accounts/rht<enter><change-folder>!<enter>'
-
 
 #####################################
 # Common macros across all accounts #
