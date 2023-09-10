@@ -151,7 +151,7 @@ if [ -f ${AGENT_ENV} ]; then
         unset SSH_AGENT_PID
         unset SSH_AUTH_SOCK
         /bin/rm -f ${AGENT_ENV}
-        ssh-agent | grep -v ^echo > ${AGENT_ENV}
+        ssh-agent | /bin/grep -v ^echo > ${AGENT_ENV}
         eval $(cat ${AGENT_ENV})
     fi
 else
