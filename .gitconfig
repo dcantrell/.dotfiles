@@ -47,3 +47,8 @@
 	directory = /home/dcantrell/scm/gitlab.com/redhat/centos-stream/ci-cd/rpminspect-data-centos
 	directory = /home/dcantrell/scm/github.com/dcantrell/rpminspect
 	directory = /home/dcantrell/scm/github.com/dcantrell/rpminspect
+	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
+	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
+	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
+	directory = /home/dcantrell/scm/gitlab.com/redhat/centos-stream/ci-cd/rpminspect-data-centos
+	directory = /home/dcantrell/scm/gitlab.com/redhat/centos-stream/ci-cd/rpminspect-data-centos
