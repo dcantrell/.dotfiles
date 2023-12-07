@@ -209,3 +209,11 @@ if [ -d ${HOME}/.weechat/python ]; then
     done
     cd "${CWD}"
 fi
+
+# Generate this file like this:
+#     pass git pull
+#     pass rht/jira > ~/.jirarc
+#     chmod 0600 ~/.jirarc
+if [ -f ${HOME}/.jirarc ]; then
+    . ${HOME}/.jirarc
+fi
