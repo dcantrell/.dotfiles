@@ -12,6 +12,7 @@ BlowOffFactor 40
 BlowSnow 1
 CpuLoad 100
 Transparency 0
+Screen -1
 Scale 100
 DesiredNumberOfTrees 10
 FlakeCountMax 665
@@ -24,6 +25,7 @@ MeteorFrequency 40
 Moon 0
 MoonSpeed 120
 MoonSize 100
+MoonColor 0
 NoFluffy 0
 NoKeepSBot 0
 NoKeepSnow 0
@@ -43,12 +45,15 @@ Overlap 0
 Rudolf 1
 SantaSize 3
 SantaSpeedFactor 100
+SantaScale 100
 SnowFlakesFactor 180
 SnowSize 8
 SnowSpeedFactor 100
 Stars 0
 ThemeXsnow 1
+Outline 0
 TreeFill 30
+TreeScale 100
 VintageFlakes 0
 WhirlFactor 100
 WindTimer 30
@@ -76,3 +81,4 @@ ViewingDistance 40
 BirdsColor #361A07
 BackgroundFile 
 BlackBackground 0
+Language sys
