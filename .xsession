@@ -46,8 +46,7 @@ fi
 # Set audio input and output
 if pactl --help >/dev/null 2>&1 ; then
     pactl list short sinks | grep alsa | while read -r num shortname stuff ; do
-        echo "${shortname}" | grep -q -i headset >/dev/null 2>&1
-        if [ $? -eq 0 ]; then
+        if echo "${shortname}" | grep -q -i -E "(headset|jabra)" >/dev/null 2>&1 ; then
             # input from the USB headset
             pactl set-default-source "${shortname}"
         else

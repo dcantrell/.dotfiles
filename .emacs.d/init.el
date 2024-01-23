@@ -10,15 +10,19 @@
 ;     'org'                  Orgmode - https://orgmode.org/
 ;     'ggtags'               GNU Global frontend
 ;                            https://github.com/leoliu/ggtags
-(setq package-list '(use-package color-theme-modern org ggtags))
+;     'rust-mode'            Rust syntax highlighting
+;                            https://github.com/rust-lang/rust-mode
+(setq package-list '(use-package color-theme-modern org ggtags rust-mode))
 
 ; Package repositories
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("melpa-stable" . "http://stable.melpa.org/packages/")))
 
 ; Activate all the packages (in particular autoloads)
 (package-initialize)
+;(package-refresh-contents)
 
 ; Fetch the list of packages available
 (or (file-exists-p package-user-dir) (package-refresh-contents))
@@ -136,11 +140,6 @@
 ; When launched from mutt, put us in email composing mode
 (add-hook 'mail-mode-hook 'mutt-mail-mode-hook)
 
-; Set modes based on filename or file extension
-(add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
-(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-(add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
-
 ; Work around problem with the X selection and getting extra spaces
 ; only on commented lines
 (defun yank-to-x-clipboard () (interactive)
@@ -239,6 +238,20 @@
 
 ; Try to help when things go wrong
 (setq debug-on-error t)
+
+; Load Rust syntax highlighting
+(require 'rust-mode)
+(setq rust-format-on-save t)
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+;(add-hook 'rust-mode-hook
+;          (lambda () (prettify-symbols-mode)))
+
+; Set modes based on filename or file extension
+(add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+(add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ; Theme it up
 (load-theme 'misterioso t)
