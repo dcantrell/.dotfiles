@@ -47,6 +47,9 @@
 	directory = /home/dcantrell/scm/github.com/dcantrell/rpminspect
 	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
 	directory = /home/dcantrell/scm/github.com/dcantrell/rhfinishing
+	directory = /home/dcantrell/scm/github.com/dcantrell/dnf-plugins-core
+	directory = /home/dcantrell/scm/github.com/dcantrell/dnf
+	directory = /home/dcantrell/scm/github.com/dcantrell/libdnf
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
