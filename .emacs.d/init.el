@@ -12,7 +12,8 @@
 ;                            https://github.com/leoliu/ggtags
 ;     'rust-mode'            Rust syntax highlighting
 ;                            https://github.com/rust-lang/rust-mode
-(setq package-list '(use-package color-theme-modern org ggtags rust-mode))
+;(setq package-list '(use-package color-theme-modern org ggtags rust-mode))
+(setq package-list '(use-package color-theme-modern org ggtags))
 
 ; Package repositories
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -240,10 +241,10 @@
 (setq debug-on-error t)
 
 ; Load Rust syntax highlighting
-(require 'rust-mode)
-(setq rust-format-on-save t)
-(add-hook 'rust-mode-hook
-          (lambda () (setq indent-tabs-mode nil)))
+;(require 'rust-mode)
+;(setq rust-format-on-save t)
+;(add-hook 'rust-mode-hook
+;          (lambda () (setq indent-tabs-mode nil)))
 ;(add-hook 'rust-mode-hook
 ;          (lambda () (prettify-symbols-mode)))
 
@@ -251,7 +252,7 @@
 (add-to-list 'auto-mode-alist '("(GNUmakefile|makefile|Makefile)" . makefile-mode))
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+;(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ; Theme it up
 (load-theme 'misterioso t)
