@@ -53,13 +53,16 @@ fi
 
 # Amend the PATH
 if [ ! -z "${PATH}" ]; then
-    tPATH=" $(echo ${PATH} | sed -e 's/:/\ /g')"
+    pathdirs=(${(@s.:.)PATH})
+    desired=(${HOME}/bin /usr/local/sbin /usr/sbin /sbin)
 
-    echo "${tPATH}" | grep -q "${HOME}/bin" || PATH="${HOME}/bin:${PATH}"
-    echo "${tPATH}" | grep -q "${HOME}/.local/bin" || PATH="${HOME}/.local/bin:${PATH}"
-    echo "${tPATH}" | grep -q "/usr/local/sbin" || PATH="${PATH}:/usr/local/sbin"
-    echo "${tPATH}" | grep -q "/usr/sbin" || PATH="${PATH}:/usr/sbin"
-    echo "${tPATH}" | grep -q "/sbin" || PATH="${PATH}:/sbin"
+    for desired_dir in $desired ; do
+        if (( ! $pathdirs[(Ie)${desired_dir}] )); then
+            pathdirs+=(${desired_dir})
+        fi
+    done
+
+    PATH="${(@j.:.)pathdirs}"
 fi
 
 # Pull in photo tools
@@ -96,7 +99,7 @@ else
     alias ln="ln -iv"
 fi
 
-alias grep="grep -I -n"
+alias ngrep="grep -I -n"
 alias less="less -F -R -X"
 alias bc="bc -q -l"
 alias ftp="tnftp"
