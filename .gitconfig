@@ -50,6 +50,7 @@
 	directory = /home/dcantrell/scm/github.com/dcantrell/dnf-plugins-core
 	directory = /home/dcantrell/scm/github.com/dcantrell/dnf
 	directory = /home/dcantrell/scm/github.com/dcantrell/libdnf
+	directory = /peachtree/src
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
