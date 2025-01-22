@@ -35,22 +35,18 @@
 	templateDir = ~/.git_template
 	defaultBranch = main
 [safe]
-	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect
+	directory = /home/dcantrell/scm/github.com/dcantrell/dnf
+	directory = /home/dcantrell/scm/github.com/dcantrell/dnf-plugins-core
+	directory = /home/dcantrell/scm/github.com/dcantrell/libdnf
+	directory = /home/dcantrell/scm/github.com/dcantrell/rhfinishing
 	directory = /home/dcantrell/scm/github.com/dcantrell/rpminspect
-	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
-	directory = /home/devel/src
-	directory = /projects/peachtree/src
-	directory = /srv/peachtree/src
 	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect
 	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
 	directory = /home/dcantrell/scm/gitlab.com/redhat/centos-stream/ci-cd/rpminspect-data-centos
-	directory = /home/dcantrell/scm/github.com/dcantrell/rpminspect
-	directory = /home/dcantrell/scm/github.com/rpminspect/rpminspect-data-fedora
-	directory = /home/dcantrell/scm/github.com/dcantrell/rhfinishing
-	directory = /home/dcantrell/scm/github.com/dcantrell/dnf-plugins-core
-	directory = /home/dcantrell/scm/github.com/dcantrell/dnf
-	directory = /home/dcantrell/scm/github.com/dcantrell/libdnf
+	directory = /home/devel/src
 	directory = /peachtree/src
+	directory = /projects/peachtree/src
+	directory = /srv/peachtree/src
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
