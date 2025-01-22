@@ -39,6 +39,53 @@ dotf() {
     git --git-dir=${HOME}/.dotfiles/.git --work-tree=${HOME} $*
 }
 
+# Add and remove /opt bin dirs to the PATH
+optin() {
+    pkg="$1"
+    desired_dir="/opt/${pkg}/bin"
+
+    if [ -z "${pkg}" ]; then
+        echo "Usage: optin [package in /opt" >&2
+        echo "Example:  optin xz" >&2
+    elif [ -d ${desired_dir} ]; then
+        echo "PATH before: ${PATH}"
+
+        pathdirs=(${(@s.:.)PATH})
+
+        if (( ! $pathdirs[(Ie)${desired_dir}] )); then
+            pathdirs+=(${desired_dir})
+        fi
+
+        PATH="${(@j.:.)pathdirs}"
+        export PATH
+
+        echo "PATH after: ${PATH}"
+    fi
+}
+
+optout() {
+    pkg="$1"
+    desired_dir="/opt/${pkg}/bin"
+
+    if [ -z "${pkg}" ]; then
+        echo "Usage: optout [package in /opt" >&2
+        echo "Example:  optout xz" >&2
+    elif [ -d ${desired_dir} ]; then
+        echo "PATH before: ${PATH}"
+
+        pathdirs=(${(@s.:.)PATH})
+
+        if [ ${pathdirs[(r)${desired_dir}]} = ${desired_dir} ]; then
+            pathdirs[${pathdirs[(i)${desired_dir}]}]=()
+        fi
+
+        PATH="${(@j.:.)pathdirs}"
+        export PATH
+
+        echo "PATH after: ${PATH}"
+    fi
+}
+
 # Make sure we have some basic PATH
 [ -z "${PATH}" ] && PATH=/usr/bin:/usr/local/bin
 
