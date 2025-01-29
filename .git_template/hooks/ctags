@@ -8,6 +8,9 @@
 
 set -e
 
+# do not create tag files for git-annex repos
+[ -d .git/annex ] && exit 0
+
 PATH=/usr/bin:/usr/local/bin
 TMPTAGS="$(mktemp -t git-hook-XXXXXXXXXX.TAGS)"
 
@@ -22,3 +25,8 @@ fi
 
 git ls-files | ${CTAGSBIN} -e --tag-relative=yes -f "${TMPTAGS}" -L -
 mv "${TMPTAGS}" "TAGS"
+
+# for projects that are not code, also git-annex repos
+if [ ! -s "TAGS" ]; then
+    rm -f "TAGS"
+fi
