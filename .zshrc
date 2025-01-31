@@ -14,7 +14,7 @@ autoload -U compinit
 setopt transient_rprompt
 
 # Completions
-fpath=(~/shell/functions $fpath)
+fpath=(~/.zfunctions/functions $fpath)
 rm -rf ~/.zcompdump ; compinit
 
 # Command history
@@ -220,7 +220,7 @@ fi
 QUOTING_STYLE=literal
 
 # Show vcs branch and type information in the right prompt
-[ -f ~/bin/zsh-git-prompt.sh ] && . ~/bin/zsh-git-prompt.sh
+[ -f ~/.zfunctions/prompt/zsh-git-prompt.sh ] && . ~/.zfunctions/prompt/zsh-git-prompt.sh
 
 # Command prompt settings
 PROMPT="[%n@%m %1~]%# "
