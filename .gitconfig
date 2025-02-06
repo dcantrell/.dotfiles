@@ -56,3 +56,12 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[color "status"]
+	header = black normal bold
+	added = green normal bold
+	updated = green normal bold
+	changed = yellow normal bold
+	untracked = cyan normal bold
+	branch = magenta normal bold
+	nobranch = normal normal bold
+	unmerged = red normal bold
