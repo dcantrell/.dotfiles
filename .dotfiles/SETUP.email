@@ -1,3 +1,30 @@
+Thunderbird Configuration
+-------------------------
+
+1) Set up two accounts:
+       imap.gmail.com for dcantrell@redhat.com
+       imap.kolabnow.com for dcantrell@burdell.org
+
+2) Quit Thunderbird
+
+3) In ~/.thunderbird, make sure the actual profile is called
+'dcantrell' and not something like 329hfnc3i324.default-release.
+Remove other subdirectories not referenced.  Under
+dcantrell/ImapMail/imap.{gmal,kolabnow}.com make sure the message
+files from .dotfiles are in place.
+
+4) Update the ini files in ~/.thunderbird to reference the dcantrell
+profile.
+
+
+
+
+HISTORICAL EMAIL CONFIGURATION
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Below are steps when I used mutt for email.  I am now using Thunderbird.
+
+
 Email Configuration:
 --------------------
 
