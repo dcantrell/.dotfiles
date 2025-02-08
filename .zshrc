@@ -25,6 +25,15 @@ export HISTSIZE SAVEHIST HISTFILE
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 
+# Who am i
+NAME="David Cantrell"
+EMAIL="dcantrell@burdell.org"
+
+# git-annex variables
+ANNEXHOST="kevlar.burdell.org"
+ANNEXPATH="/srv/annex"
+LOCALANNEX="${HOME}/annex"
+
 # Function to name terminal windows with an arbitrary string
 # Usage:  wname "STRING"
 # e.g., wname mutt
@@ -34,8 +43,8 @@ wname() {
 
 # dotfiles git command wrapper
 dotf() {
-    env GIT_AUTHOR_EMAIL=dcantrell@burdell.org \
-        GIT_COMMITTER_EMAIL=dcantrell@burdell.org \
+    env GIT_AUTHOR_EMAIL="${EMAIL}" \
+        GIT_COMMITTER_EMAIL="${EMAIL}" \
     git --git-dir=${HOME}/.dotfiles/.git --work-tree=${HOME} $*
 }
 
@@ -86,17 +95,81 @@ optout() {
     fi
 }
 
+# git-annex helpers
+
+# cloneannex - Cllone the local git-annex repos.  Use this once when
+# setting up a new system or if you nuke the local annex.  This
+# function requires network access.
+cloneannex() {
+    if ! ping -c 1 -q ${ANNEXHOST} >/dev/null 2>&1 ; then
+        echo "*** ${ANNEXHOST} is unreachable, check network" >&2
+        exit 1
+    fi
+
+    [ -d "${LOCALANNEX}" ] || mkdir -p "${LOCALANNEX}"
+    CWD="$(pwd)"
+
+    ssh "${ANNEXHOST}" ls -1d "${ANNEXPATH}"/*.git | sort | while read -r p ; do
+        bp="$(basename "${p}")"
+        subdir="$(basename "${bp}" .git)"
+        git -C "${ANNEXHOST}" clone ${ANNEXHOST}:${ANNEXPATH}/${bp}
+        ( cd "${LOCALANNEX}" ; ${ANNEXHOST}:${ANNEXPATH}/${bp} )
+        ( cd "${LOCALANNEX}"/"${subdir}" ; git config user.name "${NAME}" )
+        ( cd "${LOCALANNEX}"/"${subdir}" ; git config user.email "${EMAIL}" )
+        ( cd "${LOCALANNEX}"/"${subdir}" ; git annex init . )
+    done
+
+    cd "${CWD}" || exit 1
+}
+
+# syncannex - Run git annex sync --content on all annex repos.
+syncannex() {
+    if [ ! -d "${LOCALANNEX}" ]; then
+        echo "*** no local annex, exiting" >&2
+        exit 1
+    fi
+
+    if ! ping -c 1 -q ${ANNEXHOST} >/dev/null 2>&1 ; then
+        echo "*** ${ANNEXHOST} is unreachable, check network" >&2
+        exit 1
+    fi
+
+    cd "${LOCALANNEX}" || exit 1
+    CWD="$(pwd)"
+
+    for repodir in * ; do
+        git -C "${ANNEXPATH}"/"${repodir}" annex sync --content
+    done
+
+    cd "${CWD}" || exit 1
+}
+
+# lnannex - Symlink git-annex directories to $HOME
+lnannex() {
+    cd "${LOCALANNEX}" || exit 1
+    CWD="$(pwd)"
+
+    for repodir in * ; do
+        [ -r "${HOME}"/"${repodir}" ] || ln -s annex/"${repodir}" "${HOME}"/"${repodir}"
+    done
+
+    cd "${CWD}" || exit 1
+}
+
 # Make sure we have some basic PATH
 [ -z "${PATH}" ] && PATH=/usr/bin:/usr/local/bin
 
 # Protect files and directories
 if [ ! -z "${HOME}" ]; then
     chmod 0711 "${HOME}"
-    [ -d "${HOME}/etc" ] && chmod 0700 "${HOME}/etc"
+    [ -d "${HOME}"/etc ] && chmod 0700 "${HOME}"/etc
 fi
 
 # Something is making this directory appear, stop!  02-Mar-2011
-[ -d "${HOME}/Desktop" ] && rmdir "${HOME}/Desktop" 2>/dev/null
+[ -d "${HOME}"/Desktop ] && rmdir "${HOME}"/Desktop 2>/dev/null
+
+# But I am using this for what appears on the desktop.  08-Feb-2025
+[ -d "${HOME}"/local ] || mkdir -p "${HOME}"/local
 
 # Amend the PATH
 if [ ! -z "${PATH}" ]; then
@@ -113,18 +186,18 @@ if [ ! -z "${PATH}" ]; then
 fi
 
 # Pull in photo tools
-[ -d "${HOME}/photos/bin" ] && PATH=${PATH}:${HOME}/photos/bin
+[ -d "${HOME}"/photos/bin ] && PATH=${PATH}:${HOME}/photos/bin
 
 # Things installed by pip and maybe other package managers
-[ -d "${HOME}/.local/bin" ] && PATH=${PATH}:${HOME}/.local/bin
-[ -d "${HOME}/.cabal/bin" ] && PATH=${PATH}:${HOME}/.cabal/bin
+[ -d "${HOME}"/.local/bin ] && PATH=${PATH}:${HOME}/.local/bin
+[ -d "${HOME}"/.cabal/bin ] && PATH=${PATH}:${HOME}/.cabal/bin
 
 # Make sure we have the right ssh config permissions
-[ -f "${HOME}/.ssh/config" ] && chmod 0644 "${HOME}/.ssh/config"
+[ -f "${HOME}"/.ssh/config ] && chmod 0644 "${HOME}/.ssh/config"
 
 # Make sure mbsync has directories
-if [ -f ${HOME}/.mbsyncrc ]; then
-    grep -v "^#" ${HOME}/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
+if [ -f "${HOME}"/.mbsyncrc ]; then
+    grep -v "^#" "${HOME}"/.mbsyncrc | grep "Path " | awk '{ print $2; }' | \
     while read maildirname ; do
         mdn="$(eval echo "${maildirname}")"
         [ -d "${mdn}" ] || mkdir -p "${mdn}"
@@ -160,7 +233,6 @@ if [ -r /etc/fedora-release ] || [ -r /etc/redhat-release ] || [ -r /etc/centos-
 fi
 
 # Other environment variables
-NAME="David Cantrell"
 PAGER="less -F -R -X"
 
 # Emacs setup
@@ -172,9 +244,9 @@ alias vi='printf "Use Emacs.\n"'
 alias vim='printf "Use Emacs.\n"'
 
 # Make sure emacs has directories in place
-[ -d ${HOME}/.emacs.d ] || mkdir -p ${HOME}/.emacs.d
-[ -d ${HOME}/.emacs.d/autosaves ] || mkdir -p ${HOME}/.emacs.d/autosaves
-[ -d ${HOME}/.emacs.d/backups ] || mkdir -p ${HOME}/.emacs.d/backups
+[ -d "${HOME}"/.emacs.d ] || mkdir -p "${HOME}"/.emacs.d
+[ -d "${HOME}"/.emacs.d/autosaves ] || mkdir -p "${HOME}"/.emacs.d/autosaves
+[ -d "${HOME}"/.emacs.d/backups ] || mkdir -p "${HOME}"/.emacs.d/backups
 
 # GnuPG and agent settings
 #
@@ -193,24 +265,24 @@ echo UPDATESTARTUPTTY | gpg-connect-agent >/dev/null 2>&1
 # Run the ssh-agent or connect to an already running one
 # NOTE:  To get this block working, make sure you start with no .ssh/agent.env
 # file and no running ssh-agent.
-AGENT_ENV=${HOME}/.ssh/agent.env
+AGENT_ENV="${HOME}"/.ssh/agent.env
 
-if [ -f ${AGENT_ENV} ]; then
-    eval $(cat ${AGENT_ENV})
+if [ -f "${AGENT_ENV}" ]; then
+    eval $(cat "${AGENT_ENV}")
 
     if [ ! "$(ps -p $SSH_AGENT_PID -o comm=)" = "ssh-agent" ]; then
         unset SSH_AGENT_PID
         unset SSH_AUTH_SOCK
-        /bin/rm -f ${AGENT_ENV}
-        ssh-agent | /bin/grep -v ^echo > ${AGENT_ENV}
-        eval $(cat ${AGENT_ENV})
+        /bin/rm -f "${AGENT_ENV}"
+        ssh-agent | /bin/grep -v ^echo > "${AGENT_ENV}"
+        eval $(cat "${AGENT_ENV}")
     fi
 else
     pid="$(pgrep ssh-agent)"
 
     if [ -z "${pid}" ]; then
-        ssh-agent | grep -v ^echo > ${AGENT_ENV}
-        eval $(cat ${AGENT_ENV})
+        ssh-agent | grep -v ^echo > "${AGENT_ENV}"
+        eval $(cat "${AGENT_ENV}")
     fi
 fi
 
@@ -245,21 +317,6 @@ bindkey "$(tput kend | cat -v)" end-of-line
 
 # Make delete work
 bindkey "^[[3~" delete-char
-
-# IRC (and other systems) client
-WEECHAT_HOME=${HOME}/.weechat
-export WEECHAT_HOME
-
-if [ -d ${HOME}/.weechat/python ]; then
-    # autoload all Python plugins
-    CWD="$(pwd)"
-    cd ${HOME}/.weechat/python
-    [ -d autoload ] || mkdir autoload
-    for plugin in $(ls -1 *.py 2>/dev/null) ; do
-        ( cd autoload ; ln -sf ../${plugin} . >/dev/null 2>&1 )
-    done
-    cd "${CWD}"
-fi
 
 # Generate this file like this:
 #     pass git pull
