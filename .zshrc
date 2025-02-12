@@ -156,6 +156,11 @@ linkannex() {
     cd "${CWD}" || exit 1
 }
 
+# unlocktree - This can't be an alias because of the pipe
+unlocktree() {
+    find . -type f -print0 | xargs -0 git annex unlock
+}
+
 # Make sure we have some basic PATH
 [ -z "${PATH}" ] && PATH=/usr/bin:/usr/local/bin
 
