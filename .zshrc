@@ -97,7 +97,7 @@ optout() {
 
 # git-annex helpers
 
-# cloneannex - Cllone the local git-annex repos.  Use this once when
+# cloneannex - Clone the local git-annex repos.  Use this once when
 # setting up a new system or if you nuke the local annex.  This
 # function requires network access.
 cloneannex() {
@@ -112,7 +112,7 @@ cloneannex() {
     ssh "${ANNEXHOST}" ls -1d "${ANNEXPATH}"/*.git | sort | while read -r p ; do
         bp="$(basename "${p}")"
         subdir="$(basename "${bp}" .git)"
-        git -C "${ANNEXHOST}" clone ${ANNEXHOST}:${ANNEXPATH}/${bp}
+        git -C "${LOCALANNEX}" clone ${ANNEXHOST}:${ANNEXPATH}/${bp}
         ( cd "${LOCALANNEX}" ; ${ANNEXHOST}:${ANNEXPATH}/${bp} )
         ( cd "${LOCALANNEX}"/"${subdir}" ; git config user.name "${NAME}" )
         ( cd "${LOCALANNEX}"/"${subdir}" ; git config user.email "${EMAIL}" )
@@ -138,14 +138,14 @@ syncannex() {
     CWD="$(pwd)"
 
     for repodir in * ; do
-        git -C "${ANNEXPATH}"/"${repodir}" annex sync --content
+        git -C "${LOCALANNEX}"/"${repodir}" annex sync --content
     done
 
     cd "${CWD}" || exit 1
 }
 
-# lnannex - Symlink git-annex directories to $HOME
-lnannex() {
+# linkannex - Symlink git-annex directories to $HOME
+linkannex() {
     cd "${LOCALANNEX}" || exit 1
     CWD="$(pwd)"
 
