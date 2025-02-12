@@ -1,0 +1,7 @@
+scrollbar.vertical slider {
+   min-width: 14px;
+}
+
+scrollbar.horizontal slider {
+   min-height: 14px;
+}
