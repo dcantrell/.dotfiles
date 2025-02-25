@@ -170,11 +170,8 @@ if [ ! -z "${HOME}" ]; then
     [ -d "${HOME}"/etc ] && chmod 0700 "${HOME}"/etc
 fi
 
-# Something is making this directory appear, stop!  02-Mar-2011
-[ -d "${HOME}"/Desktop ] && rmdir "${HOME}"/Desktop 2>/dev/null
-
-# But I am using this for what appears on the desktop.  08-Feb-2025
-[ -d "${HOME}"/local ] || mkdir -p "${HOME}"/local
+# I am using this for what appears on the desktop.
+[ -d "${HOME}"/Desktop ] || mkdir -p "${HOME}"/Desktop
 
 # Amend the PATH
 if [ ! -z "${PATH}" ]; then
@@ -310,11 +307,15 @@ GTK_OVERLAY_SCROLLING=0
 # Set browser command for urlscan
 BROWSER="firefox --new-tab"
 
+# Help trash(1) command
+XDG_DATA_HOME="$HOME"
+
 export PROMPT RPROMPT
 export PATH NAME EDITOR VISUAL ALTERNATE_EDITOR PAGER
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
 export BROWSER
+export XDG_DATA_HOME
 
 # Home and End keys (especially inside tmux)
 bindkey "$(tput khome | cat -v)" beginning-of-line
