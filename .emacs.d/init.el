@@ -3,17 +3,14 @@
 
 ; Packages to install
 ;     'use-package'          Emacs install may not have it
-;     'color-theme-modern'   (NOTE: I don't currently use these themes,
-;                            but I'll let them install anyway on the off
-;                            chance I find myself in some weird terminal
-;                            and need to change from my preferred theme.
 ;     'org'                  Orgmode - https://orgmode.org/
 ;     'ggtags'               GNU Global frontend
 ;                            https://github.com/leoliu/ggtags
 ;     'rust-mode'            Rust syntax highlighting
 ;                            https://github.com/rust-lang/rust-mode
-;(setq package-list '(use-package color-theme-modern org ggtags rust-mode))
-(setq package-list '(use-package color-theme-modern org ggtags))
+;     'borland-blue-theme'   Recreates that awesome Borland DOS IDE
+;(setq package-list '(use-package org ggtags rust-mode))
+(setq package-list '(use-package org ggtags))
 
 ; Package repositories
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -32,6 +29,10 @@
 (dolist (package package-list)
     (unless (package-installed-p package)
         (package-install package)))
+
+; Theme it up
+(push (substitute-in-file-name "~/.emacs.d/themes/") custom-theme-load-path)
+(load-theme 'borland-blue t)
 
 ; Send automatic custom additions to a different file
 (setq custom-file "~/.emacs.d/custom.el")
@@ -87,9 +88,9 @@
 (global-whitespace-mode)
 
 ; Prevent lots of trailing whitespace on mouse copy/paste
-(unless window-system
-    (custom-set-faces
-        '(default ((t (:background "unspecified-bg"))))))
+;(unless window-system
+;    (custom-set-faces
+;        '(default ((t (:background "unspecified-bg"))))))
 
 ; How to compose email
 (defun mutt-mail-mode-hook ()
@@ -253,6 +254,3 @@
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (add-to-list 'auto-mode-alist '(".*tmp\/mutt-.*[0-9]+$" . mail-mode))
 ;(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-
-; Theme it up
-(load-theme 'misterioso t)
