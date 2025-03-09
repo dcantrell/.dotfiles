@@ -47,6 +47,7 @@
 	directory = /peachtree/src
 	directory = /projects/peachtree/src
 	directory = /srv/peachtree/src
+	directory = /home/dcantrell/scm/github.com/dcantrell/rhfinishing
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
