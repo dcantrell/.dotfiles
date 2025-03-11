@@ -1,5 +1,29 @@
+; Send automatic custom additions to a different file
+(setq custom-file "~/.emacs.d/custom.el")
+(when (file-exists-p custom-file)
+    (load custom-file))
+
 ; Install things from MELPA if we don't have tham
 (require 'package)
+
+; Package repositories
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+
+; Package repository priorities
+(setq package-archive-priorities '(("melpa-stable" . 10)
+                                   ("melpa" . 8)
+                                   ("gnu" . 6)
+                                   ("nongnu" . 2)))
+
+; Activate all the packages (in particular autoloads)
+(package-initialize)
+
+; Refresh package repo contents if necessary
+(when (not package-archive-contents)
+    (package-refresh-contents))
 
 ; Packages to install
 ;     'use-package'          Emacs install may not have it
@@ -9,35 +33,24 @@
 ;     'rust-mode'            Rust syntax highlighting
 ;                            https://github.com/rust-lang/rust-mode
 ;     'borland-blue-theme'   Recreates that awesome Borland DOS IDE
-;(setq package-list '(use-package org ggtags rust-mode))
-(setq package-list '(use-package org ggtags))
+;     'py-autopep8'          Autoformat Python to PEP8
+;     'elpy'                 Python development environment
+;     'magit'                Emacs git interface
+;     'docker-compose-mode'  Docker mode
+;     'dockerfile-mode'      Docker mode
+;     'yaml-mode'            YAML major mode
+;     'markdown-mode'        MarkDown major mode
 
-; Package repositories
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
+(setq my-package-list
+    '(use-package org ggtags))
 
-; Activate all the packages (in particular autoloads)
-(package-initialize)
-;(package-refresh-contents)
-
-; Fetch the list of packages available
-(or (file-exists-p package-user-dir) (package-refresh-contents))
-
-; Install the missing packages
-(dolist (package package-list)
+(dolist (package my-package-list)
     (unless (package-installed-p package)
         (package-install package)))
 
 ; Theme it up
 (push (substitute-in-file-name "~/.emacs.d/themes/") custom-theme-load-path)
-(load-theme 'borland-blue t)
-
-; Send automatic custom additions to a different file
-(setq custom-file "~/.emacs.d/custom.el")
-(when (file-exists-p custom-file)
-    (load custom-file))
+(load-theme 'borland-blue)
 
 ; Prevent tabs and use 4 space tab stop
 (setq indent-tabs-mode nil)
@@ -123,7 +136,6 @@
 ;        (while (not (looking-at-p "^--\\s+$"))     ; mark to signature
 ;            (forward-line 1))
 ;        (setq deactivate-mark nil)))
-
 
 ; Helper function to produce RFC2646 format=flowed email
 ; https://lists.gnu.org/archive/html/help-gnu-emacs/2005-05/msg00821.html
