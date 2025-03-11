@@ -50,7 +50,7 @@
 
 ; Theme it up
 (push (substitute-in-file-name "~/.emacs.d/themes/") custom-theme-load-path)
-(load-theme 'borland-blue)
+(load-theme 'borland-blue t)
 
 ; Prevent tabs and use 4 space tab stop
 (setq indent-tabs-mode nil)
