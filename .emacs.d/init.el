@@ -185,7 +185,7 @@
 ;    (send-string-to-terminal (concat "\033]2;emacs: " (buffer-name) "\007")))
 ;(add-hook 'post-command-hook 'xterm-title-update)
 
-; Function to insert my daily status report file in to the current
+; Function to insert my weekly status report file in to the current
 ; buffer.  I use this from mutt when composing a status report email.
 ; At some point in the future I will extend this to compose the
 ; message for me and then eventually send it.  For now I am just
@@ -196,10 +196,10 @@
 ; * Make sure there's only a single blank line before the sig
 ; * Work without positioning the point
 ; * Construct outgoing email and send it
-(defun insert-dailystatus ()
+(defun insert-weeklystatus ()
     (interactive)
-    (insert-file-contents "~/dailystatus.org"))
-(global-set-key (kbd "M-S") 'insert-dailystatus)
+    (insert-file-contents "~/Desktop/weeklystatus.org"))
+(global-set-key (kbd "M-S") 'insert-weeklystatus)
 
 ; Kill all sessions and the daemon if I feel so inclined
 (defun server-shutdown ()
