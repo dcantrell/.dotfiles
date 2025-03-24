@@ -307,9 +307,6 @@ GTK_OVERLAY_SCROLLING=0
 # Set browser command for urlscan
 BROWSER="firefox --new-tab"
 
-# Help trash(1) command
-XDG_DATA_HOME="$HOME"
-
 export PROMPT RPROMPT
 export PATH NAME EDITOR VISUAL ALTERNATE_EDITOR PAGER
 export QUOTING_STYLE
