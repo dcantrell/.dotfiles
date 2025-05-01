@@ -30,9 +30,15 @@ NAME="David Cantrell"
 EMAIL="dcantrell@burdell.org"
 
 # git-annex variables
-ANNEXHOST="kevlar.burdell.org"
-ANNEXPATH="/srv/annex"
-LOCALANNEX="${HOME}/annex"
+# There are multiple annex stores on different networks.  For each
+# host in the ANNEXHOST array, you need a corresponding matching index
+# entry in ANNEXPATH which is the directory path on that host where
+# the git-annex repos are kept.
+ANNEXHOST=("kevlar.burdell.org" "liebherr.bos.burdell.org")
+ANNEXPATH=("/srv/annex" "/srv/annex")
+
+# Where are we storing clones of git-annex repos.
+LOCALANNEX="${HOME}"/annex
 
 # Function to name terminal windows with an arbitrary string
 # Usage:  wname "STRING"
@@ -101,22 +107,42 @@ optout() {
 # setting up a new system or if you nuke the local annex.  This
 # function requires network access.
 cloneannex() {
-    if ! ping -c 1 -q ${ANNEXHOST} >/dev/null 2>&1 ; then
-        echo "*** ${ANNEXHOST} is unreachable, check network" >&2
-        exit 1
-    fi
+    i=1
 
-    [ -d "${LOCALANNEX}" ] || mkdir -p "${LOCALANNEX}"
-    CWD="$(pwd)"
+    while [ $i -le ${#ANNEXHOST} ]; do
+        ahost="$ANNEXHOST[$i]"
+        apath="$ANNEXPATH[$i]"
+        basehost="$(echo "${ahost}" | cut -d '.' -f 1)"
+        lpath="${LOCALANNEX}"/"${basehost}"
 
-    ssh "${ANNEXHOST}" ls -1d "${ANNEXPATH}"/*.git | sort | while read -r p ; do
-        bp="$(basename "${p}")"
-        subdir="$(basename "${bp}" .git)"
-        git -C "${LOCALANNEX}" clone ${ANNEXHOST}:${ANNEXPATH}/${bp}
-        ( cd "${LOCALANNEX}" ; ${ANNEXHOST}:${ANNEXPATH}/${bp} )
-        ( cd "${LOCALANNEX}"/"${subdir}" ; git config user.name "${NAME}" )
-        ( cd "${LOCALANNEX}"/"${subdir}" ; git config user.email "${EMAIL}" )
-        ( cd "${LOCALANNEX}"/"${subdir}" ; git annex init . )
+        if ! ping -c 1 -q ${ahost} >/dev/null 2>&1 ; then
+            echo "*** ${ahost} is unreachable, skipping" >&2
+            i=$((i + 1))
+            continue
+        fi
+
+        [ -d "${lpath}" ] || mkdir -p "${lpath}"
+        CWD="$(pwd)"
+
+        # NOTE: The \ in front of *.git is deliberate because we do not
+        # want the shell to expand this locally but rather pass it to the
+        # host via ssh for expansion there.  Gotta love shell.
+        ssh "${ahost}" ls -1d "${apath}"/\*.git | sort | while read -r p ; do
+            bp="$(basename "${p}")"
+            subdir="$(basename "${bp}" .git)"
+
+            echo
+            echo ">>> ANNEX: ${ahost}:${apath}/${bp}"
+            echo
+
+            git -C "${lpath}" clone ${ahost}:${apath}/${bp}
+            ( cd "${lpath}" ; ${ahost}:${apath}/${bp} )
+            ( cd "${lpath}"/"${subdir}" ; git config user.name "${NAME}" )
+            ( cd "${lpath}"/"${subdir}" ; git config user.email "${EMAIL}" )
+            ( cd "${lpath}"/"${subdir}" ; git annex init . )
+        done
+
+        i=$((i + 1))
     done
 
     cd "${CWD}" || exit 1
@@ -129,16 +155,31 @@ syncannex() {
         exit 1
     fi
 
-    if ! ping -c 1 -q ${ANNEXHOST} >/dev/null 2>&1 ; then
-        echo "*** ${ANNEXHOST} is unreachable, check network" >&2
-        exit 1
-    fi
-
-    cd "${LOCALANNEX}" || exit 1
+    i=1
     CWD="$(pwd)"
 
-    for repodir in * ; do
-        git -C "${LOCALANNEX}"/"${repodir}" annex sync --content
+    while [ $i -le ${#ANNEXHOST} ]; do
+        ahost="$ANNEXHOST[$i]"
+        apath="$ANNEXPATH[$i]"
+        basehost="$(echo "${ahost}" | cut -d '.' -f 1)"
+        lpath="${LOCALANNEX}"/"${basehost}"
+
+        if [ ! -d "${lpath}" ]; then
+            i=$((i + 1))
+            continue
+        fi
+
+        if ! ping -c 1 -q ${ahost} >/dev/null 2>&1 ; then
+            echo "*** ${ahost} is unreachable, skipping" >&2
+            i=$((i + 1))
+            continue
+        fi
+
+        cd "${lpath}" || exit 1
+
+        for repodir in * ; do
+            git -C "${lpath}"/"${repodir}" annex sync --content
+        done
     done
 
     cd "${CWD}" || exit 1
@@ -146,11 +187,18 @@ syncannex() {
 
 # linkannex - Symlink git-annex directories to $HOME
 linkannex() {
-    cd "${LOCALANNEX}" || exit 1
     CWD="$(pwd)"
+    cd "${LOCALANNEX}" || exit 1
 
-    for repodir in * ; do
-        [ -r "${HOME}"/"${repodir}" ] || ln -s annex/"${repodir}" "${HOME}"/"${repodir}"
+    for annexhost in * ; do
+        [ -d "${annexhost}" ] || continue
+
+        cd "${annexhost}" || exit 1
+        for repodir in * ; do
+            [ -d "${repodir}" ] || continue
+            [ -r "${HOME}"/"${repodir}" ] || ln -s annex/"${annexhost}"/"${repodir}" "${HOME}"/"${repodir}"
+        done
+        cd .. || exit 1
     done
 
     cd "${CWD}" || exit 1
