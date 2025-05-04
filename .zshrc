@@ -136,7 +136,6 @@ cloneannex() {
             echo
 
             git -C "${lpath}" clone ${ahost}:${apath}/${bp}
-            ( cd "${lpath}" ; ${ahost}:${apath}/${bp} )
             ( cd "${lpath}"/"${subdir}" ; git config user.name "${NAME}" )
             ( cd "${lpath}"/"${subdir}" ; git config user.email "${EMAIL}" )
             ( cd "${lpath}"/"${subdir}" ; git annex init . )
@@ -178,8 +177,14 @@ syncannex() {
         cd "${lpath}" || exit 1
 
         for repodir in * ; do
-            git -C "${lpath}"/"${repodir}" annex sync --content
+            echo
+            echo ">>> ANNEX: ${ahost}:${lpath}/${repodir}"
+            echo
+
+            git -C "${lpath}"/"${repodir}" annex sync --content --quiet
         done
+
+        i=$((i + 1))
     done
 
     cd "${CWD}" || exit 1
@@ -196,7 +201,11 @@ linkannex() {
         cd "${annexhost}" || exit 1
         for repodir in * ; do
             [ -d "${repodir}" ] || continue
-            [ -r "${HOME}"/"${repodir}" ] || ln -s annex/"${annexhost}"/"${repodir}" "${HOME}"/"${repodir}"
+
+            if [ ! -r "${HOME}"/"${repodir}" ]; then
+                echo "${HOME}/${repodir} -> annex/${annexhost}/${repodir}"
+                ln -s annex/"${annexhost}"/"${repodir}" "${HOME}"/"${repodir}"
+            fi
         done
         cd .. || exit 1
     done
