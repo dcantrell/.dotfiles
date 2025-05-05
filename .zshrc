@@ -151,7 +151,7 @@ cloneannex() {
 syncannex() {
     if [ ! -d "${LOCALANNEX}" ]; then
         echo "*** no local annex, exiting" >&2
-        exit 1
+        return 0
     fi
 
     i=1
@@ -193,7 +193,13 @@ syncannex() {
 # linkannex - Symlink git-annex directories to $HOME
 linkannex() {
     CWD="$(pwd)"
-    cd "${LOCALANNEX}" || exit 1
+
+    if [ ! -d "${LOCALANNEX}" ]; then
+        echo "*** no local annex, exiting" >&2
+        return 0
+    fi
+
+    cd "${LOCALANNEX}" || return 1
 
     for annexhost in * ; do
         [ -d "${annexhost}" ] || continue
