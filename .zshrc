@@ -375,7 +375,6 @@ export PATH NAME EDITOR VISUAL ALTERNATE_EDITOR PAGER
 export QUOTING_STYLE
 export GTK_OVERLAY_SCROLLING
 export BROWSER
-export XDG_DATA_HOME
 
 # Home and End keys (especially inside tmux)
 bindkey "$(tput khome | cat -v)" beginning-of-line
